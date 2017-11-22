@@ -1,0 +1,6 @@
+/ShapeType.cxx
+/ShapeType.hpp
+/ShapeTypePlugin.cxx
+/ShapeTypePlugin.hpp
+makefile_*
+objs/

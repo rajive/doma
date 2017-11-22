@@ -1,0 +1,121 @@
+<!-- 
+=======================================================================
+   						Endpoint QoS - Common
+=======================================================================
+RTI Connext DDS User QoS Profiles
+
+This document is intended to be used to extend the builtin QoS profiles if 
+desired. Each of the builtin profiles, other than the Baseline.x.x.x 
+profiles, has a counterpart in this file named User.X, where X is the profile 
+that it is inheriting from. 
+
+All of the built-in profiles can be found in the 
+BuiltinProfiles.documentationONLY.xml file located in the
+$NDDSHOME/resource/xml/ directory. 
+
+Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
+-->
+<dds
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.0/rti_dds_qos_profiles.xsd"
+	version="5.3.0">
+
+	<qos_library name="EndpointQoSLib">
+		<qos_profile
+			name="User.Generic.StrictReliable"
+			base_name="BuiltinQosLibExp::Generic.StrictReliable" />
+
+		<qos_profile
+			name="User.Generic.KeepLastReliable"
+			base_name="BuiltinQosLibExp::Generic.KeepLastReliable" />
+
+		<qos_profile
+			name="User.Generic.BestEffort"
+			base_name="BuiltinQosLibExp::Generic.BestEffort" />
+
+		<qos_profile
+			name="User.Generic.StrictReliable.HighThroughput"
+			base_name="BuiltinQosLibExp::Generic.StrictReliable.HighThroughput" />
+
+		<qos_profile
+			name="User.Generic.StrictReliable.LowLatency"
+			base_name="BuiltinQosLibExp::Generic.StrictReliable.LowLatency" />
+
+		<qos_profile
+			name="User.Generic.StrictReliable.LargeData"
+			base_name="BuiltinQosLibExp::Generic.StrictReliable.LargeData" />
+
+		<qos_profile
+			name="User.Generic.KeepLastReliable.LargeData"
+			base_name="BuiltinQosLibExp::Generic.KeepLastReliable.LargeData" />
+
+		<qos_profile
+			name="User.Generic.StrictReliable.LargeData.FastFlow"
+			base_name="BuiltinQosLibExp::Generic.StrictReliable.LargeData.FastFlow" />
+
+		<qos_profile
+			name="User.Generic.StrictReliable.LargeData.MediumFlow"
+			base_name="BuiltinQosLibExp::Generic.StrictReliable.LargeData.MediumFlow" />
+
+		<qos_profile
+			name="User.Generic.StrictReliable.LargeData.SlowFlow"
+			base_name="BuiltinQosLibExp::Generic.StrictReliable.LargeData.SlowFlow" />
+
+		<qos_profile
+			name="User.Generic.KeepLastReliable.LargeData.FastFlow"
+			base_name="BuiltinQosLibExp::Generic.KeepLastReliable.LargeData.FastFlow" />
+
+		<qos_profile
+			name="User.Generic.KeepLastReliable.LargeData.MediumFlow"
+			base_name="BuiltinQosLibExp::Generic.KeepLastReliable.LargeData.MediumFlow" />
+
+		<qos_profile
+			name="User.Generic.KeepLastReliable.LargeData.SlowFlow"
+			base_name="BuiltinQosLibExp::Generic.KeepLastReliable.LargeData.SlowFlow" />
+
+		<qos_profile
+			name="User.Generic.KeepLastReliable.TransientLocal"
+			base_name="BuiltinQosLibExp::Generic.KeepLastReliable.TransientLocal" />
+
+		<qos_profile
+			name="User.Generic.KeepLastReliable.Transient"
+			base_name="BuiltinQosLibExp::Generic.KeepLastReliable.Transient" />
+
+		<qos_profile
+			name="User.Generic.KeepLastReliable.Persistent"
+			base_name="BuiltinQosLibExp::Generic.KeepLastReliable.Persistent" />
+
+		<qos_profile
+			name="User.Pattern.PeriodicData"
+			base_name="BuiltinQosLibExp::Pattern.PeriodicData" />
+
+		<qos_profile
+			name="User.Pattern.Streaming"
+			base_name="BuiltinQosLibExp::Pattern.Streaming" />
+
+		<qos_profile
+			name="User.Pattern.ReliableStreaming"
+			base_name="BuiltinQosLibExp::Pattern.ReliableStreaming" />
+
+		<qos_profile
+			name="User.Pattern.Event"
+			base_name="BuiltinQosLibExp::Pattern.Event" />
+
+		<qos_profile
+			name="User.Pattern.AlarmEvent"
+			base_name="BuiltinQosLibExp::Pattern.AlarmEvent" />
+
+		<qos_profile
+			name="User.Pattern.Status"
+			base_name="BuiltinQosLibExp::Pattern.Status" />
+
+		<qos_profile
+			name="User.Pattern.AlarmStatus"
+			base_name="BuiltinQosLibExp::Pattern.AlarmStatus" />
+
+		<qos_profile
+			name="User.Pattern.LastValueCache"
+			base_name="BuiltinQosLibExp::Pattern.LastValueCache" />
+
+	</qos_library>
+</dds>

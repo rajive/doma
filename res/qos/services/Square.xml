@@ -1,0 +1,38 @@
+<!--
+=======================================================================
+    							Service QoS
+=======================================================================
+RTI Connext DDS User QoS Profiles
+
+Service specific qos profiles.
+
+Configure service specific qos policies to each topic using topic 
+filters. Also, configure any service specific customizatiomns for
+the qos policies defined eslsewhere..
+
+Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
+-->
+<dds
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.0/rti_dds_qos_profiles.xsd"
+	version="5.3.0">
+
+	<qos_library name="EndpointQoSLib">
+
+		<qos_profile
+			name="User.Service.Square"
+			base_name="User.Pattern.Status">
+
+			<!-- Note: policies inherit from this qos profile's base_name, unless another 
+				base_name is used to override -->
+			<datareader_qos topic_filter="Square" />
+
+			<!-- Override by specifying a different qos profile via base_name -->
+			<datawriter_qos
+				topic_filter="Square"
+				base_name="User.Pattern.LastValueCache" />
+
+		</qos_profile>
+
+	</qos_library>
+</dds>
