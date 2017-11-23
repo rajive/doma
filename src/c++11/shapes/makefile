@@ -22,7 +22,8 @@ SOURCES += $(SOURCE_DIR)Service.cxx $(SOURCE_DIR)Component.cxx \
 		  $(SOURCE_DIR)Service_subscriber.cxx
 	
 EXEC   += Component_square_sub Component_square_pub \
-		  Component_square_pubsub
+		  Component_square_pubsub \
+		  Component_circle_pub_triangle_pub
 
 $(TARGET_ARCH) : $(DIRECTORIES) $(COMMONOBJS) \
 	$(EXEC:%=objs/$(TARGET_ARCH)/%.o) \
