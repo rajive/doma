@@ -1,6 +1,7 @@
 #!/bin/bash
 # Compose a component from the following services:
-#      Square_square
+#      Square -> Pub
+#      Square -> Sub
 # ---------------------------------------------------------------------
 # Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 
@@ -22,7 +23,7 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 # ---------------------------------------------------------------------
 # Service Composition into a Component
 
-# Service_square
+# Service: Square
 export BASE_NAME_Square_Root="Root_Library::Root"
 export BASE_NAME_Square_Pub="Square_Library::Square_Root"
 export BASE_NAME_Square_Sub="Square_Library::Square_Pub"
