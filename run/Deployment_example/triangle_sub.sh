@@ -1,6 +1,6 @@
 #!/bin/bash
 # Compose a component from the following services:
-#      Square -> Sub
+#      Triangle -> Sub
 # ---------------------------------------------------------------------
 # Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 
@@ -22,22 +22,22 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 # ---------------------------------------------------------------------
 # Service Composition into a Component
 
-# Service: Square
-export BASE_NAME_Square_Root="Root_Library::Root"
-export BASE_NAME_Square_Pub="Square_Library::Square_Root"
-export BASE_NAME_Square_Sub="Square_Library::Square_Root"
+# Service: Triangle
+export BASE_NAME_Triangle_Root="Root_Library::Root"
+export BASE_NAME_Triangle_Pub="Triangle_Library::Triangle_Root"
+export BASE_NAME_Triangle_Sub="Triangle_Library::Triangle_Root"
 
 # Component
-export BASE_NAME_Component="Square_Library::Square_Sub"
-export NAME_Component="square_sub"
+export BASE_NAME_Component="Triangle_Library::Triangle_Sub"
+export NAME_Component="triangle_sub"
 export DOMAIN_ID_Component=0
 
 # QoS Configurations
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Square.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Triangle.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/Deployment_example.xml;"
 
 # XML App Configurations
-NDDS_QOS_PROFILES+="${MY_HOME}/if/Square.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/if/Triangle.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/component/final.xml"
 
 # ---------------------------------------------------------------------
@@ -52,4 +52,4 @@ rtiddsprototyper -cfgName Component_Library::Component -luaFile ${MY_HOME}/src/l
 #			     -luaFile ${MY_HOME}/src/lua/shapes/ShapesSubscriber.lua 
 #			     -luaOnData false
 
-# ${MY_HOME}/src/c++11/shapes/objs/x64Darwin16clang8.0/Component_square_sub
+# ${MY_HOME}/src/c++11/shapes/objs/x64Darwin16clang8.0/Component_triangle_sub

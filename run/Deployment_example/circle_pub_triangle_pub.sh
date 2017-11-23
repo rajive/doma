@@ -60,4 +60,4 @@ rtiddsprototyper -cfgName Component_Library::Component -luaFile ${MY_HOME}/src/l
 #			     -luaFile ${MY_HOME}/src/lua/shapes/ShapesPublisher.lua 
 #			     -luaOnData false
 
-# ${MY_HOME}/src/c++11/shapes/objs/x64Darwin16clang8.0/Component_square_pubsub
+# ${MY_HOME}/src/c++11/shapes/objs/x64Darwin16clang8.0/Component_circle_pub_triangle_pub

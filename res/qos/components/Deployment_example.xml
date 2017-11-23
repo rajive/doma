@@ -35,11 +35,6 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 		</qos_profile>
 
 		<qos_profile
-			name="User.Selected.Component.square_sub"
-			base_name="User.Selected.Participant">
-		</qos_profile>
-
-		<qos_profile
 			name="User.Selected.Component.circle_pub_triangle_pub"
 			base_name="User.Selected.Participant">
 		</qos_profile>
@@ -47,6 +42,11 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 		<qos_profile
 			name="User.Selected.Component.square_sub_circle_sub"
 			base_name="User.Selected.Participant">
-		</qos_profile>						
+		</qos_profile>	
+		
+		<qos_profile
+			name="User.Selected.Component.triangle_sub"
+			base_name="User.Selected.Participant">
+		</qos_profile>					
 	</qos_library>
 </dds>
