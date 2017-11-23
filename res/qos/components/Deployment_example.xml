@@ -26,7 +26,13 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 
 		<qos_profile
 			name="User.Selected.Component.square_pub_sub"
-			base_name="ParticipantQoSLib::User.Selected.Participant">
+			base_name="ParticipantQoSLib::User.Selected.Participant"
+			is_default_participant_factory_profile="true">
+			<participant_factory_qos base_name="FactoryQoSLib::User.Selected.Factory">
+				<logging>
+					<verbosity>ERROR</verbosity>
+				</logging>
+			</participant_factory_qos>
 		</qos_profile>
 
 		<qos_profile
@@ -42,11 +48,11 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 		<qos_profile
 			name="User.Selected.Component.square_sub_circle_sub"
 			base_name="ParticipantQoSLib::User.Selected.Participant">
-		</qos_profile>	
-		
+		</qos_profile>
+
 		<qos_profile
 			name="User.Selected.Component.triangle_sub"
 			base_name="ParticipantQoSLib::User.Selected.Participant">
-		</qos_profile>					
+		</qos_profile>
 	</qos_library>
 </dds>
