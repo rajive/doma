@@ -28,7 +28,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			base_name="$(BASE_NAME_Component)"
 			domain_id="$(DOMAIN_ID_Component)">
 			<participant_qos
-				base_name="ParticipantQoSLib::User.Selected.Component.$(NAME_Component)">
+				base_name="ComponentQoSLib::User.Selected.Component.$(NAME_Component)">
 				<participant_name>
 					<name>$(NAME_Component)</name>
 				</participant_name>

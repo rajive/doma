@@ -50,11 +50,11 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			base_name="$(BASE_NAME_Square_Pub)">
 
 			<publisher name="Square_Publisher">
-				<publisher_qos base_name="EndpointQoSLib::User.Service.Square" />
+				<publisher_qos base_name="ServiceQoSLib::User.Service.Square" />
 				<data_writer
 					name="SquareWriter"
 					topic_ref="Square">
-					<datawriter_qos base_name="EndpointQoSLib::User.Service.Square" />
+					<datawriter_qos base_name="ServiceQoSLib::User.Service.Square" />
 				</data_writer>
 			</publisher>
 
@@ -66,11 +66,11 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			base_name="$(BASE_NAME_Square_Sub)">
 
 			<subscriber name="Square_Subscriber">
-				<subscriber_qos base_name="EndpointQoSLib::User.Service.Square" />
+				<subscriber_qos base_name="ServiceQoSLib::User.Service.Square" />
 				<data_reader
 					name="SquareReader"
 					topic_ref="Square">
-					<datareader_qos base_name="EndpointQoSLib::User.Service.Square" />
+					<datareader_qos base_name="ServiceQoSLib::User.Service.Square" />
 					<filter
 						name="SquareTopic_ContentFiltered"
 						kind="builtin.sql">
