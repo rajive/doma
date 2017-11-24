@@ -37,4 +37,14 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 
 	</domain_participant_library>
 
+	<!-- Participant Factory QoS -->
+	<qos_library name="ComponentQoSLib">
+		<!-- Singleton! applied to all the component participants -->
+		<qos_profile 
+			is_default_participant_factory_profile="true"
+			name="User.Selected.Component.Factory"
+			base_name="User.Selected.Component.$(NAME_Component)">
+		</qos_profile>
+	</qos_library>
+	
 </dds>
