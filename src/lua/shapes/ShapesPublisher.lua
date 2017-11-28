@@ -7,7 +7,7 @@
 --*****************************************************************************
 -- Author: Rajive Joshi, real-Time Innovations, Inc.
 
----ShapeaPublisher
+---ShapesPublisher
 -- Publishes to all topics found in the participant configuration
 -- 
 -- HOW TO?

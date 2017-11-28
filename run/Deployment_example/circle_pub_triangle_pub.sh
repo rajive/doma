@@ -1,4 +1,11 @@
 #!/bin/bash
+#*****************************************************************************
+#*     (c) 2005-2017 Copyright, Real-Time Innovations, All rights reserved.  *
+#*                                                                           *
+#*         Permission to modify and use for internal purposes granted.       *
+#* This software is provided "as is", without warranty, express or implied.  *
+#*                                                                           *
+#*****************************************************************************
 # Compose a component from the following services:
 #      Circle 	->  Pub
 #	   Triangle ->  Pub
