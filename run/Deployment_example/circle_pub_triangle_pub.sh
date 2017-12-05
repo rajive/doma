@@ -12,23 +12,13 @@
 # ---------------------------------------------------------------------
 # Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 
-export MY_HOME=../..
-export TYPES_DIR=${MY_HOME}/res/types
-# ---------------------------------------------------------------------
-# Common Framework
-
-export NDDS_QOS_PROFILES= #empty
-
-# Common - QoS Configurations
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/factory.xml;"
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/participant.xml;"
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/endpoint.xml;"
-
-# Common - XML App Configurations
-NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
-
 # ---------------------------------------------------------------------
 # Service Composition into a Component
+
+# Component
+export NAME_Component="circle_pub_triangle_pub"
+export DOMAIN_ID_Component=0
+export BASE_NAME_Component="Triangle_Library::Triangle_Pub"
 
 # Service: Circle -> Pub
 export BASE_NAME_Circle_Root="Root_Library::Root"
@@ -40,21 +30,33 @@ export BASE_NAME_Triangle_Root="Circle_Library::Circle_Pub"
 export BASE_NAME_Triangle_Pub="Triangle_Library::Triangle_Root"
 export BASE_NAME_Triangle_Sub="Triangle_Library::Triangle_Root"
 
-# Component
-export BASE_NAME_Component="Triangle_Library::Triangle_Pub"
-export NAME_Component="circle_pub_triangle_pub"
-export DOMAIN_ID_Component=0
+# ---------------------------------------------------------------------
+export MY_HOME=../..
+export TYPES_DIR=${MY_HOME}/res/types
+# ---------------------------------------------------------------------
+# NDDS_QOS_PROFILES
 
-# QoS Configurations
+export NDDS_QOS_PROFILES= #empty
+
+# Component - XML App Configurations
+NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
+
+# Common - QoS Configurations
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/factory.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/participant.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/endpoint.xml;"
+
+# Service - QoS Configurations
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Circle.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Triangle.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/Deployment_example.xml;"
 
-# XML App Configurations
+# Service - XML App Configurations
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Circle.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Triangle.xml;"
-NDDS_QOS_PROFILES+="${MY_HOME}/if/component/final.xml"
 
+# Component - XML App Configurations
+NDDS_QOS_PROFILES+="${MY_HOME}/if/component/final.xml"
 # ---------------------------------------------------------------------
 echo NDDS_QOS_PROFILES=${NDDS_QOS_PROFILES}
 
