@@ -3,8 +3,8 @@
 An example showing how to compose independently developed services into 
 arbitrary deployment components.
 
-- [Overview](#Overview)
-- [How To](#HowTo)
+- [Overview](#overview)
+- [How To](#how-to)
 - [Organization](./doc/Organization.md)
 - [Design](./doc/Design.md)
 - [BestPractices](./doc/BestPractices.md)
