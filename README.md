@@ -112,7 +112,7 @@ illustrates implementations in C++11 and Lua.
  
 4. Define a new component: `MyComponent`
 
-   4.1 Add a file `if/<deployment_name>/MyComponent.sh` and define the service
+   4.1 Add a file `run/<deployment_name>/MyComponent.sh` and define the service
        composition: 
    - `NAME_Component`
    - `BASE_NAME_Component`
