@@ -126,9 +126,10 @@ illustrates implementations in C++11 and Lua.
    `User.Selected.Component.MyComponent` in `res/qos/components/`. For an example
    look at [res/qos/components/Deployment_example.xml](./res/qos/components/Deployment_example.xml)
      
-   4.3 Specify all the XML files in the environment variable: `NDDS_QOS_PROFILES`.
-   For an example, look at: 
-   [run/Deployment_example/square_pub_sub.sh](./run/Deployment_example/square_pub_sub.sh)
+   4.3 Specify all the XML files in the environment variable: `NDDS_QOS_PROFILES` by 
+   sourcing the file `run/<deployment_name>/MyComponent.sh`, for example:
+   
+        . run/Deployment_example/square_pub_sub.sh
    
 
 5. Implement the component `MyComponent` 

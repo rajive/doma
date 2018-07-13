@@ -43,7 +43,7 @@ NEEDED FOR DEPLOYMENT:
       - `services/`: service specific qos profiles 
          - per service xml file
        
-      - `component/` : service specific qos profiles 
+      - `components/` : service specific qos profiles 
          - per deployment xml file
       
  - `run/` : runtime settings for service compositions

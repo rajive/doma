@@ -46,7 +46,7 @@ int Component::main(int argc, char *argv[],
 	 dds::core::QosProvider::Default()->create_participant_from_config(
 	        		participant_config_name, params);
     try {
-    		service.init(participant);
+    	service.init(participant);
         service.loop(sample_count);
     } catch (const std::exception& ex) {
         // This will catch DDS exceptions
