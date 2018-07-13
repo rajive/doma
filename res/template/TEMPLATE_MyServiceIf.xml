@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+*****************************************************************************
+*    (c) 2005-2018 Copyright, Real-Time Innovations, All rights reserved.   *
+*                                                                           *
+*         Permission to modify and use for internal purposes granted.       *
+* This software is provided "as is", without warranty, express or implied.  *
+*                                                                           *
+*****************************************************************************
+-->
+<!-- 
+=======================================================================
+    						Service - Square		
+=======================================================================
+RTI Connext DDS XML App Creation
+
+Define a service "MyService" as a set of data-oriented interfaces.
+
+The 'MyService' service can have any number of interfaces:
+	- MyService_InterfaceX (illustrated in the template below)
+	- MyService_InterfaceY
+	- ...and so on...
+
+The interfaces can be composed with each other or other service interfaces 
+(if desired) to define component interfaces.
+
+Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
+-->
+<dds
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_profiles.xsd"
+	version="5.3.1">
+
+	<!-- Data Types -->
+	<types>
+		<include file="$(TYPES_DIR)/MyType.xml"/>
+	</types>
+
+	<!-- Participants : each participant defines a data-oriented interface -->
+	<domain_participant_library name="MyService_Library">
+
+		<!-- Root: empty interface to register types and topics -->
+		<domain_participant name="MyService_Root" base_name="$(BASE_NAME_MyService_Root)">
+
+			<!-- register types used by the service -->
+			<register_type name="MyType" type_ref="rti::example::MyType"/>
+			
+			<!-- register topics used by the service -->
+			<topic name="MyTopic" register_type_ref="MyType"/>
+
+		</domain_participant>
+
+
+		<!-- Define a data-oriented interface -->
+		<domain_participant name="MyService_InterfaceX" base_name="$(BASE_NAME_MyService_InterfaceX)">
+
+			<!-- Inputs -->
+			<subscriber name="MyService_InterfaceX_Subscriber">
+				<subscriber_qos base_name="ServiceQoSLib::User.Service.MyService"/>
+
+				<data_reader name="MyTopic_Reader" topic_ref="MyTopic">
+					<datareader_qos base_name="ServiceQoSLib::User.Service.MyService"/>
+				</data_reader>
+				<!-- ... -->
+				
+			</subscriber>
+			<!-- ... -->
+			
+			
+			<!-- Outputs -->
+			<publisher name="MyService_InterfaceX_Publisher">
+				<publisher_qos base_name="ServiceQoSLib::User.Service.MyService"/>
+
+				<data_writer name="MyTopic_Writer" topic_ref="MyTopic">
+					<datawriter_qos base_name="ServiceQoSLib::User.Service.MyService"/>
+				</data_writer>
+				<!-- ... -->
+				
+			</publisher>
+			<!-- ... -->
+
+		</domain_participant>
+		
+	</domain_participant_library>
+
+</dds>
