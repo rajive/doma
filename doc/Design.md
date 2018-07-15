@@ -1,23 +1,29 @@
 ## Interface Definition
 
-An interface is defined by:
-   
-- participant with a `base_name=$(BASE_NAME...)` environment variable
-  - by specifying the `base_name=$(BASE_NAME...)` the interface can be composed
-    with other interfaces
-  - the participant qos is NOT specified here; it is specified for 
-    the component
+A data-oriented interface is defined by:
 
-    
+- an *abstract* participant whose name is the interface name
+
 - inputs: 
   - Subscriber(s) containing DataReaders
-  - Subscriber are associated with SubscriberQos
+  - Subscribers are associated with SubscriberQos
   - DataReader(s) are associated with DataReaderQos
 
 - outputs: 
   - Publishers(s) containing DataWriters
   - Publishers are associated with PublisherQos
   - DataWriters(s) are associated with DataWriterQos  
+
+
+An abstract participant
+
+- can be be composed with other abstract participants (interfaces)
+- does *not* specify a participant_qos 
+
+Abstract participants are composed via inheritance
+
+-  `base_name=$(BASE_NAME_...)` 
+- `BASE_NAME__...` environment variable specifies the base interface
 
 
 ## Service Definition
@@ -36,7 +42,7 @@ includes:
 
 - a `domain_participant_library` named `name=MyService_Library` that contains:
 
-  - a marker interface named `MyService_Root` that 
+  - a marker interface (i.e. has no inputs and outputs) named `MyService_Root` that 
     - OPTIONAL: `<register_type>` tags
       - registers the types used by the service; this is only needed
         if dynamic types are used (e.g. using scripting in Lua etc.)
@@ -66,7 +72,7 @@ A component is configured by defining the environment variables:
 
 A component's DomainParticipantFactoryQos and DomainParticipantQos
 are retrieved from the qos profile 
-`ComponentQoSLib::User.Selected.Component.$(NAME_Component)` 
+ `ComponentQoSLib::User.Selected.Component.$(NAME_Component)` 
 
 This qos profile may customize qos policies for:
 
