@@ -12,7 +12,8 @@
 #	   ServiceM_InterfaceY	->	root
 #
 # Use this script to launch the component as follows:
-#     <this_script>.sh [<domain_id> [<path_to_executable_or_lua_script>]]
+#
+#  	<this>.sh [<domain_id> [<path_to_executable_or_lua_script>] [project_dir]]
 #
 # ---------------------------------------------------------------------
 # Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
@@ -20,9 +21,6 @@
 # ---------------------------------------------------------------------
 #                   --- Service Composition ---
 # ---------------------------------------------------------------------
-
-# Project Directory
-MY_HOME=..
 
 # final: Component Parameters
 NAME_Component="MyComponent"
@@ -41,13 +39,16 @@ BASE_NAME_MyServiceN_Root="MyServiceM_Library::MyServiceM_InterfaceY"
 BASE_NAME_MyServiceM_InterfaceY="MyServiceM_Library::MyServiceM_Root"
 BASE_NAME_MyServiceN_Root="Root_Library::Root"
 
-
 # ---------------------------------------------------------------------
 #                   --- Directories ---
 # ---------------------------------------------------------------------
 
+# Project Directory
+# Use the third argument, $3, if specified
+# Default: one level up (..) from the location of this script
+MY_HOME=${3:-$(cd $(dirname "$0")/..; pwd -P)}
+
 # Locations
-export MY_HOME=${MY_HOME:=..}
 export TYPES_DIR=${TYPES_DIR:=${MY_HOME}/res/types}
 
 # ---------------------------------------------------------------------
@@ -119,10 +120,11 @@ esac
 # ---------------------------------------------------------------------
 
 echo "Usage: "
-echo "$0 [<domain_id> [<path_to_executable_or_lua_script>]]"
+echo "$0 [<domain_id> [<path_to_executable_or_lua_script>] [project_dir]]"
 echo
 
 echo DOMAIN_ID=${DOMAIN_ID_Component}
+echo MY_HOME=${MY_HOME}
 echo NDDS_QOS_PROFILES=${NDDS_QOS_PROFILES}
 echo EXEC=${EXEC}
 
