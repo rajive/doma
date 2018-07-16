@@ -79,14 +79,14 @@ section [Organization](./doc/Organization.md).
 	
 2. Define a new service interface: `MyService`
   
-   2.1 Add a file `res/qos/services/MyServiceQos.xml` by cloning the template
-   [res/template/TEMPLATE_MyServiceQos.xml](./res/template/TEMPLATE_MyServiceQos.xml).
+   2.1 Add a file `res/qos/services/MyService_qos.xml` by cloning the template
+   [`res/template/TEMPLATE_MyService_qos.xml`](./res/template/TEMPLATE_MyService_qos.xml).
    
    2.2 Define all the service end-point qos policies. Use a *topic_filter* to 
    specify per topic *DataWriter* and *DataReader* Qos. Reuse the common qos 
    policy libraries defined in `res/qos/common/`, and expand those common 
    libraries if appropriate. For an example, look at 
-   [res/qos/services/Square.xml](./res/qos/services/Square.xml).
+   [`res/qos/services/Square_qos.xml`](./res/qos/services/Square_qos.xml).
        
    2.2 Add a file `if/MyService.xml` by cloning the template
    [res/template/TEMPLATE_MyService.xml](./res/template/TEMPLATE_MyService.xml).
@@ -130,11 +130,11 @@ section [Organization](./doc/Organization.md).
    For an example, look at: 
    [run/square\_pub\_sub.sh](./run/square_pub_sub.sh)
      
-   4.4 Add a file `res/qos/components/MyComponentQos.xml` by cloning the template
-   [res/template/TEMPLATE_MyComponentQos.xml](./res/template/TEMPLATE_MyComponentQos.xml).
+   4.4 Add a file `res/qos/components/MyComponent_qos.xml` by cloning the template
+   [`res/template/TEMPLATE_MyComponent_qos.xml`](./res/template/TEMPLATE_MyComponent_qos.xml).
    
    4.5 Define the component deployment qos policies. For an example
-   look at [res/qos/components/square_pub_sub.xml](./res/qos/components/square_pub_sub.xml)
+   look at [`res/qos/components/square_pub_sub_qos.xml`](./res/qos/components/square_pub_sub_qos.xml)
      
 
 5. Implement the component `MyComponent` 

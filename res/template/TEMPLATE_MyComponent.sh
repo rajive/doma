@@ -59,9 +59,9 @@ export TYPES_DIR=${TYPES_DIR:=${MY_HOME}/res/types}
 export NDDS_QOS_PROFILES= #empty
 
 # QoS - Common
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/factory.xml;"
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/participant.xml;"
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/endpoint.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/factory_qos.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/participant_qos.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/endpoint_qos.xml;"
 
 # ---------------------------------------------------------------------
 #                   --- Interface Defaults ---
@@ -76,7 +76,7 @@ export BASE_NAME_MyServiceM_InterfaceX=${BASE_NAME_MyServiceM_InterfaceX:="MySer
 export BASE_NAME_MyServiceM_InterfaceY=${BASE_NAME_MyServiceM_InterfaceY:="MyServiceM_Library::MyService_Root"}
 export BASE_NAME_MyServiceM_InterfaceZ=${BASE_NAME_MyServiceM_InterfaceZ:="MyServiceM_Library::MyService_Root"}
 export BASE_NAME_MyServiceM_Root=${BASE_NAME_MyServiceM_Root:="Root_Library::Root"}
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/MyServiceMQos.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/MyServiceM_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/MyServiceM.xml;"
 
 
@@ -85,7 +85,7 @@ export BASE_NAME_MyServiceN_InterfaceX=${BASE_NAME_MyServiceN_InterfaceX:="MySer
 export BASE_NAME_MyServiceN_InterfaceY=${BASE_NAME_MyServiceN_InterfaceY:="MyServiceN_Library::MyService_Root"}
 export BASE_NAME_MyServiceN_InterfaceZ=${BASE_NAME_MyServiceN_InterfaceZ:="MyServiceN_Library::MyService_Root"}
 export BASE_NAME_MyServiceN_Root=${BASE_NAME_MyServiceN_Root:="Root_Library::Root"}
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/MyServiceNQos.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/MyServiceN_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/MyServiceN.xml;"
 
 
@@ -93,8 +93,7 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/MyServiceN.xml;"
 export BASE_NAME_Component=${BASE_NAME_Component:="Root_Library::Root"}
 export NAME_Component=${NAME_Component:="MyComponent"}
 export DOMAIN_ID_Component=${1:-0} # Use the first argument, $1, if specified
-
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/${NAME_Component}.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/${NAME_Component}_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/component/final.xml"
 
 # ---------------------------------------------------------------------
