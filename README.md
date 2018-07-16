@@ -153,11 +153,6 @@ section [Organization](./doc/Organization.md).
      - `Component_square_pub_sub.cxx` composed of the square publication service and the 
      square subscription service
 
-      To build the components:
-	
-			cd src/c++11/shapes/
-			rm -f objs/x64Darwin16clang8.0/Component_*  
-			make
 		
   - `src/lua/` : Lua implementation (using *rtiddsprototyper*)
  
@@ -166,6 +161,23 @@ section [Organization](./doc/Organization.md).
        if an executable or lua script is not specified in the component
        launcher command line
 
+
+## Building a component
+
+Generate the platform specific makefile (per platform)
+
+	cd src/c++11/shapes/
+	make makefile/x64Darwin17clang9.0  # look at $NDDSHOME/lib for choices
+	  
+Build components:
+	
+	cd src/c++11/shapes/
+	make
+
+Clean components:
+
+	cd src/c++11/shapes/
+	make clean                        # as needed
 
 ## Running a component
 

@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 	return Component_pub_pub().main(argc, argv,
 		"Component_Library::Component",
 		*std::make_shared<Service_pub_pub>(
-			*std::make_shared<Service_publisher>("Circle_Publisher::CircleWriter"),
-			*std::make_shared<Service_publisher>("Triangle_Publisher::TriangleWriter")
+			*std::make_shared<Service_publisher>("Circle_Pub_publisher::Circle_writer"),
+			*std::make_shared<Service_publisher>("Triangle_Pub_publisher::Triangle_writer")
 		));
 }

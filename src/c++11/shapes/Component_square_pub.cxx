@@ -69,5 +69,5 @@ int main(int argc, char *argv[])
 {
 	return Component_publisher().main(argc, argv,
 		"Component_Library::Component",
-		*std::make_shared<Service_publisher>("Square_Publisher::SquareWriter"));
+		*std::make_shared<Service_publisher>("Square_Pub_publisher::Square_writer"));
 }

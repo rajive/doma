@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 	return Component_sub_sub().main(argc, argv,
 		"Component_Library::Component",
 		*std::make_shared<Service_sub_sub>(
-			*std::make_shared<Service_subscriber>("Square_Subscriber::SquareReader"),
-			*std::make_shared<Service_subscriber>("Circle_Subscriber::CircleReader")
+			*std::make_shared<Service_subscriber>("Square_Sub_subscriber::Square_reader"),
+			*std::make_shared<Service_subscriber>("Circle_Sub_subscriber::Circle_reader")
 		));
 }

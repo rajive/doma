@@ -58,10 +58,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			name="Square_Pub"
 			base_name="$(BASE_NAME_Square_Pub)">
 
-			<publisher name="Square_Publisher">
+			<publisher name="Square_Pub_publisher">
 				<publisher_qos base_name="ServiceQoSLib::User.Service.Square" />
 				<data_writer
-					name="SquareWriter"
+					name="Square_writer"
 					topic_ref="Square">
 					<datawriter_qos base_name="ServiceQoSLib::User.Service.Square" />
 				</data_writer>
@@ -74,10 +74,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			name="Square_Sub"
 			base_name="$(BASE_NAME_Square_Sub)">
 
-			<subscriber name="Square_Subscriber">
+			<subscriber name="Square_Sub_subscriber">
 				<subscriber_qos base_name="ServiceQoSLib::User.Service.Square" />
 				<data_reader
-					name="SquareReader"
+					name="Square_reader"
 					topic_ref="Square">
 					<datareader_qos base_name="ServiceQoSLib::User.Service.Square" />
 					<filter

@@ -46,7 +46,7 @@ ShapeTypePlugin.hpp ShapeType.hpp : \
 
 # Generate a platform specific makefile
 # Example:
-#   		make makefile/x64Darwin16clang8.0
+#   		make makefile/x64Darwin17clang9.0
 makefile/%: ../../../res/types/ShapeType.idl
 	rtiddsgen ../../../res/types/ShapeType.idl -ppDisable -d . \
 				-language C++11 -stl \

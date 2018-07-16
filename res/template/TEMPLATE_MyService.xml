@@ -55,10 +55,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 		<domain_participant name="MyService_InterfaceX" base_name="$(BASE_NAME_MyService_InterfaceX)">
 
 			<!-- Inputs -->
-			<subscriber name="MyService_InterfaceX_Subscriber">
+			<subscriber name="MyService_InterfaceX_subscriber">
 				<subscriber_qos base_name="ServiceQoSLib::User.Service.MyService"/>
 
-				<data_reader name="MyTopic_Reader" topic_ref="MyTopic">
+				<data_reader name="MyTopic_reader" topic_ref="MyTopic">
 					<datareader_qos base_name="ServiceQoSLib::User.Service.MyService"/>
 				</data_reader>
 				<!-- ... -->
@@ -68,10 +68,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 			
 			
 			<!-- Outputs -->
-			<publisher name="MyService_InterfaceX_Publisher">
+			<publisher name="MyService_InterfaceX_publisher">
 				<publisher_qos base_name="ServiceQoSLib::User.Service.MyService"/>
 
-				<data_writer name="MyTopic_Writer" topic_ref="MyTopic">
+				<data_writer name="MyTopic_writer" topic_ref="MyTopic">
 					<datawriter_qos base_name="ServiceQoSLib::User.Service.MyService"/>
 				</data_writer>
 				<!-- ... -->

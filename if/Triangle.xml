@@ -58,10 +58,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			name="Triangle_Pub"
 			base_name="$(BASE_NAME_Triangle_Pub)">
 
-			<publisher name="Triangle_Publisher">
+			<publisher name="Triangle_Pub_publisher">
 				<publisher_qos base_name="ServiceQoSLib::User.Service.Triangle" />
 				<data_writer
-					name="TriangleWriter"
+					name="Triangle_writer"
 					topic_ref="Triangle">
 					<datawriter_qos base_name="ServiceQoSLib::User.Service.Triangle" />
 				</data_writer>
@@ -74,10 +74,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			name="Triangle_Sub"
 			base_name="$(BASE_NAME_Triangle_Sub)">
 
-			<subscriber name="Triangle_Subscriber">
+			<subscriber name="Triangle_Sub_subscriber">
 				<subscriber_qos base_name="ServiceQoSLib::User.Service.Triangle" />
 				<data_reader
-					name="TriangleReader"
+					name="Triangle_reader"
 					topic_ref="Triangle">
 					<datareader_qos base_name="ServiceQoSLib::User.Service.Triangle" />
 					<filter

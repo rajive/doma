@@ -72,6 +72,6 @@ int main(int argc, char *argv[])
 {
 	return Component_subscriber().main(argc, argv,
 		"Component_Library::Component",
-		*std::make_shared<Service_subscriber>("Triangle_Subscriber::TriangleReader"));
+		*std::make_shared<Service_subscriber>("Triangle_Sub_subscriber::Triangle_reader"));
 }
 
