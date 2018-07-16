@@ -56,10 +56,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 
 			<!-- Inputs -->
 			<subscriber name="MyService_InterfaceX_subscriber">
-				<subscriber_qos base_name="ServiceQoSLib::User.Service.MyService"/>
+				<subscriber_qos base_name="ServiceQosLib::User.Service.MyService"/>
 
 				<data_reader name="MyTopic_reader" topic_ref="MyTopic">
-					<datareader_qos base_name="ServiceQoSLib::User.Service.MyService"/>
+					<datareader_qos base_name="ServiceQosLib::User.Service.MyService"/>
 				</data_reader>
 				<!-- ... -->
 				
@@ -69,10 +69,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 			
 			<!-- Outputs -->
 			<publisher name="MyService_InterfaceX_publisher">
-				<publisher_qos base_name="ServiceQoSLib::User.Service.MyService"/>
+				<publisher_qos base_name="ServiceQosLib::User.Service.MyService"/>
 
 				<data_writer name="MyTopic_writer" topic_ref="MyTopic">
-					<datawriter_qos base_name="ServiceQoSLib::User.Service.MyService"/>
+					<datawriter_qos base_name="ServiceQosLib::User.Service.MyService"/>
 				</data_writer>
 				<!-- ... -->
 				

@@ -9,13 +9,13 @@
 - Subscriber names end with `_subscriber`
 - DataReader names end with `_reader`
 - Participant Libraries end with `_Library`
-- QoS Libraries end with `QoSLib`, for consistency with the builtin
+- QoS Libraries end with `QosLib`, for consistency with the builtin
   qos profiles naming conventions `BuiltinQosLibExp`
 - User defined QoS profile names start with `User.`
 - Selected or preferred user QoS profile names start with `User.Selected.`
 - Service qos profile names start with `User.Service.`
 - Component qos profile names start with `User.Component.`
-
+- "QoS only" xml files end with `_qos.xml`
 
 ---
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.

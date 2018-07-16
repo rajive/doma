@@ -52,7 +52,7 @@ includes:
     
   - one or more service interfaces  
 
-- a `qos_profile` named `ServiceQoSLib::User.Service.MyService` that defines the 
+- a `qos_profile` named `ServiceQosLib::User.Service.MyService` that defines the 
   endpoint qos policies for all the topics used by the service 
   using topics filters (`topic_filter`)
 
@@ -72,7 +72,7 @@ A component is configured by defining the environment variables:
 
 A component's DomainParticipantFactoryQos and DomainParticipantQos
 are retrieved from the qos profile 
- `ComponentQoSLib::User.Component.$(NAME_Component)` 
+ `ComponentQosLib::User.Component.$(NAME_Component)` 
 
 This qos profile may customize qos policies for:
 

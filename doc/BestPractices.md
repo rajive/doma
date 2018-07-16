@@ -29,14 +29,14 @@
     (Protototper, Recording Service, Routing Service etc.).
 
 - Separate qos policies for participants (in `ParticpantQoSlib`), 
-  endpoints (i.e. DataWriter(s) and DataReader(s) in `EndpointQoSLib`), and the
-  singleton factory (in `FactoryQoSLib`).
+  endpoints (i.e. DataWriter(s) and DataReader(s) in `EndpointQosLib`), and the
+  singleton factory (in `FactoryQosLib`).
 
-   - `ParticpantQoSlib`,  `EndpointQoSLib`, `FactoryQoSLib` are independent hierarchies
+   - `ParticpantQoSlib`,  `EndpointQosLib`, `FactoryQosLib` are independent hierarchies
       that can extend from the built-in qos profiles.
    
-   - Some `EndpointQoSLib` profiles may have some coupling to the 
-     `ParticipantQoSLib`, e.g. for large data; in that case the endpoint qos 
+   - Some `EndpointQosLib` profiles may have some coupling to the 
+     `ParticipantQosLib`, e.g. for large data; in that case the endpoint qos 
      profile should extend or include the appropriate participant qos profile 
      from `ParticpantQoSlib`.
 
@@ -45,12 +45,12 @@
   polices will apply to endpoints created in code (i.e. not defined a priori 
   in XML App Creation).
   
-- To define service qos profile in `ServiceQoSLib`, extend profiles from 
-  `EndpointQoSLib` and use `topic filters` for each topic used by the service. This
+- To define service qos profile in `ServiceQosLib`, extend profiles from 
+  `EndpointQosLib` and use `topic filters` for each topic used by the service. This
    avoids duplication and ensures a compact qos specification.
   
-- To define a component's qos profile in `ComponentQoSLib`, extend profiles in 
-  `ParticpantQoSlib` and use profiles from `FactoryQoSLib`. This 
+- To define a component's qos profile in `ComponentQosLib`, extend profiles in 
+  `ParticpantQoSlib` and use profiles from `FactoryQosLib`. This 
    avoids duplication and ensures a compact qos specification.
   
 ---
