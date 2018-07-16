@@ -95,7 +95,7 @@ section [Organization](./doc/Organization.md).
    For an example, look at [if/Square.xml](./if/Square.xml) 
 
    2.4 Ensure that the service interfaces are using the service qos profile
-   for all *DataWriter*, *DataReder*, *Publisher*, and *Subscriber* entities. 
+   for all *DataWriter*, *DataReader*, *Publisher*, and *Subscriber* entities. 
  
  
 3. Implement the service `MyService`
@@ -201,8 +201,12 @@ not located in the standard location under the `run/` directory. The
 The `[<path_to_executable_or_lua_script>]` specifies the component implementation.
 
 - A value ending in `.lua` is launched as a lua script
-  within the `rtiddsprototyper`. Otherwise, it is launched as an executable.
-  
+  within the `rtiddsprototyper`. 
+- Otherwise, it is launched as the component executable. E.g. `MyComponent[.exe]`, 
+`rtiroutingservice[.exe]`, `bash`
+
+Thus, 
+
 - To run `rtiroutingservice` with the component's environment:
 
 		./run/MyComponent.sh <domain_id> <rtiroutingservice> [project_dir]

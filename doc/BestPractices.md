@@ -28,17 +28,17 @@
   - This ensures that the qos are usable also the Connext Tools & Services 
     (Protototper, Recording Service, Routing Service etc.).
 
-- Separate qos policies for participants (in `ParticpantQoSlib`), 
+- Separate qos policies for participants (in `ParticpantQosLib`), 
   endpoints (i.e. DataWriter(s) and DataReader(s) in `EndpointQosLib`), and the
   singleton factory (in `FactoryQosLib`).
 
-   - `ParticpantQoSlib`,  `EndpointQosLib`, `FactoryQosLib` are independent hierarchies
+   - `ParticpantQosLib`,  `EndpointQosLib`, `FactoryQosLib` are independent hierarchies
       that can extend from the built-in qos profiles.
    
    - Some `EndpointQosLib` profiles may have some coupling to the 
      `ParticipantQosLib`, e.g. for large data; in that case the endpoint qos 
      profile should extend or include the appropriate participant qos profile 
-     from `ParticpantQoSlib`.
+     from `ParticpantQosLib`.
 
 - For endpoint qos profiles, use topic filters to specify the QoS policies 
   for each topic's DataWriter and DataReader. This  ensures that the qos
@@ -50,7 +50,7 @@
    avoids duplication and ensures a compact qos specification.
   
 - To define a component's qos profile in `ComponentQosLib`, extend profiles in 
-  `ParticpantQoSlib` and use profiles from `FactoryQosLib`. This 
+  `ParticpantQosLib` and use profiles from `FactoryQosLib`. This 
    avoids duplication and ensures a compact qos specification.
   
 ---
