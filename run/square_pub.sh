@@ -7,9 +7,8 @@
 #*                                                                           *
 #*****************************************************************************
 # Compose a component from the following services:
-#      final				->	MyServiceN_InterfaceX
-#	   ServiceN_InterfaceX	->	MyServiceM_InterfaceY
-#	   ServiceM_InterfaceY	->	root
+#      final				->	Square_Pub
+#	   Square_Pub			->	root
 #
 # Use this script to launch the component as follows:
 #
@@ -23,21 +22,17 @@
 # ---------------------------------------------------------------------
 
 # final: Component Parameters
-NAME_Component="MyComponent"
+NAME_Component="square_pub"
 
 
 # --- Service composition ---
 
-# final -> ServiceN_InterfaceX
-BASE_NAME_Component="MyService_Library::MyServiceN_InterfaceX"
+# final -> Square_Pub
+BASE_NAME_Component="Square_Library::Square_Pub"
 
-# ServiceN_InterfaceX -> ServiceM_InterfaceY
-BASE_NAME_MyServiceN_InterfaceX="MyServiceN_Library::MyService_Root"
-BASE_NAME_MyServiceN_Root="MyServiceM_Library::MyServiceM_InterfaceY"
-
-# ServiceM_InterfaceY -> root
-BASE_NAME_MyServiceM_InterfaceY="MyServiceM_Library::MyServiceM_Root"
-BASE_NAME_MyServiceN_Root="Root_Library::Root"
+# Square_Pub -> root
+BASE_NAME_Square_Pub="Square_Library::Square_Root"
+BASE_NAME_Square_Root="Root_Library::Root"
 
 # ---------------------------------------------------------------------
 #                   --- Directories ---
@@ -71,30 +66,19 @@ NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/common/endpoint.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 
 
-# ServiceM
-export BASE_NAME_MyServiceM_InterfaceX=${BASE_NAME_MyServiceM_InterfaceX:="MyServiceM_Library::MyService_Root"}
-export BASE_NAME_MyServiceM_InterfaceY=${BASE_NAME_MyServiceM_InterfaceY:="MyServiceM_Library::MyService_Root"}
-export BASE_NAME_MyServiceM_InterfaceZ=${BASE_NAME_MyServiceM_InterfaceZ:="MyServiceM_Library::MyService_Root"}
-export BASE_NAME_MyServiceM_Root=${BASE_NAME_MyServiceM_Root:="Root_Library::Root"}
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/MyServiceMQos.xml;"
-NDDS_QOS_PROFILES+="${MY_HOME}/if/MyServiceM.xml;"
-
-
-# ServiceN
-export BASE_NAME_MyServiceN_InterfaceX=${BASE_NAME_MyServiceN_InterfaceX:="MyServiceN_Library::MyService_Root"}
-export BASE_NAME_MyServiceN_InterfaceY=${BASE_NAME_MyServiceN_InterfaceY:="MyServiceN_Library::MyService_Root"}
-export BASE_NAME_MyServiceN_InterfaceZ=${BASE_NAME_MyServiceN_InterfaceZ:="MyServiceN_Library::MyService_Root"}
-export BASE_NAME_MyServiceN_Root=${BASE_NAME_MyServiceN_Root:="Root_Library::Root"}
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/MyServiceNQos.xml;"
-NDDS_QOS_PROFILES+="${MY_HOME}/if/MyServiceN.xml;"
+# Square
+export BASE_NAME_Square_Pub=${BASE_NAME_Square_Pub:="Square_Library::Square_Root"}
+export BASE_NAME_Square_Sub=${BASE_NAME_Square_Sub:="Square_Library::Square_Root"}
+export BASE_NAME_Square_Root=${BASE_NAME_Square_Root:="Root_Library::Root"}
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Square.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/if/Square.xml;"
 
 
 # final
 export BASE_NAME_Component=${BASE_NAME_Component:="Root_Library::Root"}
 export NAME_Component=${NAME_Component:="MyComponent"}
 export DOMAIN_ID_Component=${1:-0} # Use the first argument, $1, if specified
-
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/${NAME_Component}.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/Deployment_example.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/component/final.xml"
 
 # ---------------------------------------------------------------------
