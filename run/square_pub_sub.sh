@@ -8,8 +8,8 @@
 #*****************************************************************************
 # Compose a component from the following services:
 #      final                ->  Square_Sub
-#      Square_Sub			->  Square_Pub
-#      Square_Pub			->  root
+#      Square_Sub           ->  Square_Pub
+#      Square_Pub           ->  root
 #
 # Use this script to launch the component as follows:
 #

@@ -8,8 +8,8 @@
 #*****************************************************************************
 # Compose a component from the following services:
 #      final                ->  Triangle_Pub
-#      Triangle_Pub			->  Circle_Pub
-#      Circle_Pub			->  root
+#      Triangle_Pub         ->  Circle_Pub
+#      Circle_Pub           ->  root
 #
 # Use this script to launch the component as follows:
 #
