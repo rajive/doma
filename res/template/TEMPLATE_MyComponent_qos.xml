@@ -34,7 +34,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 
 	<qos_library name="ComponentQoSLib">
 
-		<qos_profile name="MyComponent_QosProfile">
+		<qos_profile name="User.Component.MyComponent">
 
 			<participant_qos base_name="ParticipantQoSLib::User.Selected.Participant">              
 				<discovery>

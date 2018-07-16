@@ -72,7 +72,7 @@ A component is configured by defining the environment variables:
 
 A component's DomainParticipantFactoryQos and DomainParticipantQos
 are retrieved from the qos profile 
- `ComponentQoSLib::User.Selected.Component.$(NAME_Component)` 
+ `ComponentQoSLib::User.Component.$(NAME_Component)` 
 
 This qos profile may customize qos policies for:
 

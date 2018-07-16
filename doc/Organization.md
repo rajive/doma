@@ -47,9 +47,7 @@ NEEDED FOR DEPLOYMENT:
          - per deployment xml file
       
  - `run/` : runtime settings for service compositions
-    - `<deployment_name>/` : deployment specific runtime configurations
-        - scripts that setup the deployment runtime environment for 
-          launching components
+        - a launcher script per component to setup its runtime deployment environment
   
 (optional)
  
