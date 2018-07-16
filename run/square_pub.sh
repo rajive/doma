@@ -7,7 +7,7 @@
 #*                                                                           *
 #*****************************************************************************
 # Compose a component from the following services:
-#      final				->	Square_Pub
+#      final                ->  Square_Pub
 #	   Square_Pub			->	root
 #
 # Use this script to launch the component as follows:

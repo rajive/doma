@@ -7,7 +7,7 @@
 #*                                                                           *
 #*****************************************************************************
 # Compose a component from the following services:
-#      final				->	Triangle_Sub
+#      final                ->  Triangle_Sub
 #	   Triangle_Sub			->	root
 #
 # Use this script to launch the component as follows:

@@ -7,9 +7,9 @@
 #*                                                                           *
 #*****************************************************************************
 # Compose a component from the following services:
-#      final				->	MyServiceN_InterfaceX
-#	   ServiceN_InterfaceX	->	MyServiceM_InterfaceY
-#	   ServiceM_InterfaceY	->	root
+#      final                ->  MyServiceN_InterfaceX
+#      ServiceN_InterfaceX  ->  MyServiceM_InterfaceY
+#	   ServiceM_InterfaceY  ->  root
 #
 # Use this script to launch the component as follows:
 #

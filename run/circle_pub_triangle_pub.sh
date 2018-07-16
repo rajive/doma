@@ -7,7 +7,7 @@
 #*                                                                           *
 #*****************************************************************************
 # Compose a component from the following services:
-#      final				->	Triangle_Pub
+#      final                ->  Triangle_Pub
 #	   Triangle_Pub			->	Circle_Pub
 #	   Circle_Pub			->	root
 #

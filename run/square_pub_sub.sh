@@ -7,7 +7,7 @@
 #*                                                                           *
 #*****************************************************************************
 # Compose a component from the following services:
-#      final				->	Square_Sub
+#      final                ->  Square_Sub
 #	   Square_Sub			->	Square_Pub
 #	   Square_Pub			->	root
 #
