@@ -37,7 +37,7 @@ BASE_NAME_MyServiceN_Root="MyServiceM_Library::MyServiceM_InterfaceY"
 
 # ServiceM_InterfaceY -> root
 BASE_NAME_MyServiceM_InterfaceY="MyServiceM_Library::MyServiceM_Root"
-BASE_NAME_MyServiceN_Root="Root_Library::Root"
+BASE_NAME_MyServiceM_Root="Root_Library::Root"
 
 # ---------------------------------------------------------------------
 #                   --- Directories ---
