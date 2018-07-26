@@ -45,6 +45,14 @@
   polices will apply to endpoints created in code (i.e. not defined a priori 
   in XML App Creation).
   
+- topic_filter should use a wild card so that the policy applies to the 
+  DataReader(s) for the base topic name and a derived content filtered topic.
+  The content filtered topic name should thus derive from the base
+  topic name. For example: "MyTopic/filtered" would name a content filtered
+  topic, and a topic_filter="MyTopic*" would apply to both "MyTopic" and 
+  "MyTopic/filtered" DataReaders.
+  
+
 - To define service qos profile in `ServiceQosLib`, extend profiles from 
   `EndpointQosLib` and use `topic filters` for each topic used by the service. This
    avoids duplication and ensures a compact qos specification.
