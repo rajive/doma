@@ -27,7 +27,9 @@
     dynamically in code (and not defined a priori in XML files).
   - This ensures that the qos are usable also the Connext Tools & Services 
     (Protototper, Recording Service, Routing Service etc.).
-
+  - Exceptions: Content Filters and Partitions, since these may be specific to
+    the architecture and allowed data flows of specific service interfaces.
+       
 - Separate qos policies for participants (in `ParticpantQosLib`), 
   endpoints (i.e. DataWriter(s) and DataReader(s) in `EndpointQosLib`), and the
   singleton factory (in `FactoryQosLib`).
