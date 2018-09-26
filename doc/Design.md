@@ -52,9 +52,11 @@ includes:
     
   - one or more service interfaces  
 
-- a `qos_profile` named `ServiceQosLib::User.Service.MyService` that defines the 
-  endpoint qos policies for all the topics used by the service 
+- a service `qos_profile` named `ServiceQosLib::User.Service.MyService` 
+  that defines the endpoint qos policies for all the topics used by the service 
   using topics filters (`topic_filter`)
+  - optional *per interface* qos profiles that specialize the 
+    service qos profile, e.g. for resources or different ownership strengths etc
 
 
 ## Components

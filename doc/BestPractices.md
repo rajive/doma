@@ -42,10 +42,17 @@
      profile should extend or include the appropriate participant qos profile 
      from `ParticpantQosLib`.
 
-- For endpoint qos profiles, use topic filters to specify the QoS policies 
+- For service qos profiles, use topic filters to specify the QoS policies 
   for each topic's DataWriter and DataReader. This  ensures that the qos
   polices will apply to endpoints created in code (i.e. not defined a priori 
   in XML App Creation).
+  
+- For service qos profiles, define a *per interface* specific qos profile, eg
+  `User.Service.Requester` and `User.Service.Replier`. Interface qos profiles can 
+  be further specialized for writers of different ownership strength for 
+  certain topics.
+  
+  XML App Creation 
   
 - topic_filter should use a wild card so that the policy applies to the 
   DataReader(s) for the base topic name and a derived content filtered topic.
@@ -53,7 +60,6 @@
   topic name. For example: "MyTopic/filtered" would name a content filtered
   topic, and a topic_filter="MyTopic*" would apply to both "MyTopic" and 
   "MyTopic/filtered" DataReaders.
-  
 
 - To define service qos profile in `ServiceQosLib`, extend profiles from 
   `EndpointQosLib` and use `topic filters` for each topic used by the service. This

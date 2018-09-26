@@ -16,9 +16,8 @@ RTI Connext DDS User QoS Profiles
 
 Service specific qos profiles.
 
-Configure service specific qos policies to each topic using topic 
-filters. Also, configure any service specific customizatiomns for
-the qos policies defined eslsewhere..
+Configure service specific qos policies for each topic using topic 
+filters, that specialize common qos profiles.
 
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 -->
