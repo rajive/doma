@@ -21,27 +21,29 @@ filters, that specialize common qos profiles.
 
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 -->
-<dds
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
 	version="5.3.1">
 
 	<qos_library name="ServiceQosLib">
 
-		<qos_profile
-			name="User.Service.Circle"
+		<qos_profile name="User.Service.Circle"
 			base_name="EndpointQosLib::User.Pattern.Status">
 
-			<!-- Note: policies inherit from this qos profile's base_name, unless another 
-				base_name is used to override -->
+			<!-- Note: policies inherit from this qos profile's base_name, unless 
+				another base_name is used to override -->
 			<datareader_qos topic_filter="Circle" />
 
 			<!-- Override by specifying a different qos profile via base_name -->
-			<datawriter_qos
-				topic_filter="Circle"
+			<datawriter_qos topic_filter="Circle"
 				base_name="EndpointQosLib::User.Pattern.LastValueCache" />
-
 		</qos_profile>
+
+		<qos_profile name="User.Service.Circle.Pub"
+			base_name="User.Service.Circle" />
+
+		<qos_profile name="User.Service.Circle.Sub"
+			base_name="User.Service.Circle" />
 
 	</qos_library>
 </dds>

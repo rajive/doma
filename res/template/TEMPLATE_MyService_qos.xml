@@ -22,22 +22,52 @@ the qos policies defined elsewhere..
 
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 -->
-<dds
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
 	version="5.3.1">
 
 	<qos_library name="ServiceQosLib">
 
-		<qos_profile name="User.Service.MyService" base_name="EndpointQosLib::User.Pattern.Status">
+		<qos_profile name="User.Service.MyService"
+			base_name="EndpointQosLib::User.Pattern.Status">
 
-			<!-- Note: policies inherit from this qos profile's base_name, 
-			     unless another base_name is used to override -->
-			<datareader_qos topic_filter="MyTopic"/>
+			<!-- Note: policies inherit from this qos profile's base_name, unless 
+				another base_name is used to override -->
+			<datareader_qos topic_filter="MyTopic">
+				<ownership>
+					<kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
+				</ownership>
+			</datareader_qos>
 
 			<!-- Override by specifying a different qos profile via base_name -->
-			<datawriter_qos topic_filter="MyTopic" base_name="EndpointQosLib::User.Pattern.LastValueCache"/>
+			<datawriter_qos topic_filter="MyTopic"
+				base_name="EndpointQosLib::User.Pattern.LastValueCache">
+				<ownership>
+					<kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
+				</ownership>
+			</datawriter_qos>
 
+		</qos_profile>
+
+		<qos_profile name="User.Service.MyService.InterfaceX"
+			base_name="User.Service.MyService" />
+
+		<qos_profile name="User.Service.MyService.InterfaceX.Strength.High"
+			base_name="User.Service.MyService">
+			<datawriter_qos>
+				<ownership_strength>
+					<value>10</value>
+				</ownership_strength>
+			</datawriter_qos>
+		</qos_profile>
+
+		<qos_profile name="User.Service.MyService.InterfaceX.Strength.Low"
+			base_name="User.Service.MyService">
+			<datawriter_qos>
+				<ownership_strength>
+					<value>1</value>
+				</ownership_strength>
+			</datawriter_qos>
 		</qos_profile>
 
 	</qos_library>

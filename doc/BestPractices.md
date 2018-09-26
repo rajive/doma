@@ -49,10 +49,8 @@
   
 - For service qos profiles, define a *per interface* specific qos profile, eg
   `User.Service.Requester` and `User.Service.Replier`. Interface qos profiles can 
-  be further specialized for writers of different ownership strength for 
-  certain topics.
-  
-  XML App Creation 
+  be further specialized--for example, a service interface with ownership 
+  strength "High", and another with ownership strength "Low".
   
 - topic_filter should use a wild card so that the policy applies to the 
   DataReader(s) for the base topic name and a derived content filtered topic.

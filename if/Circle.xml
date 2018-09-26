@@ -59,12 +59,12 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			base_name="$(BASE_NAME_Circle_Pub)">
 
 			<publisher name="Circle_Pub_publisher">
-				<publisher_qos base_name="ServiceQosLib::User.Service.Circle" />
 				<data_writer
 					name="Circle_writer"
 					topic_ref="Circle">
-					<datawriter_qos base_name="ServiceQosLib::User.Service.Circle" />
+					<datawriter_qos base_name="ServiceQosLib::User.Service.Circle.Pub" />
 				</data_writer>
+                <publisher_qos base_name="ServiceQosLib::User.Service.Circle.Pub" />				
 			</publisher>
 
 		</domain_participant>
@@ -75,11 +75,9 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			base_name="$(BASE_NAME_Circle_Sub)">
 
 			<subscriber name="Circle_Sub_subscriber">
-				<subscriber_qos base_name="ServiceQosLib::User.Service.Circle" />
 				<data_reader
 					name="Circle_reader"
 					topic_ref="Circle">
-					<datareader_qos base_name="ServiceQosLib::User.Service.Circle" />
 					<filter
 						name="CircleTopic_ContentFiltered"
 						kind="builtin.sql">
@@ -93,7 +91,9 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 							<param>200</param>
 						</parameter_list>
 					</filter>
+                    <datareader_qos base_name="ServiceQosLib::User.Service.Circle.Sub" />					
 				</data_reader>
+                <subscriber_qos base_name="ServiceQosLib::User.Service.Circle.Sub" />				
 			</subscriber>
 
 		</domain_participant>
