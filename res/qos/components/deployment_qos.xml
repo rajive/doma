@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+*****************************************************************************
+*    (c) 2005-2018 Copyright, Real-Time Innovations, All rights reserved.   *
+*                                                                           *
+*         Permission to modify and use for internal purposes granted.       *
+* This software is provided "as is", without warranty, express or implied.  *
+*                                                                           *
+*****************************************************************************
+-->
+<!-- 
+=======================================================================
+    							Component QoS				
+=======================================================================
+RTI Connext DDS User QoS Profiles
+
+Configure the component specific "Participant" Qos profile settings
+such as: transports, discovery, monitoring, resources, security etc.
+	    	 
+The following naming convention is used to match the profiles names to
+component names:
+          name="User.Component.<component_name>"
+
+Example:
+	For a component "square", the component profile is named:
+		  name="User.Component.square" 
+		  
+Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
+-->
+<dds
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.0/rti_dds_qos_profiles.xsd"
+	version="5.3.1">
+
+	<qos_library name="ComponentQosLib">
+
+		<qos_profile
+			name="User.Component.square_pub_sub"
+			base_name="ParticipantQosLib::User.Selected.Participant">
+			<participant_factory_qos base_name="FactoryQosLib::User.Selected.Factory">
+				<logging>
+					<verbosity>ERROR</verbosity>
+				</logging>
+			</participant_factory_qos>
+		</qos_profile>
+
+		<qos_profile
+			name="User.Component.square_pub"
+			base_name="ParticipantQosLib::User.Selected.Participant">
+			<participant_factory_qos base_name="FactoryQosLib::User.Selected.Factory">
+				<logging>
+					<verbosity>ERROR</verbosity>
+				</logging>
+			</participant_factory_qos>
+		</qos_profile>
+
+		<qos_profile
+			name="User.Component.circle_pub_triangle_pub"
+			base_name="ParticipantQosLib::User.Selected.Participant">
+			<participant_factory_qos base_name="FactoryQosLib::User.Selected.Factory">
+				<logging>
+					<verbosity>ERROR</verbosity>
+				</logging>
+			</participant_factory_qos>
+		</qos_profile>
+
+		<qos_profile
+			name="User.Component.square_sub_circle_sub"
+			base_name="ParticipantQosLib::User.Selected.Participant">
+			<participant_factory_qos base_name="FactoryQosLib::User.Selected.Factory">
+				<logging>
+					<verbosity>ERROR</verbosity>
+				</logging>
+			</participant_factory_qos>
+		</qos_profile>
+
+		<qos_profile
+			name="User.Component.triangle_sub"
+			base_name="ParticipantQosLib::User.Selected.Participant">
+			<participant_factory_qos base_name="FactoryQosLib::User.Selected.Factory">
+				<logging>
+					<verbosity>ERROR</verbosity>
+				</logging>
+			</participant_factory_qos>
+		</qos_profile>
+		
+	</qos_library>
+</dds>

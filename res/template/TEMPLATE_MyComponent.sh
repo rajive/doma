@@ -93,7 +93,7 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/MyServiceN.xml;"
 export BASE_NAME_Component=${BASE_NAME_Component:="Root_Library::Root"}
 export NAME_Component=${NAME_Component:="MyComponent"}
 export DOMAIN_ID_Component=${1:-0} # Use the first argument, $1, if specified
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/${NAME_Component}_qos.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/deployment_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/component/final.xml"
 
 # ---------------------------------------------------------------------

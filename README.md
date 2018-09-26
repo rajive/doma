@@ -134,7 +134,7 @@ section [Organization](./doc/Organization.md).
    [`res/template/TEMPLATE_MyComponent_qos.xml`](./res/template/TEMPLATE_MyComponent_qos.xml).
    
    4.5 Define the component deployment qos policies. For an example
-   look at [`res/qos/components/square_pub_sub_qos.xml`](./res/qos/components/square_pub_sub_qos.xml)
+   look at [`res/qos/components/deployment.xml`](./res/qos/components/deployment.xml)
      
 
 5. Implement the component `MyComponent` 
