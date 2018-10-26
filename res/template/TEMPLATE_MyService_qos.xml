@@ -8,19 +8,19 @@
 *                                                                           *
 *****************************************************************************
 -->
-<!--
-=======================================================================
-              === MyService Service QoS Profiles ===
-=======================================================================
-RTI Connext DDS User QoS Profiles
+<!-- ======================================================================= 
+	                   === MyService Service QoS Profiles === 
+	 ======================================================================= 
+	 
+RTI Connext DDS User QoS Profiles Service specific qos profiles. 
 
-Service specific qos profiles.
-
-Configure service specific qos policies to each topic using topic 
-filters. Also, configure any service specific customizations for
-the qos policies defined elsewhere..
-
-Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
+- Define service specific qos policies to each topic using topic filters. 
+  - Specialize generic qos policies defined elsewhere.
+- Define module interface specific qos profiles
+  - at least one per module interface
+  - additional variants, as needed (e.g. for ownership strength etc.)
+	
+Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018. 
 -->
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
@@ -50,9 +50,35 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 		</qos_profile>
 
 		<qos_profile name="User.Service.MyService.InterfaceX"
-			base_name="User.Service.MyService" />
+			base_name="User.Service.MyService">
 
-		<qos_profile name="User.Service.MyService.InterfaceX.Strength.High"
+			<subscriber_qos>
+				<partition>
+					<name>
+						<element></element>
+						<element>starwars</element>
+						<element>startrek</element>
+						<element>funny</element>
+						<element>*</element>
+					</name>
+				</partition>
+			</subscriber_qos>
+			
+			<publisher_qos>
+				<partition>
+					<name>
+						<element></element>
+						<element>starwars</element>
+						<element>startrek</element>
+						<element>funny</element>
+						<element>*</element>
+					</name>
+				</partition>
+			</publisher_qos>
+		</qos_profile>
+
+		<qos_profile
+			name="User.Service.MyService.InterfaceX.Strength.High"
 			base_name="User.Service.MyService">
 			<datawriter_qos>
 				<ownership_strength>
@@ -61,7 +87,8 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 			</datawriter_qos>
 		</qos_profile>
 
-		<qos_profile name="User.Service.MyService.InterfaceX.Strength.Low"
+		<qos_profile
+			name="User.Service.MyService.InterfaceX.Strength.Low"
 			base_name="User.Service.MyService">
 			<datawriter_qos>
 				<ownership_strength>

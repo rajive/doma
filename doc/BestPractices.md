@@ -66,6 +66,17 @@
 - To define a component's qos profile in `ComponentQosLib`, extend profiles in 
   `ParticpantQosLib` and use profiles from `FactoryQosLib`. This 
    avoids duplication and ensures a compact qos specification.
+   
+
+### Infrastructure Services
+
+The configuration for QosProfiles used by DDS databus system service such as   
+Persistence Service, Routing Service, Recording Service, etc  should be defined 
+in the same place as the QosProfiles. Don't inline qos profiles in 
+infrastructure service configurations.
+
+The XML configuration for the DDS system services should simply refer to the 
+QosProfiles define in _qos.xml files.
   
 ---
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.

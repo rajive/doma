@@ -72,17 +72,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 				</data_reader>
 				<!-- ... -->
 				
-                <subscriber_qos base_name="ServiceQosLib::User.Service.MyService.InterfaceX"> 
-                    <partition>
-                        <name>
-                            <element></element>
-                            <element>starwars</element>
-                            <element>startrek</element>
-                            <element>funny</element>
-                            <element>*</element>
-                        </name>
-                    </partition>
-                </subscriber_qos>                  			
+                <subscriber_qos base_name="ServiceQosLib::User.Service.MyService.InterfaceX"/>                 			
 			</subscriber>
 			<!-- ... -->
 			
@@ -95,17 +85,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 				</data_writer>
 				<!-- ... -->
 				
-                <publisher_qos base_name="ServiceQosLib::User.Service.MyService.InterfaceX">	
-                    <partition>
-                        <name>
-                            <element></element>
-                            <element>starwars</element>
-                            <element>startrek</element>
-                            <element>funny</element>
-                            <element>*</element>
-                        </name>
-                    </partition>
-                </publisher_qos>               			
+                <publisher_qos base_name="ServiceQosLib::User.Service.MyService.InterfaceX"/>	              			
 			</publisher>
 			<!-- ... -->
 
