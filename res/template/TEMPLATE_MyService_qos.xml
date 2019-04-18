@@ -23,24 +23,22 @@ RTI Connext DDS User QoS Profiles Service specific qos profiles.
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018. 
 -->
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
-	version="5.3.1">
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_qos_profiles.xsd">
 
-	<qos_library name="ServiceQosLib">
+	<qos_library name="MyServiceQosLib">
 
-		<qos_profile name="User.Service.MyService"
-			base_name="EndpointQosLib::User.Pattern.Status">
+		<qos_profile name="MyService_Root" base_name="EndpointQosLib::User.Pattern.Status">
 
 			<!-- Note: policies inherit from this qos profile's base_name, unless 
 				another base_name is used to override -->
-			<datareader_qos topic_filter="MyTopic">
+			<datareader_qos topic_filter="MyTopic*">
 				<ownership>
 					<kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
 				</ownership>
 			</datareader_qos>
 
 			<!-- Override by specifying a different qos profile via base_name -->
-			<datawriter_qos topic_filter="MyTopic"
+			<datawriter_qos topic_filter="MyTopic*"
 				base_name="EndpointQosLib::User.Pattern.LastValueCache">
 				<ownership>
 					<kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
@@ -49,8 +47,8 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 
 		</qos_profile>
 
-		<qos_profile name="User.Service.MyService.InterfaceX"
-			base_name="User.Service.MyService">
+
+		<qos_profile name="MyService_InterfaceX" base_name="MyService_Root">
 
 			<subscriber_qos>
 				<partition>
@@ -75,22 +73,21 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 					</name>
 				</partition>
 			</publisher_qos>
+			
 		</qos_profile>
+		
 
-		<qos_profile
-			name="User.Service.MyService.InterfaceX.Strength.High"
-			base_name="User.Service.MyService">
-			<datawriter_qos>
-				<ownership_strength>
-					<value>10</value>
-				</ownership_strength>
+		<qos_profile name="MyService_InterfaceX.Strength.High" base_name="MyService_InterfaceX">
+			<datawriter_qos topic_filter="MyTopic*">
+                <ownership_strength>
+                    <value>10</value>
+                </ownership_strength>			
 			</datawriter_qos>
 		</qos_profile>
 
-		<qos_profile
-			name="User.Service.MyService.InterfaceX.Strength.Low"
-			base_name="User.Service.MyService">
-			<datawriter_qos>
+
+		<qos_profile name="MyService_InterfaceX.Strength.Low" base_name="MyService_InterfaceX">
+            <datawriter_qos topic_filter="MyTopic*">
 				<ownership_strength>
 					<value>1</value>
 				</ownership_strength>

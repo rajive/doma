@@ -15,15 +15,7 @@
 RTI Connext DDS User QoS Profiles
 
 Configure the component specific "Participant" Qos profile settings
-such as: transports, discovery, monitoring, resources, etc.
-	    	 
-The following naming convention is used to match the profiles names to
-component names:
-          name="User.Selected.Component.<component_name>"
-
-Example:
-	For a component "square", the component profile is named:
-		  name="User.Selected.Component.square" 
+such as: transports, discovery, monitoring, resources, etc. 
 		  
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 -->
@@ -31,26 +23,56 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
 	version="5.3.1">
 
-	<qos_library name="ComponentQosLib">
+	<qos_library name="MyComponentQosLib">
 
-		<qos_profile name="User.Component.MyComponentA"
-			base_name="ParticipantQosLib::User.Selected.Participant">
-			<participant_factory_qos
-				base_name="FactoryQosLib::User.Selected.Factory">
-				<logging>
-					<verbosity>ERROR</verbosity>
-				</logging>
-			</participant_factory_qos>
-		</qos_profile>
-	
-        <qos_profile name="User.Component.MyComponentB"
-            base_name="ParticipantQosLib::User.Selected.Participant">
-            <participant_factory_qos
-                base_name="FactoryQosLib::User.Selected.Factory">
+        <qos_profile name="MyComponent_Root" base_name="ParticipantQosLib::User.Selected.Participant">
+            
+            <participant_factory_qos base_name="FactoryQosLib::User.Selected.Factory">
                 <logging>
                     <verbosity>ERROR</verbosity>
                 </logging>
             </participant_factory_qos>
+            
+            <participant_qos>
+                <resource_limits>
+                    <type_code_max_serialized_length>0
+                    </type_code_max_serialized_length>
+                    <type_object_max_serialized_length>65535
+                    </type_object_max_serialized_length>
+                </resource_limits>
+            </participant_qos>
+            
+        </qos_profile>
+        
+		<qos_profile name="MyComponent_InterfaceX" base_name="MyComponent_Root">
+			<participant_qos>
+				<discovery>
+					<multicast_receive_addresses>
+						<element>239.255.0.2</element>
+					</multicast_receive_addresses>
+					<initial_peers>
+						<element>239.255.0.2</element>
+						<element>239.255.0.1</element>
+					</initial_peers>
+				    <accept_unknown_peers>false</accept_unknown_peers>
+				</discovery>
+			</participant_qos>            
+		</qos_profile>
+	
+        <qos_profile name="MyComponent_InterfaceY"
+            base_name="ParticipantQosLib::User.Selected.Participant">
+            <participant_qos>
+                <discovery>
+                    <multicast_receive_addresses>
+                        <element>239.255.0.1</element>
+                    </multicast_receive_addresses>
+                    <initial_peers>
+                        <element>239.255.0.2</element>
+                        <element>239.255.0.1</element>
+                    </initial_peers>
+                    <accept_unknown_peers>false</accept_unknown_peers>
+                </discovery>
+            </participant_qos>
         </qos_profile>
 
 	</qos_library>

@@ -4,17 +4,17 @@
 - Abstract participant base names are derived from participant names by 
   prefixing `BASE_NAME`, thus: `$(BASE_NAME_<name_of_abstract_participant>)`
 - Concrete participant name is the name of the component
-- Publisher names end with `_publisher`
+- Publisher names end with `_pub`. 
+- Subscriber names end with `_sub`
 - DataWriter names end with `_writer`
-- Subscriber names end with `_subscriber`
 - DataReader names end with `_reader`
-- Participant Libraries end with `_Library`
+- Participant Libraries end with `IfLib`
 - QoS Libraries end with `QosLib`, for consistency with the builtin
   qos profiles naming conventions `BuiltinQosLibExp`
-- User defined QoS profile names start with `User.`
+- Service specific QoS library names: `<service_name>QosLib`
+- Service domain qos profile names start with `<service_name>_Root`
+- Service interface qos profile names start with `<service_name>_InterfaceName`
 - Selected or preferred user QoS profile names start with `User.Selected.`
-- Service qos profile names start with `User.Service.`
-- Component qos profile names start with `User.Component.`
 - "QoS only" xml files end with `_qos.xml`
 
 ---

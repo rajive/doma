@@ -36,7 +36,9 @@ includes:
 - OPTIONAL: a `<types>` tag 
    - typically using `<include file="...">` tags to load the XML type definitions
      (generated from IDL), that are used by the service 
-   - only needed if dynamic types are used by the service
+   - only needed if dynamic types are used by the service or if a concrete service
+     is being defined
+   - an abstract service can bind the types later when components are defined
    - NOTE: it is a good practice to include this section, so that the service
      definition works with both compiled types and dynamic types
 
@@ -47,7 +49,8 @@ includes:
       - registers the types used by the service; this is only needed
         if dynamic types are used (e.g. using scripting in Lua etc.)
       - NOTE: it is a good practice to register the types, so that the service
-   	  definition works with both compiled types and dynamic types
+   	   definition works with both compiled types and dynamic types
+   	 - the types can be in a separate file
     - `<topic>` tags for each topic used by the service
     
   - one or more service interfaces  
@@ -58,14 +61,25 @@ includes:
   - optional *per interface* qos profiles that specialize the 
     service qos profile, e.g. for resources or different ownership strengths etc
 
+- Services can be composed of other services
 
 ## Components
 
-A component is an instantiation of a (composite) of service interfaces. 
-It is a unit of deployment.  Its implementation is built into the framework. 
+A component is an instantiation of a (composite) of service interfaces. It may an
+instantiation of a composite service.
+
+A component is a unit of deployment.  
+
+A component's artifacts look similar to those of a service---except that they bind an 
+underlying service qos policies and interfaces for a specific deployment.
+
 Typically, there will be one component per unix-style 'process`.
 
-A component is configured by defining the environment variables:
+Since composition of XML App Creation is not currently supported out of the box, 
+it can be achieved via carefully orchestrated inheritance. The DOMA framework provides
+and implementation using scripting and environment variables, described below.
+
+A component binding is configured by defining the environment variables:
 
 - `NAME_Component`     = "component name"
 - `DOMAIN_ID_Component` = "domain id"

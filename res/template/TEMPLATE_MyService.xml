@@ -28,8 +28,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 -->
 <dds
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_profiles.xsd"
-	version="5.3.1">
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_profiles.xsd">
 
 	<!-- Data Types -->
 	<types>
@@ -37,7 +36,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 	</types>
 
 	<!-- Participants : each participant defines a data-oriented interface -->
-	<domain_participant_library name="MyService_Library">
+	<domain_participant_library name="MyServiceIfLib">
 
 		<!-- Root: empty interface to register types and topics -->
 		<domain_participant name="MyService_Root" base_name="$(BASE_NAME_MyService_Root)">
@@ -55,7 +54,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 		<domain_participant name="MyService_InterfaceX" base_name="$(BASE_NAME_MyService_InterfaceX)">
 
 			<!-- Inputs -->
-			<subscriber name="MyService_InterfaceX_subscriber">
+			<subscriber name="SubscriberA_sub">
 
 				<data_reader name="MyTopic_reader" topic_ref="MyTopic">
                     <filter name="Chat" kind="builtin.sql">
@@ -68,27 +67,28 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
                             <param>'Jack'</param>
                         </parameter_list>
                     </filter>				    
-					<datareader_qos base_name="ServiceQosLib::User.Service.MyService.InterfaceX"/>
+					<datareader_qos base_name="MyServiceQosLib::MyService_InterfaceX"/>
 				</data_reader>
 				<!-- ... -->
 				
-                <subscriber_qos base_name="ServiceQosLib::User.Service.MyService.InterfaceX"/>                 			
+                <subscriber_qos base_name="MyServiceQosLib::MyService_InterfaceX"/>                 			
 			</subscriber>
 			<!-- ... -->
 			
 			
 			<!-- Outputs -->
-			<publisher name="MyService_InterfaceX_publisher">
+			<publisher name="PublisherB_pub">
 
 				<data_writer name="MyTopic_writer" topic_ref="MyTopic">
-					<datawriter_qos base_name="ServiceQosLib::User.Service.MyService.InterfaceX"/>
+					<datawriter_qos base_name="MyServiceQosLib::MyService_InterfaceX"/>
 				</data_writer>
 				<!-- ... -->
 				
-                <publisher_qos base_name="ServiceQosLib::User.Service.MyService.InterfaceX"/>	              			
+                <publisher_qos base_name="MyServiceQosLib::MyService_InterfaceX"/>	              			
 			</publisher>
 			<!-- ... -->
 
+            <participant_qos base_name="MyServiceQosLib::MyService_InterfaceX"/> 
 		</domain_participant>
 		
 	</domain_participant_library>
