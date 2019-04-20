@@ -53,7 +53,7 @@ includes:
    	 - the types can be in a separate file
     - `<topic>` tags for each topic used by the service
     
-  - one or more service interfaces  
+  - one or more service interfaces
 
 - a service `qos_profile` named `ServiceQosLib::User.Service.MyService` 
   that defines the endpoint qos policies for all the topics used by the service 
@@ -62,22 +62,37 @@ includes:
     service qos profile, e.g. for resources or different ownership strengths etc
 
 - Services can be composed of other services
+  - A service interface can be composed of other service interfaces
+ 
+- Since composition of XML App Creation is not currently supported out of the box, 
+it can be achieved via carefully orchestrated inheritance. The DOMA framework provides
+and implementation using scripting and environment variables, described below.
+ 
+  
+## Modules
+
+A service interface implementation is called a module.
+
+A composite service interface may be implemented as composition of modules.
+
+
+## Deployment
+
+The instantiation of a service is called a "deployment". 
+
+A deployment binds the service modules to resources.
+
+A deployment's artifacts look similar to those of a service---with the distinction that qos policies
+specify the actual resources (transports, initial peers, discovery etc.)
+
 
 ## Components
 
-A component is an instantiation of a (composite) of service interfaces. It may an
-instantiation of a composite service.
-
 A component is a unit of deployment.  
 
-A component's artifacts look similar to those of a service---except that they bind an 
-underlying service qos policies and interfaces for a specific deployment.
+It binds a module to resources.
 
 Typically, there will be one component per unix-style 'process`.
-
-Since composition of XML App Creation is not currently supported out of the box, 
-it can be achieved via carefully orchestrated inheritance. The DOMA framework provides
-and implementation using scripting and environment variables, described below.
 
 A component binding is configured by defining the environment variables:
 
@@ -94,6 +109,7 @@ This qos profile may customize qos policies for:
 
 - `participant_qos`
 - `participant_factory_qos`
+
 
 ---
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
