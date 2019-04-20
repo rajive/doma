@@ -29,13 +29,13 @@ NAME_Component="square_pub_sub"
 # --- Service composition ---
 
 # final -> Square_Sub
-BASE_NAME_Component="Square_Library::Square_Sub"
+BASE_NAME_Component="SquareIfLib::Square_Sub"
 
 # Square_Sub -> Square_Pub
-BASE_NAME_Square_Sub="Square_Library::Square_Pub"
+BASE_NAME_Square_Sub="SquareIfLib::Square_Pub"
 
 # Square_Pub -> root
-BASE_NAME_Square_Pub="Square_Library::Square_Root"
+BASE_NAME_Square_Pub="SquareIfLib::Square_Root"
 BASE_NAME_Square_Root="Root_Library::Root"
 
 # ---------------------------------------------------------------------
@@ -71,8 +71,8 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 
 
 # Square
-export BASE_NAME_Square_Pub=${BASE_NAME_Square_Pub:="Square_Library::Square_Root"}
-export BASE_NAME_Square_Sub=${BASE_NAME_Square_Sub:="Square_Library::Square_Root"}
+export BASE_NAME_Square_Pub=${BASE_NAME_Square_Pub:="SquareIfLib::Square_Root"}
+export BASE_NAME_Square_Sub=${BASE_NAME_Square_Sub:="SquareIfLib::Square_Root"}
 export BASE_NAME_Square_Root=${BASE_NAME_Square_Root:="Root_Library::Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Square_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Square.xml;"

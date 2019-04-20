@@ -103,7 +103,7 @@ A component binding is configured by defining the environment variables:
 
 A component's DomainParticipantFactoryQos and DomainParticipantQos
 are retrieved from the qos profile 
- `ComponentQosLib::User.Component.$(NAME_Component)` 
+ `DeploymentQosLib::$(NAME_Component)` 
 
 This qos profile may customize qos policies for:
 

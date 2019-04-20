@@ -25,8 +25,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 -->
 <dds
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_profiles.xsd"
-	version="5.3.1">
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_profiles.xsd">
 
 	<!-- Participant library: Define data-oriented interfaces -->
 	<domain_participant_library name="Component_Library">
@@ -37,7 +36,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			base_name="$(BASE_NAME_Component)"
 			domain_id="$(DOMAIN_ID_Component)">
 			<participant_qos
-				base_name="ComponentQosLib::User.Component.$(NAME_Component)">
+				base_name="DeploymentQosLib::$(NAME_Component)">
 				<participant_name>
 					<name>$(NAME_Component)</name>
 				</participant_name>
@@ -47,12 +46,12 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 	</domain_participant_library>
 
 	<!-- Participant Factory QoS -->
-	<qos_library name="ComponentQosLib">
+	<qos_library name="DeploymentQosLib">
 		<!-- Singleton! applied to all the component participants -->
 		<qos_profile 
 			is_default_participant_factory_profile="true"
-			name="User.Component.Factory"
-			base_name="User.Component.$(NAME_Component)">
+			name="Factory"
+			base_name="$(NAME_Component)">
 		</qos_profile>
 	</qos_library>
 	

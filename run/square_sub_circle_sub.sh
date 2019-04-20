@@ -29,14 +29,14 @@ NAME_Component="square_sub_circle_sub"
 # --- Service composition ---
 
 # final -> Circle_Sub
-BASE_NAME_Component="Circle_Library::Circle_Sub"
+BASE_NAME_Component="CircleIfLib::Circle_Sub"
 
 # Circle_Sub -> Square_Sub
-BASE_NAME_Circle_Sub="Circle_Library::Circle_Root"
-BASE_NAME_Circle_Root="Square_Library::Square_Sub"
+BASE_NAME_Circle_Sub="CircleIfLib::Circle_Root"
+BASE_NAME_Circle_Root="SquareIfLib::Square_Sub"
 
 # Square_Sub -> root
-BASE_NAME_Square_Sub="Square_Library::Square_Root"
+BASE_NAME_Square_Sub="SquareIfLib::Square_Root"
 BASE_NAME_Square_Root="Root_Library::Root"
 r
 # ---------------------------------------------------------------------
@@ -72,16 +72,16 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 
 
 # Square
-export BASE_NAME_Square_Pub=${BASE_NAME_Square_Pub:="Square_Library::Square_Root"}
-export BASE_NAME_Square_Sub=${BASE_NAME_Square_Sub:="Square_Library::Square_Root"}
+export BASE_NAME_Square_Pub=${BASE_NAME_Square_Pub:="SquareIfLib::Square_Root"}
+export BASE_NAME_Square_Sub=${BASE_NAME_Square_Sub:="SquareIfLib::Square_Root"}
 export BASE_NAME_Square_Root=${BASE_NAME_Square_Root:="Root_Library::Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Square_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Square.xml;"
 
 
 # Circle
-export BASE_NAME_Circle_Pub=${BASE_NAME_Circle_Pub:="Circle_Library::Circle_Root"}
-export BASE_NAME_Circle_Sub=${BASE_NAME_Circle_Sub:="Circle_Library::Circle_Root"}
+export BASE_NAME_Circle_Pub=${BASE_NAME_Circle_Pub:="CircleIfLib::Circle_Root"}
+export BASE_NAME_Circle_Sub=${BASE_NAME_Circle_Sub:="CircleIfLib::Circle_Root"}
 export BASE_NAME_Circle_Root=${BASE_NAME_Circle_Root:="Root_Library::Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Circle_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Circle.xml;"

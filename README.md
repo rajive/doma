@@ -135,7 +135,10 @@ section [Organization](./doc/Organization.md).
    
    4.5 Define the component deployment qos policies. For an example
    look at [`res/qos/components/deployment.xml`](./res/qos/components/deployment.xml)
-     
+
+    NOTE: Since the composition is by inheritance, the publisher and subscriber entities are not 
+    shared between the service interfaces. 
+    
 
 5. Implement the component `MyComponent` 
 

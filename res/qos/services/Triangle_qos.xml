@@ -25,9 +25,9 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
 	version="5.3.1">
 
-	<qos_library name="ServiceQosLib">
+	<qos_library name="TriangleQosLib">
 
-		<qos_profile name="User.Service.Triangle"
+		<qos_profile name="Triangle_Root"
 			base_name="EndpointQosLib::User.Pattern.Status">
 
 			<!-- Note: policies inherit from this qos profile's base_name, unless 
@@ -40,11 +40,9 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 
 		</qos_profile>
 
-		<qos_profile name="User.Service.Triangle.Pub"
-			base_name="User.Service.Triangle" />
+		<qos_profile name="Triangle_Pub" base_name="Triangle_Root" />
 
-		<qos_profile name="User.Service.Triangle.Sub"
-			base_name="User.Service.Triangle" />
+		<qos_profile name="Triangle_Sub" base_name="Triangle_Root" />
 
 	</qos_library>
 </dds>

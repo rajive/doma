@@ -29,14 +29,14 @@ NAME_Component="circle_pub_triangle_pub"
 # --- Service composition ---
 
 # final -> Triangle_Pub
-BASE_NAME_Component="Triangle_Library::Triangle_Pub"
+BASE_NAME_Component="TriangleIfLib::Triangle_Pub"
 
 # Triangle_Pub -> Circle_Pub
-BASE_NAME_Triangle_Pub="Triangle_Library::Triangle_Root"
-BASE_NAME_Triangle_Root="Circle_Library::Circle_Pub"
+BASE_NAME_Triangle_Pub="TriangleIfLib::Triangle_Root"
+BASE_NAME_Triangle_Root="CircleIfLib::Circle_Pub"
 
 # Circle_Pub -> root
-BASE_NAME_Circle_Pub="Circle_Library::Circle_Root"
+BASE_NAME_Circle_Pub="CircleIfLib::Circle_Root"
 BASE_NAME_Circle_Root="Root_Library::Root"
 
 # ---------------------------------------------------------------------
@@ -72,16 +72,16 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 
 
 # Circle
-export BASE_NAME_Circle_Pub=${BASE_NAME_Circle_Pub:="Circle_Library::Circle_Root"}
-export BASE_NAME_Circle_Sub=${BASE_NAME_Circle_Sub:="Circle_Library::Circle_Root"}
+export BASE_NAME_Circle_Pub=${BASE_NAME_Circle_Pub:="CircleIfLib::Circle_Root"}
+export BASE_NAME_Circle_Sub=${BASE_NAME_Circle_Sub:="CircleIfLib::Circle_Root"}
 export BASE_NAME_Circle_Root=${BASE_NAME_Circle_Root:="Root_Library::Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Circle_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Circle.xml;"
 
 
 # Triangle
-export BASE_NAME_Triangle_Pub=${BASE_NAME_Triangle_Pub:="Triangle_Library::Triangle_Root"}
-export BASE_NAME_Triangle_Sub=${BASE_NAME_Triangle_Sub:="Triangle_Library::Triangle_Root"}
+export BASE_NAME_Triangle_Pub=${BASE_NAME_Triangle_Pub:="TriangleIfLib::Triangle_Root"}
+export BASE_NAME_Triangle_Sub=${BASE_NAME_Triangle_Sub:="TriangleIfLib::Triangle_Root"}
 export BASE_NAME_Triangle_Root=${BASE_NAME_Triangle_Root:="Root_Library::Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Triangle_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Triangle.xml;"

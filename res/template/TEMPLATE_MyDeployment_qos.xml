@@ -17,15 +17,17 @@ RTI Connext DDS User QoS Profiles
 Configure the component specific "Participant" Qos profile settings
 such as: transports, discovery, monitoring, resources, etc. 
 		  
+In the example below, MyService_InterfaceX is the service interface being 
+deployed by a component.
+
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 -->
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
-	version="5.3.1">
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/rti_dds_qos_profiles.xsd">
 
-	<qos_library name="MyComponentQosLib">
+	<qos_library name="MyDeploymentQosLib">
 
-        <qos_profile name="MyComponent_Root" base_name="ParticipantQosLib::User.Selected.Participant">
+        <qos_profile name="MyService_Root" base_name="ParticipantQosLib::User.Selected.Participant">
             
             <participant_factory_qos base_name="FactoryQosLib::User.Selected.Factory">
                 <logging>
@@ -44,7 +46,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
             
         </qos_profile>
         
-		<qos_profile name="MyComponent_InterfaceX" base_name="MyComponent_Root">
+		<qos_profile name="MyService_InterfaceX" base_name="MyService_Root">
 			<participant_qos>
 				<discovery>
 					<multicast_receive_addresses>
@@ -59,8 +61,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 			</participant_qos>            
 		</qos_profile>
 	
-        <qos_profile name="MyComponent_InterfaceY"
-            base_name="ParticipantQosLib::User.Selected.Participant">
+        <qos_profile name="MyService_InterfaceY" base_name="MyService_Root">
             <participant_qos>
                 <discovery>
                     <multicast_receive_addresses>

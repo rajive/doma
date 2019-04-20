@@ -28,10 +28,10 @@ NAME_Component="triangle_sub"
 # --- Service composition ---
 
 # final -> Triangle_Sub
-BASE_NAME_Component="Triangle_Library::Triangle_Sub"
+BASE_NAME_Component="TriangleIfLib::Triangle_Sub"
 
 # Triangle_Sub -> root
-BASE_NAME_Triangle_Sub="Triangle_Library::Triangle_Root"
+BASE_NAME_Triangle_Sub="TriangleIfLib::Triangle_Root"
 BASE_NAME_Triangle_Root="Root_Library::Root"
 
 # ---------------------------------------------------------------------
@@ -67,8 +67,8 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 
 
 # Triangle
-export BASE_NAME_Triangle_Pub=${BASE_NAME_Triangle_Pub:="Triangle_Library::Triangle_Root"}
-export BASE_NAME_Triangle_Sub=${BASE_NAME_Triangle_Sub:="Triangle_Library::Triangle_Root"}
+export BASE_NAME_Triangle_Pub=${BASE_NAME_Triangle_Pub:="TriangleIfLib::Triangle_Root"}
+export BASE_NAME_Triangle_Sub=${BASE_NAME_Triangle_Sub:="TriangleIfLib::Triangle_Root"}
 export BASE_NAME_Triangle_Root=${BASE_NAME_Triangle_Root:="Root_Library::Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Triangle_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Triangle.xml;"

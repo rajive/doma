@@ -71,7 +71,7 @@
 - Create component interface specific qos profiles that extend the per 
   service interface specific qos profiles, using topic filters.
   
-- To define a component's qos profile in `ComponentQosLib`, extend profiles in 
+- To define a component's qos profile in `DeploymentQosLib`, extend profiles in 
   `ParticpantQosLib` and use profiles from `FactoryQosLib`. This 
    avoids duplication and ensures a compact qos specification.
    
