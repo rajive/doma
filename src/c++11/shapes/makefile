@@ -32,6 +32,8 @@ EXEC   += Component_square_pub_sub \
 		  Component_square_pub Component_circle_pub_triangle_pub \
 		  Component_square_sub_circle_sub Component_triangle_sub 
 
+all: $(TARGET_ARCH)
+
 $(TARGET_ARCH) : $(DIRECTORIES) $(COMMONOBJS) \
 	$(EXEC:%=objs/$(TARGET_ARCH)/%.o) \
 	$(EXEC:%=objs/$(TARGET_ARCH)/%)
