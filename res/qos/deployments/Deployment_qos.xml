@@ -40,9 +40,15 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
                     <verbosity>ERROR</verbosity>
                 </logging>
             </participant_factory_qos>
+            <participant_qos>
+                <resource_limits>
+                    <type_code_max_serialized_length>0</type_code_max_serialized_length>
+                    <type_object_max_serialized_length>65535</type_object_max_serialized_length>
+                </resource_limits>
+            </participant_qos>            
         </qos_profile>
         
-		<qos_profile name="square_pub_sub" base_name="Deployment_Root">
+		<qos_profile name="square_pub_sub" base_name="Deployment_Root">		
 		</qos_profile>
 
 		<qos_profile name="square_pub" base_name="Deployment_Root">

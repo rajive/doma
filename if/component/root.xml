@@ -25,10 +25,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/rti_dds_profiles.xsd">
 
-	<domain_participant_library name="Root_Library">
+	<domain_participant_library name="DeploymentIfLib">
 
 		<!-- Marker Participant -->
-		<domain_participant name="Root" />
+		<domain_participant name="Component_Root" />
 
 	</domain_participant_library>
 

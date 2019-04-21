@@ -57,7 +57,7 @@ public:
 int main(int argc, char *argv[])
 {
 	return Component_pub_pub().main(argc, argv,
-		"Component_Library::Component",
+		"DeploymentIfLib::Component",
 		*std::make_shared<Service_pub_pub>(
 			*std::make_shared<Service_publisher>("Circle_Pub_publisher::Circle_writer"),
 			*std::make_shared<Service_publisher>("Triangle_Pub_publisher::Triangle_writer")

@@ -125,7 +125,7 @@ section [Organization](./doc/Organization.md).
       
    4.3 Define the service composition: 
    - `BASE_NAME_Component`
-   - Continue defining `BASE_NAME_<Service>`, until you reach `Root_Library::Root`
+   - Continue defining `BASE_NAME_<Service>`, until you reach `DeploymentIfLib::Component_Root`
    
    For an example, look at: 
    [run/square\_pub\_sub.sh](./run/square_pub_sub.sh)

@@ -36,7 +36,7 @@ BASE_NAME_Square_Sub="SquareIfLib::Square_Pub"
 
 # Square_Pub -> root
 BASE_NAME_Square_Pub="SquareIfLib::Square_Root"
-BASE_NAME_Square_Root="Root_Library::Root"
+BASE_NAME_Square_Root="DeploymentIfLib::Component_Root"
 
 # ---------------------------------------------------------------------
 #                   --- Directories ---
@@ -73,16 +73,16 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 # Square
 export BASE_NAME_Square_Pub=${BASE_NAME_Square_Pub:="SquareIfLib::Square_Root"}
 export BASE_NAME_Square_Sub=${BASE_NAME_Square_Sub:="SquareIfLib::Square_Root"}
-export BASE_NAME_Square_Root=${BASE_NAME_Square_Root:="Root_Library::Root"}
+export BASE_NAME_Square_Root=${BASE_NAME_Square_Root:="DeploymentIfLib::Component_Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/Square_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/Square.xml;"
 
 
 # final
-export BASE_NAME_Component=${BASE_NAME_Component:="Root_Library::Root"}
+export BASE_NAME_Component=${BASE_NAME_Component:="DeploymentIfLib::Component_Root"}
 export NAME_Component=${NAME_Component:="MyComponent"}
 export DOMAIN_ID_Component=${1:-0} # Use the first argument, $1, if specified
-NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/components/deployment_qos.xml;"
+NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/deployments/Deployment_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/component/final.xml"
 
 # ---------------------------------------------------------------------
@@ -97,7 +97,7 @@ EXEC_PATH=${2:-${MY_HOME}/src/lua/Endpoints.lua}
 # if executable is a lua file, run it with the rtiddsprototyper
 case ${EXEC_PATH} in
 *.lua) 
-	EXEC="rtiddsprototyper -cfgName Component_Library::Component -luaFile ${EXEC_PATH}"
+	EXEC="rtiddsprototyper -cfgName DeploymentIfLib::Component -luaFile ${EXEC_PATH}"
 	;;
 *)	EXEC=${EXEC_PATH}
 	;;

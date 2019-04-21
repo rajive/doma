@@ -28,22 +28,18 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_profiles.xsd">
 
 	<!-- Participant library: Define data-oriented interfaces -->
-	<domain_participant_library name="Component_Library">
-
+	<domain_participant_library name="DeploymentIfLib">
 		<!-- Configure the component's participant -->
-		<domain_participant
-			name="Component"
-			base_name="$(BASE_NAME_Component)"
+		<domain_participant name="Component" base_name="$(BASE_NAME_Component)"
 			domain_id="$(DOMAIN_ID_Component)">
-			<participant_qos
-				base_name="DeploymentQosLib::$(NAME_Component)">
+			<participant_qos base_name="DeploymentQosLib::$(NAME_Component)">
 				<participant_name>
 					<name>$(NAME_Component)</name>
 				</participant_name>
 			</participant_qos>
 		</domain_participant>
-
 	</domain_participant_library>
+
 
 	<!-- Participant Factory QoS -->
 	<qos_library name="DeploymentQosLib">
