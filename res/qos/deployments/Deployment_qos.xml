@@ -48,7 +48,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
             </participant_qos>            
         </qos_profile>
         
-		<qos_profile name="square_pub_sub" base_name="Deployment_Root">		
+		<qos_profile name="square_pub_sub" base_name="Deployment_Root">
 		</qos_profile>
 
 		<qos_profile name="square_pub" base_name="Deployment_Root">
