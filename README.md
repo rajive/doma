@@ -128,7 +128,7 @@ section [Organization](./doc/Organization.md).
    - Continue defining `BASE_NAME_<Service>`, until you reach `DeploymentIfLib::Component_Root`
    
    For an example, look at: 
-   [run/square\_pub\_sub.sh](./run/square_pub_sub.sh)
+   [run/square\_pub\_sub.sh](./bin/square_pub_sub.sh)
      
    4.4 Add a file `res/qos/components/MyComponent_qos.xml` by cloning the template
    [`res/template/TEMPLATE_MyComponent_qos.xml`](./res/template/TEMPLATE_MyComponent_qos.xml).
@@ -186,7 +186,7 @@ Clean components:
 
 To run a component, use its launcher script `MyComponent.sh`:
 
-	./run/MyComponent.sh [<domain_id> [<path_to_executable_or_lua_script>] [project_dir]]
+	./bin/MyComponent.sh [<domain_id> [<path_to_executable_or_lua_script>] [project_dir]]
 
 The component's launcher script sets up the correct environment for running
 the component.  
@@ -212,11 +212,11 @@ Thus,
 
 - To run `rtiroutingservice` with the component's environment:
 
-		./run/MyComponent.sh <domain_id> <rtiroutingservice> [project_dir]
+		./bin/MyComponent.sh <domain_id> <rtiroutingservice> [project_dir]
 
 - To launch a shell with the component's environment:
 
-	  	./run/MyComponent.sh <domain_id> bash [project_dir]
+	  	./bin/MyComponent.sh <domain_id> bash [project_dir]
 
 - See [Demo](./doc/Demo.md) for examples
  

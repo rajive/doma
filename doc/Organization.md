@@ -27,10 +27,9 @@ a directory structure organized using the scheme below.
 NEEDED FOR DEPLOYMENT:
 
 - `if/` : interfaces 
-   - per service xml file
-   - `component/` : READ_ONLY predefined component definitions for the deployment 
-     framework
-      - these should not be altered by the framework user
+    - per service xml file
+    - `component/` : READ_ONLY predefined component definitions for the deployment framework
+       - these should not be altered by the framework user
       
 - `res/` : common resources 
 
@@ -46,14 +45,13 @@ NEEDED FOR DEPLOYMENT:
       - `components/` : service specific qos profiles 
          - per deployment xml file
       
- - `run/` : runtime settings for service compositions
-        - a launcher script per component to setup its runtime deployment environment
+  - `bin/` : executables 
+    - scripts to launch the components
+      - may include runtime settings for service compositions
+        e.g. a launcher script per component to setup its runtime deployment environment
   
 (optional)
- 
-  - `bin/` : executables 
-     - scripts to launch the components
-	       
+       	       
   - `svc/` : Connext DDS platform service configurations 
     - `ps/`  : persistence service configurations
     - `rs/`  : routing service configurations  
