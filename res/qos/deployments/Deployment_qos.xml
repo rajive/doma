@@ -49,18 +49,36 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
         </qos_profile>
         
 		<qos_profile name="square_pub_sub" base_name="Deployment_Root">
+            <base_name>
+                <element>SquareQosLib::Square_Pub</element>
+                <element>SquareQosLib::Square_Sub</element>                
+            </base_name>		
 		</qos_profile>
 
 		<qos_profile name="square_pub" base_name="Deployment_Root">
+            <base_name>
+                <element>SquareQosLib::Square_Pub</element>             
+            </base_name>		
 		</qos_profile>
 
 		<qos_profile name="circle_pub_triangle_pub" base_name="Deployment_Root">
+            <base_name>
+                <element>CircleQosLib::Circle_Pub</element>
+                <element>TriangleQosLib::Triangle_Pub</element>                
+            </base_name>		
 		</qos_profile>
 
 		<qos_profile name="square_sub_circle_sub" base_name="Deployment_Root">
+            <base_name>
+                <element>SquareQosLib::Square_Sub</element>
+                <element>CircleQosLib::Circle_Sub</element>                
+            </base_name>		
 		</qos_profile>
 
 		<qos_profile name="triangle_sub" base_name="Deployment_Root">
+            <base_name>
+                <element>TriangleQosLib::Triangle_Sub</element>                
+            </base_name>		
 		</qos_profile>
 		
 	</qos_library>

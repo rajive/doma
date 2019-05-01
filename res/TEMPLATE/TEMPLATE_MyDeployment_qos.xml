@@ -42,6 +42,13 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
                     <type_code_max_serialized_length>0</type_code_max_serialized_length>
                     <type_object_max_serialized_length>65535</type_object_max_serialized_length>
                 </resource_limits>
+                <discovery>
+                    <initial_peers>
+                        <element>239.255.0.2</element>
+                        <element>239.255.0.1</element>
+                    </initial_peers>
+                    <accept_unknown_peers>false</accept_unknown_peers>
+                </discovery>                
             </participant_qos>
         </qos_profile>
         
@@ -54,11 +61,6 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 					<multicast_receive_addresses>
 						<element>239.255.0.2</element>
 					</multicast_receive_addresses>
-					<initial_peers>
-						<element>239.255.0.2</element>
-						<element>239.255.0.1</element>
-					</initial_peers>
-				    <accept_unknown_peers>false</accept_unknown_peers>
 				</discovery>
 			</participant_qos>            
 		</qos_profile>
@@ -72,11 +74,6 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
                     <multicast_receive_addresses>
                         <element>239.255.0.1</element>
                     </multicast_receive_addresses>
-                    <initial_peers>
-                        <element>239.255.0.2</element>
-                        <element>239.255.0.1</element>
-                    </initial_peers>
-                    <accept_unknown_peers>false</accept_unknown_peers>
                 </discovery>
             </participant_qos>
         </qos_profile>
