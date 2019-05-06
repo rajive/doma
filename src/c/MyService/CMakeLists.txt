@@ -28,17 +28,17 @@ SET(RTIDDSGEN ${RTIMEHOME}/rtiddsgen/scripts/rtiddsgen)
 SET(RTIDDSMAG ${RTIMEHOME}/rtiddsmag/scripts/rtiddsmag)
 SET_PROPERTY(GLOBAL PROPERTY RULE_MESSAGES OFF)
 
-set(IF_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../if)
-set(IDL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/types)
-set(QOS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/qos)
+set(IF_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../if)
+set(IDL_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/types)
+set(QOS_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/qos)
 
-SET(IDL_SOURCE_C ${IDL_DIR}/MyService.idl) # >>><<<
+SET(IDL_SOURCE_C ${IDL_ROOT_DIR}/MyService.idl) # >>><<<
 SET(IDL_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen) # >>><<<
 
 # >>><<<
-SET(APP_CFG_IF  ${IF_DIR}/MyService.xml) 
-SET(APP_CFG_REF ${QOS_DIR}/builtin/BuiltinProfiles.xml
-                ${QOS_DIR}/services/MyService_qos.xml)
+SET(APP_CFG_IF  ${IF_ROOT_DIR}/MyService.xml) 
+SET(APP_CFG_REF ${QOS_ROOT_DIR}/builtin/BuiltinProfiles.xml
+                ${QOS_ROOT_DIR}/services/MyService_qos.xml)
 SET(APP_CFG_TYPES MyService.idl)
 SET(APP_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen)
 # >>><<<
@@ -108,7 +108,17 @@ FOREACH(idl ${IDL_SOURCE_C})
                                -d ${IDL_GEN_ROOT} ${idl}
                        DEPENDS ${idl}
                        COMMENT "Regeneration type support plugin from ${idl}"
-   	)                        
+   	)
+
+   	get_filename_component(idl_dir ${idl} DIRECTORY)
+    add_custom_target(${basename}_idl ALL
+                       COMMAND ${RTIDDSGEN} -verbosity 1 -convertToXml 
+                                            -d ${idl_dir} ${idl}
+                       COMMAND mv ${idl_dir}/${basename}.xml 
+                                  ${idl_dir}/${basename}_idl.xml
+                       DEPENDS ${idl}
+                       COMMENT "Conversion to XML representation from ${idl}"
+    )
 ENDFOREACH()
 SET_SOURCE_FILES_PROPERTIES(${IDL_GEN_C} ${IDL_GEN_H} PROPERTIES GENERATED 1)  
 
