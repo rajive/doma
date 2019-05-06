@@ -216,20 +216,12 @@ Databus_output(struct Databus* databus, long count) {
 
     int length = sizeof(*writer_infos)/sizeof(struct WriterInfo);
     for (int i = 0; i < length; ++i) {
-        printf("%s: writing sample %ld\n", writer_infos[i].writer_name, count);
-
         /* call the output function for each writer, if specified */
         if (writer_infos[i].sample_output_func != NULL) {
-            writer_infos[i].sample_output_func(writer_infos[i].writer,
-                                               writer_infos[i].sample, count);
+            printf("%s: writing sample %ld\n", writer_infos[i].writer_name, count);
 
-        /* call the untyped write function on the datawriter */
-        } else {
-            retcode = DDS_DataWriter_write(writer_infos[i].writer, writer_infos[i].sample, &DDS_HANDLE_NIL);
-            switch (retcode) {
-            case DDS_RETCODE_OK: break;
-            default: fprintf(stderr, "failed to write\n"); break;
-            };
+            writer_infos[i].sample_output_func(writer_infos[i].writer,
+                                               writer_infos[i].sample);
         }
     }
 }

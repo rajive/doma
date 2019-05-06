@@ -23,8 +23,7 @@ set(QOS_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/qos)
 
 # IDL
 SET(IDL_SOURCE_C 
-    ${IDL_ROOT_DIR}/MyService.idl
-    ${IDL_ROOT_DIR}/ShapeType.idl)
+    ${IDL_ROOT_DIR}/MyService.idl)
 
 # XML App Config
 set(APP_CFG_TYPES MyService.idl)

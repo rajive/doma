@@ -25,17 +25,27 @@
 #include "Publisher.h"
 #include "Writers.h"
 
-void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped, long count) {
+void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped) {
 
     My_Type_Chat_ObjDataWriter *writer = (My_Type_Chat_ObjDataWriter *)writer_untyped;
     My_Type_Chat_Obj *sample = (My_Type_Chat_Obj *)sample_untyped;
     DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
 
     strncpy(sample->id, "Rajive (xml micro C)", My_Type_Chat_MAX_SIZE);
-    snprintf(sample->content, My_Type_Chat_MAX_SIZE, "XML Micro C Hello World %ld", count);
+    snprintf(sample->content, My_Type_Chat_MAX_SIZE, "XML Micro C Hello World");
     printf("\t%s %s\n", sample->id, sample->content);
 
     retcode = My_Type_Chat_ObjDataWriter_write(writer, sample, &DDS_HANDLE_NIL);
+    switch (retcode) {
+    case DDS_RETCODE_OK: break;
+    default: fprintf(stderr, "failed output, retcode = %d\n", retcode); break;
+    };
+}
+
+void My_Topic_Untyped_output(DDS_DataWriter* writer_untyped, void* sample_untyped) {
+
+    DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
+    retcode = DDS_DataWriter_write(writer_untyped, sample_untyped, &DDS_HANDLE_NIL);
     switch (retcode) {
     case DDS_RETCODE_OK: break;
     default: fprintf(stderr, "failed output, retcode = %d\n", retcode); break;

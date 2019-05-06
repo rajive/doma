@@ -21,7 +21,7 @@
 
 typedef void* (*SampleCreate)();
 typedef void  (*SampleDelete)(void *);
-typedef void  (*SampleOutput)(DDS_DataWriter*, void*, long);
+typedef void  (*SampleOutput)(DDS_DataWriter*, void*);
 
 struct WriterInfo {
     const char* writer_name;

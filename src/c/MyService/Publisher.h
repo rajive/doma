@@ -21,8 +21,11 @@
 
 #include "MyServiceSupport.h"
 
-extern void My_Topic_Chat_output(DDS_DataWriter* writer_untyped,
-        void* sample_untyped, long count);
+extern void
+My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped);
+
+extern void
+My_Topic_Untyped_output(DDS_DataWriter* writer_untyped, void* sample_untyped);
 
 extern void
 My_Publisher_on_publication_matched(
