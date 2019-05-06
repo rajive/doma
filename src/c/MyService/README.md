@@ -1,4 +1,23 @@
-# Connext Micro C Implementation using XML App Creation (MAG/appgen)
+# MyService Implementation
+
+Illustrates how to wire topics (readers and writers) to application logic.
+
+Tested with 
+- Connext Micro using XML App Creation (MAG/appgen)
+- Connext Pro using XML App Creation and rtiddsprototyper
+
+## Add/remove/change application functionality
+
+To add application logic:
+- Configure application wiring in `Readers.c` and `Writers.c`
+- Define application logic is in `Publisher.[h|c]` and `Subscriber.[h|c]`
+- Define application content filters in `Filter.[h|c]`
+
+The framework logic should not need to change, unless new features are needed.
+- Databus wiring logic is in `Databus.[h|c]` and doesn't need to change
+- Application helpers are in `App.[h|c]` and doesn't need to change
+- Based on the generated example for a Connext Micro application
+
 
 ## Environment variables
 
@@ -6,7 +25,8 @@ The RTIMEARCH variable specifies the target architecture to build for.
 
     set RTIMEARCH x64Darwin17clang9.0
 
-The RTIMEHOME environment variable is used to specify where the Connext Micro is installed. The libs for $RTIMEARCH are expected to be found here.
+The RTIMEHOME environment variable is used to specify where the Connext Micro 
+is installed. The libs for $RTIMEARCH are expected to be found here.
     
     set RTIMEHOME /path/to/connext/micro/home/with/libs
 
@@ -52,9 +72,11 @@ The generated code is located in a sub-directory:
     gen/
 
 The type handling code should regenerated every-time the IDL files change.
-The application generation code should regenerated every-time the XML files change.
+The application generation code should regenerated every-time the XML files 
+change.
 
-The `CMakeLists.txt` script includes rules so that the generated build system automatically regenerates the code when the corresponding source files change.
+The `CMakeLists.txt` script includes rules so that the generated build system 
+automatically regenerates the code when the corresponding source files change.
 
 
 
@@ -63,15 +85,15 @@ The `CMakeLists.txt` script includes rules so that the generated build system au
 - Define the list of DDS-XML files to be loaded via the `NDDS_QOS_PROFILES` 
   environment variable  
   
-        export NDDS_QOS_PROFILES="res/qos/Endpoint_qos.xml;res/qos/Service_qos.xml;if/Service.xml"
+        export NDDS_QOS_PROFILES="res/qos/services/MyService_qos.xml;if/MyService.xml"
         
 - Run Subscriber Example:
 
-        rtiddsprototyper -cfgName ServiceIfLib::Sub -luaFile src/lua/Subscriber.lua
+        rtiddsprototyper -cfgName MyServiceIfLib::Sub -luaFile src/lua/MyService/Subscriber.lua
  
 - Run Publisher Example:
 
-        rtiddsprototyper -cfgName ServiceIfLib::Pub -luaFile src/lua/Publisher.lua
+        rtiddsprototyper -cfgName MyServiceIfLib::Pub -luaFile src/lua/MyService/Publisher.lua
         
 
 ---
