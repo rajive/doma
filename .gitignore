@@ -35,3 +35,6 @@
 *~
 .DS_Store
 .*
+build/
+gen/
+objs/

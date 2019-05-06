@@ -1,0 +1,309 @@
+<?xml version="1.0"?>
+<!--  
+#******************************************************************************
+#   Copyright 2019 Rajive Joshi, Real-Time Innovations Inc.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#******************************************************************************
+-->
+<!-- Connext Micro Only!
+    
+     Resolve the built-in profiles, since these are not (yet) pre-defined for Connext Micro 
+     
+     NOTE: Connext DDS Professional pre-defines the builtin profiles, and those are documented in
+             NDDSHOME/resource/xml/BuiltinProfiles.documentationONLY.xml
+-->
+
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="/opt/rti/NDDSHOME/resource/schema/rti_dds_qos_profiles.xsd">
+
+	<qos_library name="BuiltinQosLib">
+	
+		<qos_profile name="Generic.Common">
+		    
+            <participant_qos>
+                <transport_builtin>
+                    <mask>INTRA|UDPv4</mask>
+                </transport_builtin>        
+                          
+                <discovery_config>
+                    <builtin_discovery_plugins>SDP</builtin_discovery_plugins>
+                </discovery_config>
+                
+                <discovery>
+                    <initial_peers>
+                        <element>127.0.0.1</element>
+                        <element>239.255.0.1</element>
+                    </initial_peers>
+                    <multicast_receive_addresses>
+                        <element>udpv4://127.0.0.1</element>
+                        <element>udpv4://239.255.0.1</element>
+                    </multicast_receive_addresses>
+                </discovery>
+
+
+                <!-- In addition increase limits for Admin Console as described in
+                     https://community.rti.com/static/documentation/connext-micro/2.4.11/doc/html/group__UserManuals__MicroAndCore.html 
+                 -->
+				<resource_limits>
+					<local_writer_allocation>
+						<max_count>2</max_count>
+					</local_writer_allocation>
+					<local_reader_allocation>
+						<max_count>2</max_count>
+					</local_reader_allocation>
+					<local_publisher_allocation>
+						<max_count>2</max_count>
+					</local_publisher_allocation>
+					<local_subscriber_allocation>
+						<max_count>2</max_count>
+					</local_subscriber_allocation>
+					<local_topic_allocation>
+						<max_count>2</max_count>
+					</local_topic_allocation>
+					<local_type_allocation>
+						<max_count>2</max_count>
+					</local_type_allocation>
+					<remote_participant_allocation>
+						<max_count>18<!-- 16 + 2 AdminConsole --></max_count>
+					</remote_participant_allocation>
+					<remote_writer_allocation>
+						<max_count>40<!-- 16 + 24 AdminConsole --></max_count>
+					</remote_writer_allocation>
+					<remote_reader_allocation>
+						<max_count>40<!-- 16 + 24 AdminConsole --></max_count>
+					</remote_reader_allocation>
+					<matching_writer_reader_pair_allocation>
+					   <max_count>304<!-- 256 + 48 AdminConsole --></max_count>
+					</matching_writer_reader_pair_allocation>
+					<max_receive_ports>32</max_receive_ports>
+					<max_destination_ports>32</max_destination_ports>
+				</resource_limits>  
+                              
+            </participant_qos>		
+            
+            <datawriter_qos>
+                <history>
+                    <depth>3</depth>
+                </history>
+                <resource_limits>
+                    <max_instances>16</max_instances>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>32</max_samples_per_instance>
+                </resource_limits>
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <protocol>
+                    <rtps_reliable_writer>
+                        <heartbeat_period>
+                            <nanosec>250000000</nanosec>
+                            <sec>0</sec>
+                        </heartbeat_period>
+                    </rtps_reliable_writer>
+                </protocol>
+                 <writer_resource_limits>
+                    <max_remote_readers>16</max_remote_readers>
+                </writer_resource_limits>               
+            </datawriter_qos>
+            
+            <datareader_qos>
+                <history>
+                    <depth>1</depth>
+                </history>
+                <resource_limits>
+                    <max_instances>16</max_instances>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>32</max_samples_per_instance>
+                </resource_limits>
+                <reader_resource_limits>
+                    <max_remote_writers>16</max_remote_writers>
+                    <max_remote_writers_per_instance>8</max_remote_writers_per_instance>
+                    <max_outstanding_reads>8</max_outstanding_reads>
+                </reader_resource_limits>
+            </datareader_qos>            
+		</qos_profile>
+		
+	</qos_library>
+    
+	<qos_library name="BuiltinQosLibExp">
+
+		<qos_profile name="Generic.BestEffort" base_name="BuiltinQosLib::Generic.Common">
+			<datawriter_qos>
+				<reliability>
+					<kind>BEST_EFFORT_RELIABILITY_QOS</kind>
+				</reliability>
+				<history>
+					<kind>KEEP_LAST_HISTORY_QOS</kind>
+					<depth>100</depth>
+				</history>
+			</datawriter_qos>
+	
+			<datareader_qos>
+				<reliability>
+					<kind>BEST_EFFORT_RELIABILITY_QOS</kind>
+				</reliability>
+				<history>
+					<kind>KEEP_LAST_HISTORY_QOS</kind>
+					<depth>100</depth>
+				</history>
+			</datareader_qos>
+		</qos_profile>
+
+		<qos_profile name="Generic.StrictReliable" base_name="BuiltinQosLib::Generic.Common">
+			<datawriter_qos>
+				<reliability>
+					<kind>RELIABLE_RELIABILITY_QOS</kind>
+					<max_blocking_time>
+						<sec>5</sec>
+						<nanosec>0</nanosec>
+					</max_blocking_time>
+				</reliability>
+				<history>
+					<kind>KEEP_ALL_HISTORY_QOS</kind>
+				</history>
+				<protocol>
+					<rtps_reliable_writer>
+						<!-- All write() calls will block (for at most max_blocking_time) if 
+							there are 40 unacknowledged samples in the writer queue -->
+						<max_send_window_size>40</max_send_window_size>
+						<heartbeats_per_max_samples>10</heartbeats_per_max_samples>	
+						<heartbeat_period>
+							<sec>0</sec>
+							<nanosec>200000000</nanosec>
+						</heartbeat_period>
+						<max_heartbeat_retries>500</max_heartbeat_retries>
+					</rtps_reliable_writer>
+				</protocol>
+			</datawriter_qos>
+	
+			<datareader_qos>
+				<resource_limits>
+					<max_samples>256</max_samples>
+				</resource_limits>
+				<reliability>
+					<kind>RELIABLE_RELIABILITY_QOS</kind>
+				</reliability>
+				<history>
+					<kind>KEEP_ALL_HISTORY_QOS</kind>
+				</history>
+			</datareader_qos>
+		</qos_profile>
+
+		<qos_profile name="Generic.KeepLastReliable" base_name="Generic.StrictReliable">
+			<datawriter_qos>
+				<history>
+					<kind>KEEP_LAST_HISTORY_QOS</kind>
+				</history>
+				<protocol>
+					<rtps_reliable_writer>
+						<!-- Do not block because of the send_window -->
+						<max_send_window_size>LENGTH_UNLIMITED</max_send_window_size>
+					</rtps_reliable_writer>
+				</protocol>
+			</datawriter_qos>
+	
+			<datareader_qos>
+				<history>
+					<kind>KEEP_LAST_HISTORY_QOS</kind>
+				</history>
+			</datareader_qos>
+		</qos_profile>
+
+        <qos_profile name="Generic.KeepLastReliable.TransientLocal" base_name="Generic.KeepLastReliable">
+            <datareader_qos>
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+            </datareader_qos>
+    
+            <datawriter_qos>
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+            </datawriter_qos>
+        </qos_profile>
+
+		<qos_profile name="Pattern.PeriodicData" base_name="Generic.BestEffort">
+			<datawriter_qos>
+				<deadline>
+					<period>
+						<sec>4</sec>
+						<nanosec>0</nanosec>
+					</period>
+				</deadline>
+			</datawriter_qos>
+	
+			<datareader_qos>
+				<deadline>
+					<period>
+						<sec>10</sec>
+						<nanosec>0</nanosec>
+					</period>
+				</deadline>
+			</datareader_qos>
+		</qos_profile>
+                
+        <qos_profile name="Pattern.Streaming" base_name="Pattern.PeriodicData"/>
+
+
+		<qos_profile name="Pattern.ReliableStreaming" base_name="Generic.KeepLastReliable">
+			<datawriter_qos>
+				<history>
+					<depth>100</depth>
+				</history>
+			</datawriter_qos>
+	
+			<datareader_qos>
+				<history>
+					<depth>100</depth>
+				</history>
+			</datareader_qos>
+		</qos_profile>
+    
+    
+        <qos_profile name="Pattern.Event" base_name="Generic.StrictReliable">
+            <datawriter_qos>
+                <liveliness>
+                    <lease_duration>
+                        <sec>4</sec>
+                        <nanosec>0</nanosec>
+                    </lease_duration>
+                </liveliness>
+            </datawriter_qos>
+    
+            <datareader_qos>
+                <liveliness>
+                    <lease_duration>
+                        <sec>10</sec>
+                        <nanosec>0</nanosec>
+                    </lease_duration>
+                </liveliness>
+            </datareader_qos>
+        </qos_profile>        
+
+       
+       <qos_profile name="Pattern.AlarmEvent" base_name="Pattern.Event"/>
+
+        
+       <qos_profile name="Pattern.Status" base_name="Generic.KeepLastReliable.TransientLocal"/>
+
+
+       <qos_profile name="Pattern.AlarmStatus" base_name="Pattern.Status"/>
+
+
+       <qos_profile name="Pattern.LastValueCache" base_name="Generic.KeepLastReliable.TransientLocal"/>
+    
+	</qos_library>
+
+</dds>

@@ -1,0 +1,92 @@
+/******************************************************************************
+#   Copyright 2019 Rajive Joshi, Real-Time Innovations Inc.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#*****************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "rti_me_c.h"
+
+#include "Databus.h"
+#include "App.h"
+#include "Publisher.h"
+#include "Writers.h"
+
+void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped, long count) {
+
+    My_Type_Chat_ObjDataWriter *writer = (My_Type_Chat_ObjDataWriter *)writer_untyped;
+    My_Type_Chat_Obj *sample = (My_Type_Chat_Obj *)sample_untyped;
+    DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
+
+    strncpy(sample->id, "Rajive (xml micro C)", My_Type_Chat_MAX_SIZE);
+    snprintf(sample->content, My_Type_Chat_MAX_SIZE, "XML Micro C Hello World %ld", count);
+    printf("\t%s %s\n", sample->id, sample->content);
+
+    retcode = My_Type_Chat_ObjDataWriter_write(writer, sample, &DDS_HANDLE_NIL);
+    switch (retcode) {
+    case DDS_RETCODE_OK: break;
+    default: fprintf(stderr, "failed output, retcode = %d\n", retcode); break;
+    };
+}
+
+void
+My_Publisher_on_publication_matched(
+        void *listener_data,
+        DDS_DataWriter * writer,
+        const struct DDS_PublicationMatchedStatus *status) {
+    if (status->current_count_change > 0) {
+        printf("Matched a subscriber\n");
+    }
+    else if (status->current_count_change < 0) {
+        printf("Unmatched a subscriber\n");
+    }
+}
+
+void output_data(void* context, long count) {
+    printf("\niteration: %ld\n", count);
+    Databus_output((struct Databus *)context, count);
+}
+
+int
+publisher_main_w_args(long sleep_time, long count) {
+
+    struct Databus *databus = NULL;
+
+    assert((databus = Databus_create(My_If_PUB))
+            != NULL
+    );
+    Databus_initialize(databus, NULL, WRITER_INFOS);
+
+    assert(Databus_enable(databus)
+            == DDS_RETCODE_OK
+    );
+
+    App_loop(sleep_time, count, output_data, databus);
+
+done:
+    Databus_finalize(databus);
+    Databus_delete(databus);
+
+    return 0;
+}
+
+int
+main(int argc, char **argv) {
+    long sleep_time = 1000;
+    long count = 0;
+    App_arguments(argc, argv, &sleep_time, &count);
+    return publisher_main_w_args(sleep_time, count);
+}

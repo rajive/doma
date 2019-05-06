@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--  
+#******************************************************************************
+#   Copyright 2019 Rajive Joshi, Real-Time Innovations Inc.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#******************************************************************************
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="/opt/rti/NDDSHOME/resource/schema/rti_dds_profiles.xsd">
+
+    <!-- types -->
+    <types>
+        <include file="res/types/MyService_idl.xml" />
+    </types>
+
+    <!-- Domain Library -->
+    <domain_library name="MyServiceBusLib">
+        <domain name="Domain">
+
+            <register_type name="My::Type::Chat::Obj" type_ref="My::Type::Chat::Obj" />
+            <topic name="Chat" register_type_ref="My::Type::Chat::Obj" />
+
+        </domain>    
+    </domain_library>
+
+    <!-- Participant library -->
+    <domain_participant_library name="MyServiceIfLib">
+            
+        <!-- Pub -->
+        <domain_participant name="Pub" domain_ref="MyServiceBusLib::Domain">
+            <publisher name="_pub">
+                <data_writer name="Chat_writer" topic_ref="Chat">
+                    <datawriter_qos base_name="MyServiceQosLib::MyService_Pub" />
+                </data_writer>
+                <publisher_qos base_name="MyServiceQosLib::MyService_Pub" />
+            </publisher>
+            <participant_qos base_name="MyServiceQosLib::MyService_Pub" />
+        </domain_participant>
+
+        <!-- Sub -->
+        <domain_participant name="Sub" domain_ref="MyServiceBusLib::Domain">
+            <subscriber name="_sub">
+                <data_reader name="Chat_reader" topic_ref="Chat">
+                    <datareader_qos base_name="MyServiceQosLib::MyService_Sub" />
+                </data_reader>
+                <subscriber_qos base_name="MyServiceQosLib::MyService_Sub"/>
+            </subscriber>
+            <participant_qos base_name="MyServiceQosLib::MyService_Sub"/>
+        </domain_participant>
+
+        <!-- PubSub Interface -->
+        <domain_participant name="PubSub" domain_ref="MyServiceBusLib::Domain">
+
+            <subscriber name="_sub">
+
+                <data_reader name="Chat_reader" topic_ref="Chat">
+                    <datareader_qos base_name="MyServiceQosLib::MyService_Sub" />
+                </data_reader>
+                <subscriber_qos base_name="MyServiceQosLib::MyService_Sub"/>
+
+            </subscriber>
+
+            <publisher name="_pub">
+
+                <data_writer name="Chat_writer" topic_ref="Chat">
+                    <datawriter_qos base_name="MyServiceQosLib::MyService_Pub" />
+                </data_writer>
+                <publisher_qos base_name="MyServiceQosLib::MyService_Pub" />
+
+            </publisher>
+
+            <participant_qos base_name="MyServiceQosLib::MyService_Sub"/>
+        </domain_participant>
+    </domain_participant_library>
+</dds>

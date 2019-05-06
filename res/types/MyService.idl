@@ -1,0 +1,54 @@
+/******************************************************************************
+   Copyright 2019 Rajive Joshi, Real-Time Innovations Inc.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*****************************************************************************/
+
+// This is a single lineIDL comment
+/* This is a multi-line IDL comment */
+
+//@copy        // This gets copied verbatim in all languages    
+//@copy-c      // This gets copied verbatim in C and C++ only
+//@copy-cppcli // This gets copied verbatim in .NET C++/CLI
+//@copy-java   // This gets copied verbatim in Java only
+
+module My {
+
+    module Type {
+
+        module Chat {
+            const string NAME       = "My::Type::Chat::Obj";
+
+            const long MAX_SIZE=4096;
+            struct Obj {
+                @key string<MAX_SIZE> id; // identity of the chat object 
+                string<MAX_SIZE> content; // content of the chat object 
+            };
+        };
+    };
+
+    module Topic {
+        module chat { 
+            const string NAME       = "Chat";
+            const string WRITER     = "_pub::Chat_writer";
+            const string READER     = "_sub::Chat_reader";
+        };
+    };
+
+    module If {
+        const string PUB       = "MyServiceIfLib::Pub";
+        const string SUB       = "MyServiceIfLib::Sub";
+
+        const string PUBSUB    = "MyServiceIfLib::PubSub";
+    };
+};
