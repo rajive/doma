@@ -27,6 +27,11 @@ My_Topic_Chat_input(
         void *listener_data,
         DDS_DataReader * reader);
 
+void
+My_Topic_Untyped_input(
+        void *listener_data,
+        DDS_DataReader * reader_untyped);
+
 extern void
 My_Subscriber_on_subscription_matched(
         void *listener_data,
