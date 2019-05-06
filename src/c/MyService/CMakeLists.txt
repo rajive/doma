@@ -13,103 +13,112 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #******************************************************************************
+cmake_minimum_required(VERSION 3.14)
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
-
-message("RTIMEHOME = ${RTIMEHOME}") # >>><<<
-
-ADD_DEFINITIONS()
-LINK_DIRECTORIES()
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-PROJECT(doma)
-SET(SOURCE_EXTENSION c)
-
-SET(RTIDDSGEN ${RTIMEHOME}/rtiddsgen/scripts/rtiddsgen)
-SET(RTIDDSMAG ${RTIMEHOME}/rtiddsmag/scripts/rtiddsmag)
-SET_PROPERTY(GLOBAL PROPERTY RULE_MESSAGES OFF)
+project(doma)
 
 set(IF_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../if)
 set(IDL_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/types)
 set(QOS_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/qos)
 
-SET(IDL_SOURCE_C ${IDL_ROOT_DIR}/MyService.idl) # >>><<<
-SET(IDL_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen) # >>><<<
+# IDL
+SET(IDL_SOURCE_C 
+    ${IDL_ROOT_DIR}/MyService.idl
+    ${IDL_ROOT_DIR}/ShapeType.idl)
 
-# >>><<<
-SET(APP_CFG_IF  ${IF_ROOT_DIR}/MyService.xml) 
-SET(APP_CFG_REF ${QOS_ROOT_DIR}/builtin/BuiltinProfiles.xml
-                ${QOS_ROOT_DIR}/services/MyService_qos.xml)
-SET(APP_CFG_TYPES MyService.idl)
-SET(APP_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen)
-# >>><<<
+# XML App Config
+set(APP_CFG_TYPES MyService.idl)
+set(APP_CFG_IF
+    ${IF_ROOT_DIR}/MyService.xml) 
+set(APP_CFG_REF 
+    ${QOS_ROOT_DIR}/builtin/BuiltinProfiles.xml
+    ${QOS_ROOT_DIR}/services/MyService_qos.xml)
+    
+#------------------------------------------------------------------------------
 
-SET(COMMON_C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/Databus.${SOURCE_EXTENSION} 
-                     ${CMAKE_CURRENT_SOURCE_DIR}/App.${SOURCE_EXTENSION}
-) 
+message("RTIMEHOME = ${RTIMEHOME}")
+message("RTIME_TARGET_NAME = ${RTIME_TARGET_NAME}")
 
+add_definitions()
+link_directories()
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objs/${RTIME_TARGET_NAME})
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objs/${RTIME_TARGET_NAME})
-SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objs/${RTIME_TARGET_NAME})
+set(SOURCE_EXTENSION c)
 
-IF (NOT EXISTS gen)
+set(RTIDDSGEN ${RTIMEHOME}/rtiddsgen/scripts/rtiddsgen)
+set(RTIDDSMAG ${RTIMEHOME}/rtiddsmag/scripts/rtiddsmag)
+set_property(GLOBAL PROPERTY RULE_MESSAGES OFF)
+
+set(IDL_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen)
+set(APP_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen)
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 
+    ${CMAKE_CURRENT_SOURCE_DIR}/objs/${RTIME_TARGET_NAME})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 
+    ${CMAKE_CURRENT_SOURCE_DIR}/objs/${RTIME_TARGET_NAME})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 
+    ${CMAKE_CURRENT_SOURCE_DIR}/objs/${RTIME_TARGET_NAME})
+
+if (NOT EXISTS gen)
     file(MAKE_DIRECTORY gen)
-ENDIF()
+endif()
 
-SET(RTI_LIB_PREFIX rti_me)
-SET(RTI_LIB_SUFFIX)
+set(RTI_LIB_PREFIX rti_me)
+set(RTI_LIB_SUFFIX)
 
-IF (NOT (DEFINED RTI_SHARED_LIB))
-    IF (${CMAKE_BUILD_TYPE} MATCHES "[Rr]elease")
-        SET(RTI_LIB_SUFFIX "z")
-        SET(RTI_DEBUG_BUILD FALSE)
-        ADD_DEFINITIONS(-DNDEBUG)
-    ELSE()
-        SET(RTI_LIB_SUFFIX "zd")
-        SET(RTI_DEBUG_BUILD TRUE)
-    ENDIF()
-ELSE()
-    IF (${CMAKE_BUILD_TYPE} MATCHES "[Rr]elease")
-        SET(RTI_LIB_SUFFIX "")
-        SET(RTI_DEBUG_BUILD FALSE)
-        ADD_DEFINITIONS(-DNDEBUG)
-    ELSE()
-        SET(RTI_LIB_SUFFIX "d")
-        SET(RTI_DEBUG_BUILD TRUE)
-    ENDIF()
-ENDIF()
+if (NOT (DEFINED RTI_SHARED_LIB))
+    if (${CMAKE_BUILD_TYPE} MATCHES "[Rr]elease")
+        set(RTI_LIB_SUFFIX "z")
+        set(RTI_DEBUG_BUILD FALSE)
+        add_definitions(-DNDEBUG)
+    else()
+        set(RTI_LIB_SUFFIX "zd")
+        set(RTI_DEBUG_BUILD TRUE)
+    endif()
+else()
+    if (${CMAKE_BUILD_TYPE} MATCHES "[Rr]elease")
+        set(RTI_LIB_SUFFIX "")
+        set(RTI_DEBUG_BUILD FALSE)
+        add_definitions(-DNDEBUG)
+    else()
+        set(RTI_LIB_SUFFIX "d")
+        set(RTI_DEBUG_BUILD TRUE)
+    endif()
+endif()
 
-SET(MICRO_C_LIBS rti_me_appgen${RTI_LIB_SUFFIX}
+set(MICRO_C_LIBS rti_me_appgen${RTI_LIB_SUFFIX}
                  rti_me_rhsm${RTI_LIB_SUFFIX} 
                  rti_me_whsm${RTI_LIB_SUFFIX} 
                  rti_me_discdpse${RTI_LIB_SUFFIX} 
                  rti_me_discdpde${RTI_LIB_SUFFIX} 
                  rti_me${RTI_LIB_SUFFIX}
 )
+message("MICRO_C_LIBS = ${MICRO_C_LIBS}")
 
-MESSAGE("RTIME_TARGET_NAME = ${RTIME_TARGET_NAME}")
-INCLUDE_DIRECTORIES(gen/ ${RTIMEHOME}/include ${RTIMEHOME}/include/rti_me)
-LINK_DIRECTORIES(${RTIMEHOME}/lib/${RTIME_TARGET_NAME})
+include_directories(gen/ ${RTIMEHOME}/include ${RTIMEHOME}/include/rti_me)
+link_directories(${RTIMEHOME}/lib/${RTIME_TARGET_NAME})
 
-FOREACH(idl ${IDL_SOURCE_C})
-    GET_FILENAME_COMPONENT(filename ${idl} NAME)
-    STRING(REGEX REPLACE "\\.idl" "" basename ${filename})
-    LIST(APPEND IDL_GEN_C ${IDL_GEN_ROOT}/${basename}.${SOURCE_EXTENSION}
-                          ${IDL_GEN_ROOT}/${basename}Plugin.${SOURCE_EXTENSION}
-                          ${IDL_GEN_ROOT}/${basename}Support.${SOURCE_EXTENSION})
-                          
-    LIST(APPEND IDL_GEN_H ${IDL_GEN_ROOT}/${basename}.h
-                          ${IDL_GEN_ROOT}/${basename}Plugin.h  
-                          ${IDL_GEN_ROOT}/${basename}Support.h)
-                          
-    ADD_CUSTOM_COMMAND(OUTPUT ${IDL_GEN_C} ${IDL_GEN_H} 
+foreach(idl ${IDL_SOURCE_C})
+    get_filename_component(basename ${idl} NAME_WLE)
+    
+    set(idl_gen_c      ${IDL_GEN_ROOT}/${basename}.${SOURCE_EXTENSION}
+                       ${IDL_GEN_ROOT}/${basename}Plugin.${SOURCE_EXTENSION}
+                       ${IDL_GEN_ROOT}/${basename}Support.${SOURCE_EXTENSION})
+    list(APPEND IDL_GEN_C ${idl_gen_c})
+
+    set(idl_gen_h      ${IDL_GEN_ROOT}/${basename}.h
+                       ${IDL_GEN_ROOT}/${basename}Plugin.h
+                       ${IDL_GEN_ROOT}/${basename}Support.h)
+    list(APPEND IDL_GEN_H ${idl_gen_h})
+                              
+    add_custom_command(OUTPUT ${idl_gen_c} ${idl_gen_h} 
                        COMMAND ${RTIDDSGEN} -verbosity 1 -language C -micro 
                                -update typefiles 
                                -d ${IDL_GEN_ROOT} ${idl}
                        DEPENDS ${idl}
                        COMMENT "Regeneration type support plugin from ${idl}"
    	)
-
+   	
    	get_filename_component(idl_dir ${idl} DIRECTORY)
     add_custom_target(${basename}_idl ALL
                        COMMAND ${RTIDDSGEN} -verbosity 1 -convertToXml 
@@ -119,46 +128,53 @@ FOREACH(idl ${IDL_SOURCE_C})
                        DEPENDS ${idl}
                        COMMENT "Conversion to XML representation from ${idl}"
     )
-ENDFOREACH()
-SET_SOURCE_FILES_PROPERTIES(${IDL_GEN_C} ${IDL_GEN_H} PROPERTIES GENERATED 1)  
+endforeach()
 
-FOREACH(xml ${APP_CFG_IF}) # >>><<<
-    GET_FILENAME_COMPONENT(filename ${xml} NAME)
-    STRING(REGEX REPLACE "\\.xml" "" basename ${filename})
-    LIST(APPEND APP_GEN_C ${APP_GEN_ROOT}/${basename}Appgen.c)  
-                          
-    LIST(APPEND APP_GEN_H ${APP_GEN_ROOT}/${basename}Appgen.h)  
-    LIST(JOIN APP_CFG_REF " -referencedFile " APP_GEN_XML)
+foreach(xml ${APP_CFG_IF})
+    get_filename_component(basename ${xml} NAME_WLE)
 
-    ADD_CUSTOM_COMMAND(OUTPUT ${APP_GEN_C} ${APP_GEN_H} 
+    set(app_gen_c         ${APP_GEN_ROOT}/${basename}Appgen.c)
+    list(APPEND APP_GEN_C ${app_gen_c})
+
+    set(app_gen_h         ${APP_GEN_ROOT}/${basename}Appgen.h)
+    list(APPEND APP_GEN_H ${app_gen_h})
+
+    list(JOIN APP_CFG_REF " -referencedFile " app_gen_xml)
+    add_custom_command(OUTPUT ${app_gen_c} ${app_gen_h} 
                        COMMAND ${RTIDDSMAG} -verbosity 1 -language C 
                                -replace  
                                -d ${APP_GEN_ROOT} ${xml} 
                                -idlFile ${APP_CFG_TYPES} 
-                               -referencedFile ${APP_GEN_XML}
+                               -referencedFile ${app_gen_xml}
                        DEPENDS ${xml} ${APP_CFG_REF}
                        COMMENT "Regeneration of application support from ${xml}"
-   	)             	              
-ENDFOREACH()
-SET_SOURCE_FILES_PROPERTIES(${APP_GEN_C} ${APP_GEN_H} PROPERTIES GENERATED 1)    
+   	)
+endforeach()
 
+#------------------------------------------------------------------------------
+# Targets
 
-ADD_EXECUTABLE(Publisher
+set(COMMON_C_SOURCES 
+    ${CMAKE_CURRENT_SOURCE_DIR}/Databus.${SOURCE_EXTENSION} 
+    ${CMAKE_CURRENT_SOURCE_DIR}/App.${SOURCE_EXTENSION}
+) 
+
+add_executable(Publisher
                ${CMAKE_CURRENT_SOURCE_DIR}/Publisher.${SOURCE_EXTENSION}
                ${CMAKE_CURRENT_SOURCE_DIR}/Writers.${SOURCE_EXTENSION}
                ${COMMON_C_SOURCES}
-                                             ${IDL_GEN_C} ${IDL_GEN_H}
-                                             ${APP_GEN_C} ${APP_GEN_H})
+               ${IDL_GEN_C} ${IDL_GEN_H}
+               ${APP_GEN_C} ${APP_GEN_H})
 
-ADD_EXECUTABLE(Subscriber 
+add_executable(Subscriber 
                ${CMAKE_CURRENT_SOURCE_DIR}/Subscriber.${SOURCE_EXTENSION}
                ${CMAKE_CURRENT_SOURCE_DIR}/Readers.${SOURCE_EXTENSION}
                ${COMMON_C_SOURCES}
                ${CMAKE_CURRENT_SOURCE_DIR}/Filters.c
-                                             ${IDL_GEN_C} ${IDL_GEN_H}
-                                             ${APP_GEN_C} ${APP_GEN_H})
+               ${IDL_GEN_C} ${IDL_GEN_H}
+               ${APP_GEN_C} ${APP_GEN_H})
 
-message("MICRO_C_LIBS = ${MICRO_C_LIBS}")
+target_link_libraries(Publisher  ${MICRO_C_LIBS} ${PLATFORM_LIBS})
+target_link_libraries(Subscriber ${MICRO_C_LIBS} ${PLATFORM_LIBS})
 
-TARGET_LINK_LIBRARIES(Publisher  ${MICRO_C_LIBS} ${PLATFORM_LIBS})
-TARGET_LINK_LIBRARIES(Subscriber ${MICRO_C_LIBS} ${PLATFORM_LIBS})
+#------------------------------------------------------------------------------
