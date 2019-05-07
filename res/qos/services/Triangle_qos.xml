@@ -22,8 +22,7 @@ filters, that specialize common qos profiles.
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 -->
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
-	version="5.3.1">
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_qos_profiles.xsd">
 
 	<qos_library name="TriangleQosLib">
 

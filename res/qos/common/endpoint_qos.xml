@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 *****************************************************************************
-*    (c) 2005-2017 Copyright, Real-Time Innovations, All rights reserved.   *
+*    (c) 2005-2019 Copyright, Real-Time Innovations, All rights reserved.   *
 *                                                                           *
 *         Permission to modify and use for internal purposes granted.       *
 * This software is provided "as is", without warranty, express or implied.  *
@@ -23,29 +23,14 @@ All of the built-in profiles can be found in the
 BuiltinProfiles.documentationONLY.xml file located in the
 $NDDSHOME/resource/xml/ directory. 
 
-Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
+Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017-2019.
 -->
 <dds
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.1/rti_dds_qos_profiles.xsd"
-	version="5.3.1">
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_qos_profiles.xsd">
 
 	<qos_library name="EndpointQosLib">
  
-        <qos_profile name="InstanceKeepLastValue">
-            <datawriter_qos>
-                <history>
-                    <depth>3</depth>
-                </history>
-            </datawriter_qos>
-
-            <datareader_qos>
-                <history>
-                    <depth>1</depth>
-                </history>
-            </datareader_qos>
-        </qos_profile>
-
 		<qos_profile
 			name="User.Generic.StrictReliable"
 			base_name="BuiltinQosLibExp::Generic.StrictReliable" />
@@ -141,6 +126,20 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 		<qos_profile
 			name="User.Pattern.LastValueCache"
 			base_name="BuiltinQosLibExp::Pattern.LastValueCache" />
+   
+        <qos_profile name="InstanceKeepLastValue">
+            <datawriter_qos>
+                <history>
+                    <depth>3</depth>
+                </history>
+            </datawriter_qos>
+
+            <datareader_qos>
+                <history>
+                    <depth>1</depth>
+                </history>
+            </datareader_qos>
+        </qos_profile>
 
 	</qos_library>
 </dds>
