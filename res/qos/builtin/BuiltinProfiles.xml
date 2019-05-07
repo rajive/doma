@@ -30,21 +30,7 @@
 	<qos_library name="BuiltinQosLib">
 
         <qos_profile name="Generic.Common" 
-                     base_name="ConnextMicroParticipantQosLib::Transport.Selected">
-            <datawriter_qos>
-                <reliability>
-                    <kind>RELIABLE_RELIABILITY_QOS</kind>
-                </reliability>
-                <protocol>
-                    <rtps_reliable_writer>
-                        <heartbeat_period>
-                            <nanosec>250000000</nanosec>
-                            <sec>0</sec>
-                        </heartbeat_period>
-                    </rtps_reliable_writer>
-                </protocol>
-            </datawriter_qos>
-        </qos_profile>
+                     base_name="ConnextMicroParticipantQosLib::Transport.Selected"/>
     </qos_library>
  
 	<qos_library name="BuiltinQosLibExp">
