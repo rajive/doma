@@ -159,22 +159,36 @@ set(COMMON_C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/App.${SOURCE_EXTENSION}
 ) 
 
-add_executable(Publisher
+add_executable(pub
+               ${CMAKE_CURRENT_SOURCE_DIR}/PublisherApp.${SOURCE_EXTENSION}
                ${CMAKE_CURRENT_SOURCE_DIR}/Publisher.${SOURCE_EXTENSION}
                ${CMAKE_CURRENT_SOURCE_DIR}/Writers.${SOURCE_EXTENSION}
                ${COMMON_C_SOURCES}
                ${IDL_GEN_C} ${IDL_GEN_H}
                ${APP_GEN_C} ${APP_GEN_H})
 
-add_executable(Subscriber 
+add_executable(sub 
+               ${CMAKE_CURRENT_SOURCE_DIR}/SubscriberApp.${SOURCE_EXTENSION}
                ${CMAKE_CURRENT_SOURCE_DIR}/Subscriber.${SOURCE_EXTENSION}
+               ${CMAKE_CURRENT_SOURCE_DIR}/Filters.${SOURCE_EXTENSION}
                ${CMAKE_CURRENT_SOURCE_DIR}/Readers.${SOURCE_EXTENSION}
                ${COMMON_C_SOURCES}
-               ${CMAKE_CURRENT_SOURCE_DIR}/Filters.c
                ${IDL_GEN_C} ${IDL_GEN_H}
                ${APP_GEN_C} ${APP_GEN_H})
 
-target_link_libraries(Publisher  ${MICRO_C_LIBS} ${PLATFORM_LIBS})
-target_link_libraries(Subscriber ${MICRO_C_LIBS} ${PLATFORM_LIBS})
+add_executable(pubsub 
+               ${CMAKE_CURRENT_SOURCE_DIR}/PubSubApp.${SOURCE_EXTENSION}
+               ${CMAKE_CURRENT_SOURCE_DIR}/Publisher.${SOURCE_EXTENSION}
+               ${CMAKE_CURRENT_SOURCE_DIR}/Writers.${SOURCE_EXTENSION}
+               ${CMAKE_CURRENT_SOURCE_DIR}/Subscriber.${SOURCE_EXTENSION}
+               ${CMAKE_CURRENT_SOURCE_DIR}/Filters.${SOURCE_EXTENSION}
+               ${CMAKE_CURRENT_SOURCE_DIR}/Readers.${SOURCE_EXTENSION}
+               ${COMMON_C_SOURCES}
+               ${IDL_GEN_C} ${IDL_GEN_H}
+               ${APP_GEN_C} ${APP_GEN_H})
+
+target_link_libraries(pub       ${MICRO_C_LIBS} ${PLATFORM_LIBS})
+target_link_libraries(sub       ${MICRO_C_LIBS} ${PLATFORM_LIBS})
+target_link_libraries(pubsub    ${MICRO_C_LIBS} ${PLATFORM_LIBS})
 
 #------------------------------------------------------------------------------

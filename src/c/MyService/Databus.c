@@ -214,12 +214,12 @@ Databus_output(struct Databus* databus, long count) {
     DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
     struct WriterInfo *writer_infos = databus->writer_infos;
 
+    printf("\niteration: %ld\n", count);
     int length = sizeof(*writer_infos)/sizeof(struct WriterInfo);
     for (int i = 0; i < length; ++i) {
         /* call the output function for each writer, if specified */
         if (writer_infos[i].sample_output_func != NULL) {
-            printf("%s: writing sample %ld\n", writer_infos[i].writer_name, count);
-
+            printf("%s\n", writer_infos[i].writer_name);
             writer_infos[i].sample_output_func(writer_infos[i].writer,
                                                writer_infos[i].sample);
         }

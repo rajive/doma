@@ -20,6 +20,8 @@
 #include <assert.h>
 #include "osapi/osapi_thread.h"
 
+#include "App.h"
+
 void
 App_help(char *appname) {
     printf("%s [options]\n", appname);
@@ -101,9 +103,10 @@ App_sleep(long count) {
  * context - the context in which to execute do_something
  */
 void
-App_loop(long sleep_time, long count, void (*do_something)(void*, long), void* context) {
+App_loop(long sleep_time, long count,
+         Activity activity, Context context) {
     for (int i=0; (count == 0) || (i < count); ++i) {
-        do_something(context, i);
+        activity(context, i);
         OSAPI_Thread_sleep(sleep_time);
     }
 }

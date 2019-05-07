@@ -20,13 +20,8 @@
 
 #include "rti_me_c.h"
 
-#include "MyServiceSupport.h"
-
-#include "Databus.h"
-#include "App.h"
-#include "Filters.h"
 #include "Subscriber.h"
-#include "Readers.h"
+#include "Filters.h"
 
 #include "reda/reda_ptr_sequence.h"
 
@@ -121,35 +116,4 @@ My_Subscriber_on_subscription_matched(
     else if (status->current_count_change < 0) {
         printf("Unmatched a publisher\n");
     }
-}
-
-int
-subscriber_main_w_args(long sleep_time, long count) {
-
-    struct Databus *databus = NULL;
-
-    assert((databus = Databus_create(My_If_SUB))
-            != NULL
-    );
-    Databus_initialize(databus, READER_INFOS, NULL);
-
-    assert(Databus_enable(databus)
-            == DDS_RETCODE_OK
-    );
-
-    App_sleep(count);
-
-done:
-    Databus_finalize(databus);
-    Databus_delete(databus);
-
-    return 0;
-}
-
-int
-main(int argc, char **argv) {
-    long sleep_time = 1000;
-    long count = 0;
-    App_arguments(argc, argv, &sleep_time, &count);
-    return subscriber_main_w_args(sleep_time, count);
 }

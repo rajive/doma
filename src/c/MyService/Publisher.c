@@ -20,10 +20,7 @@
 
 #include "rti_me_c.h"
 
-#include "Databus.h"
-#include "App.h"
 #include "Publisher.h"
-#include "Writers.h"
 
 void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped) {
 
@@ -63,40 +60,4 @@ My_Publisher_on_publication_matched(
     else if (status->current_count_change < 0) {
         printf("Unmatched a subscriber\n");
     }
-}
-
-void output_data(void* context, long count) {
-    printf("\niteration: %ld\n", count);
-    Databus_output((struct Databus *)context, count);
-}
-
-int
-publisher_main_w_args(long sleep_time, long count) {
-
-    struct Databus *databus = NULL;
-
-    assert((databus = Databus_create(My_If_PUB))
-            != NULL
-    );
-    Databus_initialize(databus, NULL, WRITER_INFOS);
-
-    assert(Databus_enable(databus)
-            == DDS_RETCODE_OK
-    );
-
-    App_loop(sleep_time, count, output_data, databus);
-
-done:
-    Databus_finalize(databus);
-    Databus_delete(databus);
-
-    return 0;
-}
-
-int
-main(int argc, char **argv) {
-    long sleep_time = 1000;
-    long count = 0;
-    App_arguments(argc, argv, &sleep_time, &count);
-    return publisher_main_w_args(sleep_time, count);
 }

@@ -14,23 +14,44 @@
 #   limitations under the License.
 #*****************************************************************************/
 
-#ifndef _APP_H_
-#define _APP_H_
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef void (*Activity)(void*, long);
-typedef void * Context;
+#include "Databus.h"
+#include "App.h"
 
-extern void
-App_help(char *appname);
+#include "Publisher.h"
+#include "Writers.h"
 
-extern void
-App_arguments(int argc, char **argv, long* sleep_time, long* count);
+int
+publisher_app(long sleep_time, long count) {
 
-extern void
-App_sleep(long count);
+    struct Databus *databus = NULL;
 
-extern void
-App_loop(long sleep_time, long count,
-        Activity activity, Context context);
+    assert((databus = Databus_create(My_If_PUB))
+            != NULL
+    );
+    Databus_initialize(databus, NULL, WRITER_INFOS);
 
-#endif /* APP_H_ */
+    assert(Databus_enable(databus)
+            == DDS_RETCODE_OK
+    );
+
+    App_loop(sleep_time, count, (Activity)Databus_output, databus);
+
+done:
+    Databus_finalize(databus);
+    Databus_delete(databus);
+
+    return 0;
+}
+
+
+int
+main(int argc, char **argv) {
+    long sleep_time = 1000;
+    long count = 0;
+    App_arguments(argc, argv, &sleep_time, &count);
+    return publisher_app(sleep_time, count);
+}
