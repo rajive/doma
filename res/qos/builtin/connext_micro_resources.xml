@@ -21,7 +21,8 @@
 
     <qos_library name="ConnextMicroParticipantQosLib">
 
-        <qos_profile name="ResourceLimits">
+        <!-- Memory -->
+        <qos_profile name="Memory.ResourceLimits">
             <participant_qos>
                 <!-- Increase limits for Admin Console as described in
                      https://community.rti.com/static/documentation/connext-micro/2.4.11/doc/html/group__UserManuals__MicroAndCore.html 
@@ -105,8 +106,32 @@
         </qos_profile>
 
 
+        <!-- Discovery -->
+        <qos_profile name="Discovery.DPDE" 
+                     base_name="Memory.ResourceLimits">
+            <participant_qos>
+                <discovery_config>
+                    <builtin_discovery_plugins>SDP</builtin_discovery_plugins>
+                </discovery_config>
+            </participant_qos>
+        </qos_profile>
+
+        <qos_profile name="Discovery.DPSE" 
+                     base_name="Memory.ResourceLimits">
+            <participant_qos>
+                <discovery_config>
+                    <builtin_discovery_plugins>DPSE</builtin_discovery_plugins>
+                </discovery_config>
+            </participant_qos>
+        </qos_profile>
+
+        <qos_profile name="Discovery.Selected" 
+                     base_name="Discovery.DPDE" />
+
+
+        <!-- Transports -->
         <qos_profile name="Transport.Intra" 
-                     base_name="ResourceLimits">
+                     base_name="Discovery.Selected">
             <participant_qos>
                 <transport_builtin>
                     <mask>INTRA</mask>
@@ -114,17 +139,12 @@
             </participant_qos>
         </qos_profile>
 
-
         <qos_profile name="Transport.Intra.UDPv4" 
-                     base_name="ResourceLimits">
+                     base_name="Transport.Intra">
             <participant_qos>
                 <transport_builtin>
                     <mask>INTRA|UDPv4</mask>
                 </transport_builtin>
-
-                <discovery_config>
-                    <builtin_discovery_plugins>SDP</builtin_discovery_plugins>
-                </discovery_config>
 
                 <discovery>
                     <initial_peers>
@@ -139,9 +159,7 @@
             </participant_qos>
         </qos_profile>
 
-
         <qos_profile name="Transport.Selected" 
-                     base_name="Transport.Intra.UDPv4">
-        </qos_profile>
+                     base_name="Transport.Intra.UDPv4" />
     </qos_library>
 </dds>
