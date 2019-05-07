@@ -30,9 +30,10 @@ set(APP_CFG_TYPES MyService.idl)
 set(APP_CFG_IF
     ${IF_ROOT_DIR}/MyService.xml) 
 set(APP_CFG_REF 
+    ${QOS_ROOT_DIR}/builtin/connext_micro_resources.xml
     ${QOS_ROOT_DIR}/builtin/BuiltinProfiles.xml
     ${QOS_ROOT_DIR}/services/MyService_qos.xml)
-    
+
 #------------------------------------------------------------------------------
 
 message("RTIMEHOME = ${RTIMEHOME}")
