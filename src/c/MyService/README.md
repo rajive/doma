@@ -86,6 +86,10 @@ automatically regenerates the code when the corresponding source files change.
   environment variable  
   
         export NDDS_QOS_PROFILES="res/qos/services/MyService_qos.xml;if/MyService.xml"
+ 
+   OR (if using additional qos profiles)
+   
+        export NDDS_QOS_PROFILES="res/qos/common/snippet_qos.xml;res/qos/common/endpoint_qos.xml;res/qos/common/flow_qos.xml;res/qos/services/MyService_qos.xml;if/MyService.xml"
         
 - Run Subscriber Example:
 
