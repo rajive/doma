@@ -140,7 +140,6 @@ foreach(xml ${APP_CFG_IF})
     list(APPEND APP_GEN_H ${app_gen_h})
 
     list(JOIN APP_CFG_REF " -referencedFile " app_gen_xml)
-    message("app_gen_xml = ${app_gen_xml}")
     add_custom_command(OUTPUT ${app_gen_c} ${app_gen_h} 
                        COMMAND ${RTIDDSMAG} -verbosity 1 -language C 
                                -replace  
