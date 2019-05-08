@@ -19,7 +19,7 @@
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="/opt/rti/NDDSHOME/resource/schema/rti_dds_qos_profiles.xsd">
 
-    <qos_library name="FlowQosLib">
+    <qos_library name="MyCommonQosLib">
 
         <!-- Logging -->
         <qos_profile name="Logging"
