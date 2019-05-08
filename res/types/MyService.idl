@@ -38,7 +38,7 @@ module My {
     };
 
     module Topic {
-        module chat { 
+        module Chat { 
             const string NAME       = "Chat";
             const string WRITER     = "_pub::Chat_writer";
             const string READER     = "_sub::Chat_reader";

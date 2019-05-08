@@ -19,7 +19,7 @@
 #include "Publisher.h"
 
 struct WriterInfo WRITER_INFOS[] = {
-        {My_Topic_chat_WRITER,
+        {My_Topic_Chat_WRITER,
                 (SampleCreate)My_Type_Chat_Obj_create,
                 (SampleDelete)My_Type_Chat_Obj_delete,
                 My_Topic_Chat_output,

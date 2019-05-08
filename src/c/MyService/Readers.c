@@ -19,7 +19,7 @@
 #include "Subscriber.h"
 
 struct ReaderInfo READER_INFOS[] = {
-        {My_Topic_chat_READER,
+        {My_Topic_Chat_READER,
                 My_Subscriber_on_subscription_matched,
                 My_Topic_Chat_input,
                 /*My_Type_Chat_Obj_on_before_sample_deserialize,
