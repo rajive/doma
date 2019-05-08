@@ -110,6 +110,12 @@ This qos profile may customize qos policies for:
 - `participant_qos`
 - `participant_factory_qos`
 
+## System
+
+A system is a collection of services, deployed as components.
+
+In the example, the system is called `My`. The `My` system comprises of 
+many services and components.
 
 ---
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.

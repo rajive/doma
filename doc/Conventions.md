@@ -16,6 +16,9 @@
 - Service interface qos profile names start with `<service_name>_InterfaceName`
 - Selected or preferred user QoS profile names start with `User.Selected.`
 - "QoS only" xml files end with `_qos.xml`
+- Common QoS profiles: `<system_name>Common_qos.xml`, e.g. `MyCommon_qos.xml`
+  (system specific data flow patterns)
+- Example system name: `My`
 
 ---
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
