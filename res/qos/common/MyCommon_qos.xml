@@ -19,26 +19,77 @@
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="/opt/rti/NDDSHOME/resource/schema/rti_dds_qos_profiles.xsd">
 
+    <qos_library name="SnippetQosLib">
+        <!-- QoS Snippets DON'T have a base_name attribute -->
+
+        <qos_profile name="InstanceKeepLastValue">
+            <datawriter_qos>
+                <history>
+                    <depth>3</depth>
+                </history>
+            </datawriter_qos>
+            <datareader_qos>
+                <history>
+                    <depth>1</depth>
+                </history>
+            </datareader_qos>
+        </qos_profile>
+
+        <qos_profile name="Sporadic">
+            <datawriter_qos>
+                <deadline>
+                    <period>
+                        <sec>DURATION_INFINITE_SEC</sec>
+                        <nanosec>DURATION_INFINITE_NSEC</nanosec>
+                    </period>
+                </deadline>
+            </datawriter_qos>
+            <datareader_qos>
+                <deadline>
+                    <period>
+                        <sec>DURATION_INFINITE_SEC</sec>
+                        <nanosec>DURATION_INFINITE_NSEC</nanosec>
+                    </period>
+                </deadline>
+            </datareader_qos>
+        </qos_profile>
+
+    </qos_library>
+
+
     <qos_library name="MyCommonQosLib">
+
+        <!-- Generic -->
+        <qos_profile name="Generic"
+            base_name="BuiltinQosLib::Generic.Common" />
 
         <!-- Logging -->
         <qos_profile name="Logging"
-            base_name="EndpointQosLib::User.Generic.StrictReliable" />
+            base_name="BuiltinQosLibExp::Generic.StrictReliable" />
 
 
         <!-- Configuration -->
         <qos_profile name="Configuration"
-            base_name="EndpointQosLib::User.Pattern.LastValueCache" />
-
+            base_name="BuiltinQosLibExp::Pattern.LastValueCache">
+            <base_name>
+                <element>SnippetQosLib::InstanceKeepLastValue</element>
+            </base_name>
+        </qos_profile>
 
         <!-- State -->
         <qos_profile name="State"
-            base_name="EndpointQosLib::User.Pattern.Status" />
+            base_name="BuiltinQosLibExp::Pattern.Status" />
+
+        <qos_profile name="Status"
+            base_name="BuiltinQosLibExp::Pattern.Status" />
 
 
         <!-- Data Streams -->
-        <qos_profile name="Stream.BestEfforts"
-            base_name="EndpointQosLib::User.Pattern.Streaming">
+        <qos_profile name="Stream.BestEffort"
+            base_name="BuiltinQosLibExp::Pattern.Streaming">
+            <base_name>
+                <element>SnippetQosLib::Sporadic</element>
+            </base_name>
             <datawriter_qos>
                 <history>
                     <depth>4</depth>
@@ -52,7 +103,7 @@
         </qos_profile>
 
         <qos_profile name="Stream.Reliable"
-            base_name="EndpointQosLib::User.Pattern.ReliableStreaming">
+            base_name="BuiltinQosLibExp::Pattern.ReliableStreaming">
             <datawriter_qos>
                 <history>
                     <depth>4</depth>
@@ -68,7 +119,7 @@
 
         <!-- Command-Response -->
         <qos_profile name="Command"
-            base_name="EndpointQosLib::User.Pattern.Event" >
+            base_name="BuiltinQosLibExp::Pattern.Event" >
             <datawriter_qos>
                 <liveliness>
                     <lease_duration>
@@ -85,9 +136,14 @@
                     </lease_duration>
                 </liveliness>
             </datareader_qos>
-        </qos_profile>            
+        </qos_profile>
 
         <qos_profile name="Response" base_name="Command" />
+
+
+        <!-- Event -->
+        <qos_profile name="Event"
+            base_name="BuiltinQosLibExp::Pattern.Event" />
 
     </qos_library>
 </dds>
