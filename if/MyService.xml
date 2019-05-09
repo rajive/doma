@@ -63,24 +63,18 @@
         <domain_participant name="PubSub" domain_ref="MyServiceBusLib::Domain">
 
             <subscriber name="_sub">
-
                 <data_reader name="Chat_reader" topic_ref="Chat">
-                    <datareader_qos base_name="MyServiceQosLib::MyService_Sub" />
+                    <datareader_qos base_name="MyServiceQosLib::MyService_PubSub" />
                 </data_reader>
-                <subscriber_qos base_name="MyServiceQosLib::MyService_Sub"/>
-
+                <subscriber_qos base_name="MyServiceQosLib::MyService_PubSub"/>
             </subscriber>
-
             <publisher name="_pub">
-
                 <data_writer name="Chat_writer" topic_ref="Chat">
-                    <datawriter_qos base_name="MyServiceQosLib::MyService_Pub" />
+                    <datawriter_qos base_name="MyServiceQosLib::MyService_PubSub" />
                 </data_writer>
-                <publisher_qos base_name="MyServiceQosLib::MyService_Pub" />
-
+                <publisher_qos base_name="MyServiceQosLib::MyService_PubSub" />
             </publisher>
-
-            <participant_qos base_name="MyServiceQosLib::MyService_Sub"/>
+            <participant_qos base_name="MyServiceQosLib::MyService_PubSub"/>
         </domain_participant>
     </domain_participant_library>
 </dds>

@@ -53,5 +53,10 @@
          <!-- Sub Interface QoS policies -->           
         <qos_profile name="MyService_Sub" base_name="MyService_Root" />
 
+
+         <!-- Sub Interface QoS policies -->           
+        <qos_profile name="MyService_PubSub" base_name="MyService_Root" />
+
+
     </qos_library>
 </dds>
