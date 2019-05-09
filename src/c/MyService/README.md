@@ -10,10 +10,10 @@ Tested with
 
 ### Wire a new topic
 
-- Update MyService.xml: register type & topic, add readers and/or writers
-- Update MyService_qos.xml: add topic filter(s) for writers(s) and/or readers(s)
-- Update MyService.idl: add type definition and module for Topic::<topic_name>>
-- Update Writers.c and/or Readers.c
+- Update `MyService.xml`: register type & topic, add readers and/or writers
+- Update `MyService_qos.xml`: add topic filter(s) for writers(s) and/or readers(s)
+- Update `MyService.idl`: add type definition and module for `Topic::<topic_name>`
+- Update `Writers.c` and/or `Readers.c`
 
 
 ### Add application logic for a topic
