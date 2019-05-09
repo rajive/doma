@@ -124,8 +124,6 @@ foreach(idl ${IDL_SOURCE_C})
     add_custom_target(${basename}_idl ALL
                        COMMAND ${RTIDDSGEN} -verbosity 1 -convertToXml 
                                             -d ${idl_dir} ${idl}
-                       COMMAND mv ${idl_dir}/${basename}.xml 
-                                  ${idl_dir}/${basename}_idl.xml
                        DEPENDS ${idl}
                        COMMENT "Conversion to XML representation from ${idl}"
     )

@@ -21,7 +21,7 @@
 
     <!-- types -->
     <types>
-        <include file="res/types/MyService_idl.xml" />
+        <include file="res/types/MyService.xml" />
     </types>
 
     <!-- Domain Library -->
