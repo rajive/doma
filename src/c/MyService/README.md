@@ -6,10 +6,20 @@ Tested with
 - Connext Micro using XML App Creation (MAG/appgen)
 - Connext Pro using XML App Creation and rtiddsprototyper
 
-## Add/remove/change application functionality
+## Design
+
+### Wire a new topic
+
+- Update MyService.xml: register type & topic, add readers and/or writers
+- Update MyService_qos.xml: add topic filter(s) for writers(s) and/or readers(s)
+- Update MyService.idl: add type definition and module for Topic::<topic_name>>
+- Update Writers.c and/or Readers.c
+
+
+### Add application logic for a topic
 
 To add application logic:
-- Configure application wiring in `Readers.c` and `Writers.c`
+- Configure topic application wiring in `Readers.c` and `Writers.c`
 - Define application logic is in `Publisher.[h|c]` and `Subscriber.[h|c]`
 - Define application content filters in `Filter.[h|c]`
 
@@ -19,7 +29,9 @@ The framework logic should not need to change, unless new features are needed.
 - Based on the generated example for a Connext Micro application
 
 
-## Environment variables
+## Build
+
+### Environment variables
 
 The RTIMEARCH variable specifies the target architecture to build for.
 
@@ -79,8 +91,24 @@ The `CMakeLists.txt` script includes rules so that the generated build system
 automatically regenerates the code when the corresponding source files change.
 
 
+## Run
 
-# Running with the Connext Professional Prototyper (Scripting in Lua)
+### Running the built applications
+
+Subscriber
+
+    ./src/c/MyService/objs/x64Darwin17clang9.0/sub
+
+Publisher
+
+    ./src/c/MyService/objs/x64Darwin17clang9.0/sub
+
+Publisher & Subscriber
+
+    ./src/c/MyService/objs/x64Darwin17clang9.0/pubsub
+
+
+### Running with the Connext Professional Prototyper (Scripting in Lua)
 
 - Define the list of DDS-XML files to be loaded via the `NDDS_QOS_PROFILES` 
   environment variable  
