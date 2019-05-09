@@ -28,8 +28,17 @@
 
     <qos_library name="ResourceQosLib">
 
+        <!-- Factory -->
+        <qos_profile name="Factory">
+            <participant_factory_qos>
+                <entity_factory>
+                    <autoenable_created_entities>false</autoenable_created_entities>
+                </entity_factory>
+            </participant_factory_qos>
+        </qos_profile>
+
         <!-- Memory -->
-        <qos_profile name="Memory">
+        <qos_profile name="Memory" base_name="Factory">
             <participant_qos>
                 <!-- Increase limits for Admin Console as described in
                      https://community.rti.com/static/documentation/connext-micro/2.4.11/doc/html/group__UserManuals__MicroAndCore.html 
@@ -105,7 +114,7 @@
         </qos_profile>
 
 
-        <!-- Memory -->
+        <!-- Protocol -->
         <qos_profile name="Protocol" base_name="Memory">
             <datawriter_qos>
                 <reliability>
@@ -146,10 +155,17 @@
         <!-- Transports -->
         <qos_profile name="Transport.Intra" 
                      base_name="Discovery.Selected">
+
             <participant_qos>
                 <transport_builtin>
                     <mask>INTRA</mask>
                 </transport_builtin>
+
+                <discovery>
+                    <enabled_transports>
+                        <element>_intra</element>
+                    </enabled_transports>
+                </discovery>
             </participant_qos>
         </qos_profile>
 
