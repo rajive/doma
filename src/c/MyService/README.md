@@ -85,11 +85,8 @@ automatically regenerates the code when the corresponding source files change.
 - Define the list of DDS-XML files to be loaded via the `NDDS_QOS_PROFILES` 
   environment variable  
   
-        export NDDS_QOS_PROFILES="res/qos/services/MyService_qos.xml;if/MyService.xml"
- 
-   OR (if using additional qos profiles)
-   
-        export NDDS_QOS_PROFILES="res/qos/common/snippet_qos.xml;res/qos/common/endpoint_qos.xml;res/qos/common/MyCommon_qos.xml;res/qos/services/MyService_qos.xml;if/MyService.xml"
+        export NDDS_QOS_PROFILES="res/qos/common/MyCommon_qos.xml;res/qos/services/MyService_qos.xml;if/MyService.xml"
+
         
 - Run Subscriber Example:
 
