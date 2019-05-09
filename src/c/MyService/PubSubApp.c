@@ -36,7 +36,8 @@ pubsub_app(long sleep_time, long count) {
     assert((databus = Databus_create(My_If_PUBSUB))
             != NULL
     );
-    Databus_initialize(databus, READER_INFOS, WRITER_INFOS);
+    Databus_initialize(databus, READER_INFOS, READER_INFOS_LENGTH,
+                                WRITER_INFOS, WRITER_INFOS_LENGTH);
 
     assert(Databus_enable(databus)
             == DDS_RETCODE_OK

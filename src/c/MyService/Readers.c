@@ -26,3 +26,6 @@ struct ReaderInfo READER_INFOS[] = {
                 My_Type_Chat_Obj_on_before_sample_commit*/
         },
 };
+
+const int READER_INFOS_LENGTH =
+        sizeof(READER_INFOS)/sizeof(READER_INFOS[0]);

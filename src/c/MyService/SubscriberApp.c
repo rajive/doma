@@ -32,7 +32,7 @@ subscriber_app(long sleep_time, long count) {
     assert((databus = Databus_create(My_If_SUB))
             != NULL
     );
-    Databus_initialize(databus, READER_INFOS, NULL);
+    Databus_initialize(databus, READER_INFOS, READER_INFOS_LENGTH, NULL, 0);
 
     assert(Databus_enable(databus)
             == DDS_RETCODE_OK

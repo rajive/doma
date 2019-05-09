@@ -32,7 +32,7 @@ publisher_app(long sleep_time, long count) {
     assert((databus = Databus_create(My_If_PUB))
             != NULL
     );
-    Databus_initialize(databus, NULL, WRITER_INFOS);
+    Databus_initialize(databus, NULL, 0, WRITER_INFOS, WRITER_INFOS_LENGTH);
 
     assert(Databus_enable(databus)
             == DDS_RETCODE_OK

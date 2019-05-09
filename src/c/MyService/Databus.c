@@ -24,8 +24,12 @@
 
 struct Databus {
     DDS_DomainParticipant *participant;
+
     struct ReaderInfo* reader_infos;
+    int reader_infos_length;
+
     struct WriterInfo* writer_infos;
+    int writer_infos_length;
 };
 
 struct Databus *
@@ -57,7 +61,9 @@ Databus_create(const char *participant_name) {
     if (databus != NULL) {
         databus->participant = participant;
         databus->reader_infos = NULL;
+        databus->reader_infos_length = 0;
         databus->writer_infos = NULL;
+        databus->writer_infos_length = 0;
     }
     return databus;
 }
@@ -114,13 +120,13 @@ Databus_enable(struct Databus *databus) {
 
 void
 Databus_initialize(struct Databus* databus,
-        struct ReaderInfo reader_infos[],
-        struct WriterInfo writer_infos[]) {
+        struct ReaderInfo reader_infos[], const int reader_infos_length,
+        struct WriterInfo writer_infos[], const int writer_infos_length) {
 
     if (writer_infos != NULL) {
         databus->writer_infos = writer_infos;
-        int length = sizeof(*writer_infos)/sizeof(struct WriterInfo);
-        for (int i = 0; i < length; ++i) {
+        databus->writer_infos_length = writer_infos_length;
+        for (int i = 0; i < databus->writer_infos_length; ++i) {
 
             /* lookup DataWriter if a (non-NULL) writer_name is specified */
             if (writer_infos[i].writer_name != NULL) {
@@ -154,8 +160,8 @@ Databus_initialize(struct Databus* databus,
 
     if (reader_infos != NULL) {
         databus->reader_infos = reader_infos;
-        int length = sizeof(*reader_infos)/sizeof(struct ReaderInfo);
-        for (int i = 0; i < length; ++i) {
+        databus->reader_infos_length = reader_infos_length;
+        for (int i = 0; i < databus->reader_infos_length; ++i) {
 
             /* lookup DataWriter if a (non-NULL) writer_name is specified */
             if (reader_infos[i].reader_name != NULL) {
@@ -194,11 +200,11 @@ void
 Databus_finalize(struct Databus* databus) {
 
     databus->reader_infos = NULL;
+    databus->reader_infos_length = 0;
 
     if (databus->writer_infos) {
         struct WriterInfo *writer_infos = databus->writer_infos;
-        int length = sizeof(*writer_infos)/sizeof(struct WriterInfo);
-        for (int i = 0; i < length; ++i) {
+        for (int i = 0; i < databus->writer_infos_length; ++i) {
             /* delete sample if a (non-NULL) sample_delete_func is specified */
             if (writer_infos[i].sample != NULL && writer_infos[i].sample_delete_func != NULL) {
                 writer_infos[i].sample_delete_func(writer_infos[i].sample);
@@ -207,6 +213,7 @@ Databus_finalize(struct Databus* databus) {
         }
     }
     databus->writer_infos = NULL;
+    databus->writer_infos_length = 0;
 }
 
 void
@@ -215,8 +222,7 @@ Databus_output(struct Databus* databus, long count) {
     struct WriterInfo *writer_infos = databus->writer_infos;
 
     printf("\niteration: %ld\n", count);
-    int length = sizeof(*writer_infos)/sizeof(struct WriterInfo);
-    for (int i = 0; i < length; ++i) {
+    for (int i = 0; i < databus->writer_infos_length; ++i) {
         /* call the output function for each writer, if specified */
         if (writer_infos[i].sample_output_func != NULL) {
             printf("%s\n", writer_infos[i].writer_name);

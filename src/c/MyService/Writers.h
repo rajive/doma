@@ -36,4 +36,7 @@ struct WriterInfo {
 extern
 struct WriterInfo WRITER_INFOS[];
 
+extern
+const int WRITER_INFOS_LENGTH;
+
 #endif /* WRITERS_H_ */

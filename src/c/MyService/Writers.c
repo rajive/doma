@@ -26,3 +26,6 @@ struct WriterInfo WRITER_INFOS[] = {
                 My_Publisher_on_publication_matched
         },
 };
+
+const int WRITER_INFOS_LENGTH =
+        sizeof(WRITER_INFOS)/sizeof(WRITER_INFOS[0]);

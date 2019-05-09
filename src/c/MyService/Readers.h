@@ -31,4 +31,7 @@ struct ReaderInfo {
 extern
 struct ReaderInfo READER_INFOS[];
 
+extern
+const int READER_INFOS_LENGTH;
+
 #endif /* READERS_H_ */

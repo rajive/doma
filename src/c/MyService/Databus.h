@@ -45,8 +45,8 @@ Databus_enable(struct Databus *databus);
  */
 extern void
 Databus_initialize(struct Databus* databus,
-            struct ReaderInfo reader_infos[],
-            struct WriterInfo writer_infos[]);
+        struct ReaderInfo reader_infos[], const int reader_infos_length,
+        struct WriterInfo writer_infos[], const int writer_infos_length);
 
 extern void
 Databus_finalize(struct Databus* databus);
