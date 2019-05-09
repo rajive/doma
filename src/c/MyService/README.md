@@ -101,7 +101,7 @@ Subscriber
 
 Publisher
 
-    ./src/c/MyService/objs/x64Darwin17clang9.0/sub
+    ./src/c/MyService/objs/x64Darwin17clang9.0/pub
 
 Publisher & Subscriber
 
