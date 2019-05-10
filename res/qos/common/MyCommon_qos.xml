@@ -80,6 +80,7 @@
         <qos_profile name="State"
             base_name="BuiltinQosLibExp::Pattern.Status" />
 
+        <!-- Status: monitored, but not acted upon, e.g. Health -->
         <qos_profile name="Status"
             base_name="BuiltinQosLibExp::Pattern.Status" />
 

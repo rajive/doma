@@ -19,6 +19,15 @@
 #include "Subscriber.h"
 
 struct ReaderInfo READER_INFOS[] = {
+        /*
+        {const char* reader_name;
+            DDS_DataReaderListener_SubscriptionMatchedCallback on_subscription_matched;
+            DDS_DataReaderListener_DataAvailableCallback on_data_available;
+            DDS_DataReaderListener_BeforeSampleDeserializeCallback on_before_sample_deserialize;
+            DDS_DataReaderListener_BeforeSampleCommitCallback on_before_sample_commit;
+            DDS_DataReader *reader;
+        }
+        */
         {My_Topic_Chat_READER,
                 My_Subscriber_on_subscription_matched,
                 My_Topic_Chat_input,

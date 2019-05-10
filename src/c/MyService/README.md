@@ -6,27 +6,37 @@ Tested with
 - Connext Micro using XML App Creation (MAG/appgen)
 - Connext Pro using XML App Creation and rtiddsprototyper
 
-## Design
+## Usage
 
 ### Wire a new topic
 
+- Define DataType `struct`: add to an existing IDL file, or create a 
+  new `<type_name>.idl` file, or reuse an existing datatype
 - Update `MyService.xml`: register type & topic, add readers and/or writers
 - Update `MyService_qos.xml`: add topic filter(s) for writers(s) and/or readers(s)
-- Update `MyService.idl`: add type definition and module for `Topic::<topic_name>`
-- Update `Writers.c` and/or `Readers.c`
+- Update `MyService.idl`: add module `Topic::<topic_name>` and define endpoint names
+- Update `Writers.c` and/or `Readers.c` to specify output and/or input handlers
 
 
-### Add application logic for a topic
+### Add I/O handlers per topic
 
-To add application logic:
-- Configure topic application wiring in `Readers.c` and `Writers.c`
-- Define application logic is in `Publisher.[h|c]` and `Subscriber.[h|c]`
-- Define application content filters in `Filter.[h|c]`
+To add application IO/O handlers logic:
 
-The framework logic should not need to change, unless new features are needed.
+- Implement output handler logic in `Publisher.[h|c]` 
+- Implement input handler logic in `Subscriber.[h|c]`
+- Implement content filters in `Filter.[h|c]`
+
+
+## Design
+
+The wiring logic is stable, and does not need to to be touched, 
+unless new features are are to be added.
+
 - Databus wiring logic is in `Databus.[h|c]` and doesn't need to change
-- Application helpers are in `App.[h|c]` and doesn't need to change
-- Based on the generated example for a Connext Micro application
+- Application helpers logic is in `App.[h|c]` and doesn't need to change
+
+The implementation is based on generated example code for a Connext Micro 
+application.
 
 
 ## Build

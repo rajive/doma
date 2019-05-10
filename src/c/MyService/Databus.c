@@ -123,41 +123,6 @@ Databus_initialize(struct Databus* databus,
         struct ReaderInfo reader_infos[], const int reader_infos_length,
         struct WriterInfo writer_infos[], const int writer_infos_length) {
 
-    if (writer_infos != NULL) {
-        databus->writer_infos = writer_infos;
-        databus->writer_infos_length = writer_infos_length;
-        for (int i = 0; i < databus->writer_infos_length; ++i) {
-
-            /* lookup DataWriter if a (non-NULL) writer_name is specified */
-            if (writer_infos[i].writer_name != NULL) {
-                writer_infos[i].writer = DDS_DomainParticipant_lookup_datawriter_by_name(
-                        databus->participant,
-                        writer_infos[i].writer_name);
-                assert(writer_infos[i].writer != NULL);
-            }
-
-            /* set DataWriter listener if specified */
-            if (writer_infos[i].writer != NULL) {
-                struct DDS_DataWriterListener dw_listener = DDS_DataWriterListener_INITIALIZER;
-                DDS_UnsignedLong dw_status_mask = DDS_STATUS_MASK_NONE;
-                if (writer_infos[i].on_publication_matched != NULL) {
-                    dw_listener.on_publication_matched = writer_infos[i].on_publication_matched;
-                    dw_status_mask |= DDS_PUBLICATION_MATCHED_STATUS;
-                }
-                assert(DDS_DataWriter_set_listener(writer_infos[i].writer, &dw_listener,
-                        dw_status_mask)
-                        == DDS_RETCODE_OK
-                );
-            }
-
-            /* create sample if a (non-NULL) sample_create_func is specified */
-            if (writer_infos[i].sample_create_func != NULL) {
-                writer_infos[i].sample = writer_infos[i].sample_create_func();
-                assert(writer_infos[i].sample != NULL);
-            }
-        }
-    }
-
     if (reader_infos != NULL) {
         databus->reader_infos = reader_infos;
         databus->reader_infos_length = reader_infos_length;
@@ -191,6 +156,41 @@ Databus_initialize(struct Databus* databus,
                         dr_status_mask)
                         == DDS_RETCODE_OK
                 );
+            }
+        }
+    }
+
+    if (writer_infos != NULL) {
+        databus->writer_infos = writer_infos;
+        databus->writer_infos_length = writer_infos_length;
+        for (int i = 0; i < databus->writer_infos_length; ++i) {
+
+            /* lookup DataWriter if a (non-NULL) writer_name is specified */
+            if (writer_infos[i].writer_name != NULL) {
+                writer_infos[i].writer = DDS_DomainParticipant_lookup_datawriter_by_name(
+                        databus->participant,
+                        writer_infos[i].writer_name);
+                assert(writer_infos[i].writer != NULL);
+            }
+
+            /* set DataWriter listener if specified */
+            if (writer_infos[i].writer != NULL) {
+                struct DDS_DataWriterListener dw_listener = DDS_DataWriterListener_INITIALIZER;
+                DDS_UnsignedLong dw_status_mask = DDS_STATUS_MASK_NONE;
+                if (writer_infos[i].on_publication_matched != NULL) {
+                    dw_listener.on_publication_matched = writer_infos[i].on_publication_matched;
+                    dw_status_mask |= DDS_PUBLICATION_MATCHED_STATUS;
+                }
+                assert(DDS_DataWriter_set_listener(writer_infos[i].writer, &dw_listener,
+                        dw_status_mask)
+                        == DDS_RETCODE_OK
+                );
+            }
+
+            /* create sample if a (non-NULL) sample_create_func is specified */
+            if (writer_infos[i].sample_create_func != NULL) {
+                writer_infos[i].sample = writer_infos[i].sample_create_func();
+                assert(writer_infos[i].sample != NULL);
             }
         }
     }

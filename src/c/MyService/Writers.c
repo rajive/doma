@@ -19,6 +19,16 @@
 #include "Publisher.h"
 
 struct WriterInfo WRITER_INFOS[] = {
+        /*
+        {const char* writer_name;
+            SampleCreate sample_create_func;
+            SampleDelete sample_delete_func;
+            SampleOutput sample_output_func;
+            DDS_DataWriterListener_PublicationMatchedCallback on_publication_matched;
+            DDS_DataWriter *writer;
+            void* sample;
+        }
+        */
         {My_Topic_Chat_WRITER,
                 (SampleCreate)My_Type_Chat_Obj_create,
                 (SampleDelete)My_Type_Chat_Obj_delete,
