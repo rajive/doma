@@ -23,6 +23,7 @@
 #include "Subscriber.h"
 #include "Filters.h"
 
+#include "Readers.h"
 #include "reda/reda_ptr_sequence.h"
 
 void
@@ -31,11 +32,13 @@ My_Topic_Chat_input(
         DDS_DataReader * reader_untyped) {
 
     DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
+    struct ReaderInfo *reader_info = (struct ReaderInfo*)listener_data;
     struct DDS_SampleInfoSeq info_seq =  DDS_SEQUENCE_INITIALIZER;
     struct My_Type_Chat_ObjSeq sample_seq = DDS_SEQUENCE_INITIALIZER;
     My_Type_Chat_ObjDataReader *reader =
             My_Type_Chat_ObjDataReader_narrow(reader_untyped);
 
+    printf("%s\n", reader_info->reader_name);
     retcode = My_Type_Chat_ObjDataReader_take(reader,
             &sample_seq, &info_seq, DDS_LENGTH_UNLIMITED,
             DDS_ANY_SAMPLE_STATE, DDS_ANY_VIEW_STATE, DDS_ANY_INSTANCE_STATE);
@@ -73,11 +76,13 @@ My_Topic_Untyped_input(
         DDS_DataReader * reader_untyped) {
 
     DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
+    struct ReaderInfo *reader_info = (struct ReaderInfo*)listener_data;
     struct DDS_SampleInfoSeq info_seq =  DDS_SEQUENCE_INITIALIZER;
     struct REDA_PtrSeq reda_ptr_seq = DDS_SEQUENCE_INITIALIZER;
     struct DDS_UntypedSampleSeq* sample_seq =
                             (struct DDS_UntypedSampleSeq*)&reda_ptr_seq;
 
+    printf("%s\n", reader_info->reader_name);
     retcode = DDS_DataReader_take(reader_untyped,
             sample_seq, &info_seq, DDS_LENGTH_UNLIMITED,
             DDS_ANY_SAMPLE_STATE, DDS_ANY_VIEW_STATE, DDS_ANY_INSTANCE_STATE);

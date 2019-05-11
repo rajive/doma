@@ -139,6 +139,7 @@ Databus_initialize(struct Databus* databus,
             /* set DataReader listener if specified */
             if (reader_infos[i].reader != NULL) {
                 struct DDS_DataReaderListener dr_listener = DDS_DataReaderListener_INITIALIZER;
+                dr_listener.as_listener.listener_data = &reader_infos[i];
                 DDS_UnsignedLong dr_status_mask = DDS_STATUS_MASK_NONE;
                 if (reader_infos[i].on_subscription_matched != NULL) {
                     dr_listener.on_subscription_matched = reader_infos[i].on_subscription_matched;
