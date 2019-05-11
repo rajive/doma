@@ -35,7 +35,7 @@ void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped) 
     retcode = My_Type_Chat_ObjDataWriter_write(writer, sample, &DDS_HANDLE_NIL);
     switch (retcode) {
     case DDS_RETCODE_OK: break;
-    default: fprintf(stderr, "failed output, retcode = %d\n", retcode); break;
+    default: fprintf(stderr, "\tfailed output, retcode = %d\n", retcode); break;
     };
 }
 
@@ -45,7 +45,7 @@ void My_Topic_Untyped_output(DDS_DataWriter* writer_untyped, void* sample_untype
     retcode = DDS_DataWriter_write(writer_untyped, sample_untyped, &DDS_HANDLE_NIL);
     switch (retcode) {
     case DDS_RETCODE_OK: break;
-    default: fprintf(stderr, "failed output, retcode = %d\n", retcode); break;
+    default: fprintf(stderr, "\tfailed output, retcode = %d\n", retcode); break;
     };
 }
 

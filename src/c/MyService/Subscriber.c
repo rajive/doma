@@ -48,19 +48,19 @@ My_Topic_Chat_input(
             if (sample_info->valid_data) {
                 My_Type_Chat_Obj* sample =
                         My_Type_Chat_ObjSeq_get_reference(&sample_seq, i);
-                printf("\nSample received:\n"
-                            "\tid: %s\n"
-                            "\tcontent: %s\n",
+                printf("\tSample received:\n"
+                            "\t\tid: %s\n"
+                            "\t\tcontent: %s\n",
                         sample->id, sample->content);
             }
             else {
-                printf("\nSample received: INVALID DATA\n");
+                printf("\tSample received: INVALID DATA\n");
             }
         }
         My_Type_Chat_ObjDataReader_return_loan(reader, &sample_seq, &info_seq);
         break;
     }
-    default: fprintf(stderr, "failed input, retcode = %d\n", retcode); break;
+    default: fprintf(stderr, "\tfailed input, retcode = %d\n", retcode); break;
     };
 
     My_Type_Chat_ObjSeq_finalize(&sample_seq);
@@ -89,16 +89,16 @@ My_Topic_Untyped_input(
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
             if (sample_info->valid_data) {
                 void* sample = DDS_UntypedSampleSeq_get_reference(sample_seq, i);
-                printf("\nSample received: %p\n", sample);
+                printf("\tSample received: %p\n", sample);
             }
             else {
-                printf("\nSample received: INVALID DATA\n");
+                printf("\tSample received: INVALID DATA\n");
             }
         }
         DDS_DataReader_return_loan(reader_untyped, sample_seq, &info_seq);
         break;
     }
-    default: fprintf(stderr, "failed input, retcode = %d\n", retcode); break;
+    default: fprintf(stderr, "\tfailed input, retcode = %d\n", retcode); break;
     };
 
     DDS_UntypedSampleSeq_finalize(sample_seq);
