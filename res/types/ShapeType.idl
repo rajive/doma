@@ -5,6 +5,10 @@
 /* This software is provided "as is", without warranty, express or implied.  */
 /*                                                                           */
 /*****************************************************************************/
+
+#ifndef SHAPETYPE_IDL_
+#define SHAPETYPE_IDL_
+
 module rti {
 	module example {
 		struct ShapeType {
@@ -15,3 +19,5 @@ module rti {
 		};
 	};
 };
+
+#endif /* SHAPETYPE_IDL_ */

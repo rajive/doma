@@ -14,6 +14,9 @@
    limitations under the License.
 *****************************************************************************/
 
+#ifndef MYSERVICE_IDL_
+#define MYSERVICE_IDL_
+
 // This is a single lineIDL comment
 /* This is a multi-line IDL comment */
 
@@ -47,3 +50,5 @@ module My {
         const string PUBSUB         = "MyServiceIfLib::PubSub";
     };
 };
+
+#endif /* MYSERVICE_IDL_ */
