@@ -17,8 +17,6 @@
 #ifndef MYSERVICE_IDL_
 #define MYSERVICE_IDL_
 
-#include "res/types/Chat.idl"
-
 // This is a single lineIDL comment
 /* This is a multi-line IDL comment */
 
@@ -27,19 +25,21 @@
 //@copy-cppcli // This gets copied verbatim in .NET C++/CLI
 //@copy-java   // This gets copied verbatim in Java only
 
+#include "res/types/Chat.idl"
+
 module My {
+
+    module If {
+        const string PUB            = "MyServiceIfLib::Pub";
+        const string SUB            = "MyServiceIfLib::Sub";
+        const string PUBSUB         = "MyServiceIfLib::PubSub";
+    };
 
     module Topic {
         module Chat { 
             const string READER     = "_sub::Chat_reader";
             const string WRITER     = "_pub::Chat_writer";
         };
-    };
-
-    module If {
-        const string PUB            = "MyServiceIfLib::Pub";
-        const string SUB            = "MyServiceIfLib::Sub";
-        const string PUBSUB         = "MyServiceIfLib::PubSub";
     };
 };
 
