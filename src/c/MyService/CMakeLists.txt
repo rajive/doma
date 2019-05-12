@@ -15,7 +15,7 @@
 #******************************************************************************
 cmake_minimum_required(VERSION 3.14)
 
-project(doma)
+project(MyService)
 
 # Top-level project directory
 get_filename_component(ROOT_DIR 

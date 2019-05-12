@@ -24,7 +24,7 @@
         <include file="res/types/MyService.xml" />
     </types>
 
-    <!-- Domain Library -->
+    <!-- Databus Library -->
     <domain_library name="MyServiceBusLib">
         <domain name="Domain">
 
@@ -34,11 +34,12 @@
         </domain>    
     </domain_library>
 
-    <!-- Participant library -->
+    <!-- Databus Interface library -->
     <domain_participant_library name="MyServiceIfLib">
-            
-        <!-- Pub -->
+
+        <!-- Interface: Pub -->
         <domain_participant name="Pub" domain_ref="MyServiceBusLib::Domain">
+            <!-- Outputs -->
             <publisher name="_pub">
                 <data_writer name="Chat_writer" topic_ref="Chat">
                     <datawriter_qos base_name="MyServiceQosLib::MyService_Pub" />
@@ -48,8 +49,9 @@
             <participant_qos base_name="MyServiceQosLib::MyService_Pub" />
         </domain_participant>
 
-        <!-- Sub -->
+        <!-- Interface: Sub -->
         <domain_participant name="Sub" domain_ref="MyServiceBusLib::Domain">
+            <!-- Inputs -->
             <subscriber name="_sub">
                 <data_reader name="Chat_reader" topic_ref="Chat">
                     <datareader_qos base_name="MyServiceQosLib::MyService_Sub" />
@@ -59,15 +61,18 @@
             <participant_qos base_name="MyServiceQosLib::MyService_Sub"/>
         </domain_participant>
 
-        <!-- PubSub Interface -->
+        <!-- Interface: PubSub -->
         <domain_participant name="PubSub" domain_ref="MyServiceBusLib::Domain">
 
+            <!-- Inputs -->
             <subscriber name="_sub">
                 <data_reader name="Chat_reader" topic_ref="Chat">
                     <datareader_qos base_name="MyServiceQosLib::MyService_PubSub" />
                 </data_reader>
                 <subscriber_qos base_name="MyServiceQosLib::MyService_PubSub"/>
             </subscriber>
+
+            <!-- Outputs -->
             <publisher name="_pub">
                 <data_writer name="Chat_writer" topic_ref="Chat">
                     <datawriter_qos base_name="MyServiceQosLib::MyService_PubSub" />

@@ -48,16 +48,16 @@ My_Topic_Chat_input(
         for (int i = 0; i < My_Type_Chat_ObjSeq_get_length(&sample_seq); ++i) {
             struct DDS_SampleInfo* sample_info =
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
+            My_Type_Chat_Obj* sample =
+                    My_Type_Chat_ObjSeq_get_reference(&sample_seq, i);
             if (sample_info->valid_data) {
-                My_Type_Chat_Obj* sample =
-                        My_Type_Chat_ObjSeq_get_reference(&sample_seq, i);
-                printf("\tSample received:\n"
-                            "\t\tid: %s\n"
-                            "\t\tcontent: %s\n",
+                printf("\tSample received: %p\n", sample);
+                printf("\t\tid: %s\n"
+                       "\t\tcontent: %s\n",
                         sample->id, sample->content);
             }
             else {
-                printf("\tSample received: INVALID DATA\n");
+                printf("\tSample received: %p\tINVALID DATA\n", sample);
             }
         }
         My_Type_Chat_ObjDataReader_return_loan(reader, &sample_seq, &info_seq);
@@ -92,12 +92,12 @@ My_Topic_Untyped_input(
         for (int i = 0; i < DDS_UntypedSampleSeq_get_length(sample_seq); ++i) {
             struct DDS_SampleInfo* sample_info =
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
+            void* sample = DDS_UntypedSampleSeq_get_reference(sample_seq, i);
             if (sample_info->valid_data) {
-                void* sample = DDS_UntypedSampleSeq_get_reference(sample_seq, i);
                 printf("\tSample received: %p\n", sample);
             }
             else {
-                printf("\tSample received: INVALID DATA\n");
+                printf("\tSample received: %p\tINVALID DATA\n", sample);
             }
         }
         DDS_DataReader_return_loan(reader_untyped, sample_seq, &info_seq);
