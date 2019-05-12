@@ -19,7 +19,8 @@
 
 #include "rti_me_c.h"
 
-#include "MyServiceSupport.h"
+#include "res/types/MyServiceSupport.h"
+#include "res/types/ChatSupport.h"
 
 extern void
 My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped);

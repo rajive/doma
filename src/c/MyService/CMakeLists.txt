@@ -17,22 +17,21 @@ cmake_minimum_required(VERSION 3.14)
 
 project(doma)
 
-set(IF_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../if)
-set(IDL_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/types)
-set(QOS_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../res/qos)
+set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../..)
 
 # IDL
 SET(IDL_SOURCE_C 
-    ${IDL_ROOT_DIR}/MyService.idl)
+    ${ROOT_DIR}/res/types/MyService.idl
+    ${ROOT_DIR}/res/types/Chat.idl)
 
 # XML App Config
-set(APP_CFG_TYPES MyService.idl)
+set(APP_CFG_TYPES res/types/MyService.idl)
 set(APP_CFG_IF
-    ${IF_ROOT_DIR}/MyService.xml) 
+    ${ROOT_DIR}/if/MyService.xml) 
 set(APP_CFG_REF 
-    ${QOS_ROOT_DIR}/common/builtin/connext_micro.xml
-    ${QOS_ROOT_DIR}/common/MyCommon_qos.xml
-    ${QOS_ROOT_DIR}/services/MyService_qos.xml)
+    ${ROOT_DIR}/res/qos/common/builtin/connext_micro.xml
+    ${ROOT_DIR}/res/qos//common/MyCommon_qos.xml
+    ${ROOT_DIR}/res/qos/services/MyService_qos.xml)
 
 #------------------------------------------------------------------------------
 
@@ -41,7 +40,7 @@ message("RTIME_TARGET_NAME = ${RTIME_TARGET_NAME}")
 
 add_definitions()
 link_directories()
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} gen)
 
 set(SOURCE_EXTENSION c)
 
@@ -49,7 +48,7 @@ set(RTIDDSGEN ${RTIMEHOME}/rtiddsgen/scripts/rtiddsgen)
 set(RTIDDSMAG ${RTIMEHOME}/rtiddsmag/scripts/rtiddsmag)
 set_property(GLOBAL PROPERTY RULE_MESSAGES OFF)
 
-set(IDL_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen)
+set(IDL_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen/res/types)
 set(APP_GEN_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gen)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 
@@ -59,8 +58,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 
     ${CMAKE_CURRENT_SOURCE_DIR}/objs/${RTIME_TARGET_NAME})
 
-if (NOT EXISTS gen)
-    file(MAKE_DIRECTORY gen)
+if (NOT EXISTS ${IDL_GEN_ROOT})
+    file(MAKE_DIRECTORY ${IDL_GEN_ROOT})
 endif()
 
 set(RTI_LIB_PREFIX rti_me)
@@ -95,7 +94,7 @@ set(MICRO_C_LIBS rti_me_appgen${RTI_LIB_SUFFIX}
 )
 message("MICRO_C_LIBS = ${MICRO_C_LIBS}")
 
-include_directories(gen/ ${RTIMEHOME}/include ${RTIMEHOME}/include/rti_me)
+include_directories(${RTIMEHOME}/include ${RTIMEHOME}/include/rti_me)
 link_directories(${RTIMEHOME}/lib/${RTIME_TARGET_NAME})
 
 foreach(idl ${IDL_SOURCE_C})
@@ -113,7 +112,7 @@ foreach(idl ${IDL_SOURCE_C})
                               
     add_custom_command(OUTPUT ${idl_gen_c} ${idl_gen_h} 
                        COMMAND ${RTIDDSGEN} -verbosity 1 -language C -micro 
-                               -ppOption "-I${IDL_ROOT_DIR}"
+                               -ppOption "-I${ROOT_DIR}"
                                -update typefiles 
                                -d ${IDL_GEN_ROOT} ${idl}
                        DEPENDS ${idl}
@@ -123,6 +122,7 @@ foreach(idl ${IDL_SOURCE_C})
    	get_filename_component(idl_dir ${idl} DIRECTORY)
     add_custom_target(${basename}_idl ALL
                        COMMAND ${RTIDDSGEN} -verbosity 1 -convertToXml 
+                                            -ppOption "-I${ROOT_DIR}"
                                             -d ${idl_dir} ${idl}
                        DEPENDS ${idl}
                        COMMENT "Conversion to XML representation from ${idl}"

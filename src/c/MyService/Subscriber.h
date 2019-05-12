@@ -19,7 +19,9 @@
 
 #include "rti_me_c.h"
 
-#include "MyServiceSupport.h"
+#include "res/types/MyServiceSupport.h"
+#include "res/types/ChatSupport.h"
+
 #include "Filters.h"
 
 extern void

@@ -17,7 +17,8 @@
 #ifndef FILTERS_H_
 #define FILTERS_H_
 
-#include "MyServiceSupport.h"
+#include "res/types/MyServiceSupport.h"
+#include "res/types/ChatSupport.h"
 
 /* #define USE_SAMPLE_FILTER */
 /* #define FILTER_ON_DESERIALIZE */
