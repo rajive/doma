@@ -17,7 +17,10 @@ cmake_minimum_required(VERSION 3.14)
 
 project(doma)
 
-set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../..)
+# Top-level project directory
+get_filename_component(ROOT_DIR 
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../.. ABSOLUTE)
+
 
 # IDL
 SET(IDL_SOURCE_C 
@@ -142,7 +145,7 @@ foreach(xml ${APP_CFG_IF})
 
     add_custom_command(OUTPUT ${app_gen_c} ${app_gen_h} 
                        COMMAND ${RTIDDSMAG} -verbosity 1 -language C 
-                               -replace  
+                               -replace
                                -d ${APP_GEN_ROOT} ${xml} 
                                -idlFile ${APP_CFG_TYPES} 
                                -referencedFile ${app_gen_xml}
