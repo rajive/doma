@@ -23,17 +23,25 @@
 
         <!-- System QoS policies --> 
         <qos_profile name="MyService_Root">
+            <!-- policies inherit from this qos profile's base_name, unless 
+                 another base_name is used to override -->
 
+            <!-- Chat -->
             <datawriter_qos topic_filter="Chat*" 
                             base_name="MyCommonQosLib::Status">
             </datawriter_qos>
-
             <datareader_qos topic_filter="Chat*" 
                             base_name="MyCommonQosLib::Status">	
                 <history>
                     <depth>3</depth>
                 </history>
             </datareader_qos>
+
+
+             <!-- Catch all (inherit from this profile's base_name) -->
+            <datareader_qos topic_filter="*" />
+            <datawriter_qos topic_filter="*" />
+
 
             <participant_qos base_name="MyCommonQosLib::Generic">
                 <!-- The participant name, if it is set, will be displayed in the RTI 
@@ -48,8 +56,8 @@
 
         <!-- Pub Interface QoS policies --> 		
         <qos_profile name="MyService_Pub" base_name="MyService_Root" />
-        
-        
+
+
          <!-- Sub Interface QoS policies -->           
         <qos_profile name="MyService_Sub" base_name="MyService_Root" />
 
