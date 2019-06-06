@@ -22,14 +22,15 @@
 
 #include "Publisher.h"
 
-void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped) {
+void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped,
+                          long count) {
 
-    My_Type_Chat_ObjDataWriter *writer = (My_Type_Chat_ObjDataWriter *)writer_untyped;
+    My_Type_Chat_ObjDataWriter *writer = My_Type_Chat_ObjDataWriter_narrow(writer_untyped);
     My_Type_Chat_Obj *sample = (My_Type_Chat_Obj *)sample_untyped;
     DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
 
     strncpy(sample->id, "Rajive (xml micro C)", My_Type_Chat_MAX_SIZE);
-    snprintf(sample->content, My_Type_Chat_MAX_SIZE, "XML Micro C Hello World");
+    snprintf(sample->content, My_Type_Chat_MAX_SIZE, "Hello World %ld", count);
     printf("\t%s %s\n", sample->id, sample->content);
 
     retcode = My_Type_Chat_ObjDataWriter_write(writer, sample, &DDS_HANDLE_NIL);
@@ -39,7 +40,8 @@ void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped) 
     };
 }
 
-void My_Topic_Untyped_output(DDS_DataWriter* writer_untyped, void* sample_untyped) {
+void My_Topic_Untyped_output(DDS_DataWriter* writer_untyped, void* sample_untyped,
+                             long count) {
 
     DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
     retcode = DDS_DataWriter_write(writer_untyped, sample_untyped, &DDS_HANDLE_NIL);

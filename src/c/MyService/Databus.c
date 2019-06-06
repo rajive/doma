@@ -228,7 +228,8 @@ Databus_output(struct Databus* databus, long count) {
         if (writer_infos[i].sample_output_func != NULL) {
             printf("%s\n", writer_infos[i].writer_name);
             writer_infos[i].sample_output_func(writer_infos[i].writer,
-                                               writer_infos[i].sample);
+                                               writer_infos[i].sample,
+                                               count);
         }
     }
 }
