@@ -106,7 +106,7 @@ void
 App_loop(long sleep_time, long count,
          Activity activity, Context context) {
     for (int i=0; (count == 0) || (i < count); ++i) {
-        activity(context, i);
+        activity(context, i+1);
         OSAPI_Thread_sleep(sleep_time);
     }
 }
