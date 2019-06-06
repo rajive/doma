@@ -50,7 +50,7 @@ My_Topic_Chat_input(
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
             My_Type_Chat_Obj* sample =
                     My_Type_Chat_ObjSeq_get_reference(&sample_seq, i);
-            printf("\tSample received: %p\tinstance_state = %d\tpub_seq = %d%u\n",
+            printf("\tSample received: %8p\tinstance_state = %d   seq_no = %d%u\n",
                     sample,
                     sample_info->instance_state,
                     sample_info->publication_sequence_number.high,
@@ -97,7 +97,7 @@ My_Topic_Untyped_input(
             struct DDS_SampleInfo* sample_info =
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
             void* sample = DDS_UntypedSampleSeq_get_reference(sample_seq_ptr, i);
-            printf("\tSample received: %p\tinstance_state = %d\tpub_seq = %d%u\n",
+            printf("\tSample received: %8p\tinstance_state = %d   seq_no = %d%u\n",
                     sample,
                     sample_info->instance_state,
                     sample_info->publication_sequence_number.high,
