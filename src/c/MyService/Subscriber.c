@@ -50,14 +50,18 @@ My_Topic_Chat_input(
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
             My_Type_Chat_Obj* sample =
                     My_Type_Chat_ObjSeq_get_reference(&sample_seq, i);
-            if (sample_info->valid_data) {
-                printf("\tSample received: %p\n", sample);
+            printf("\tSample received: %p\tinstance_state = %d\tpub_seq = %d%u\n",
+                    sample,
+                    sample_info->instance_state,
+                    sample_info->publication_sequence_number.high,
+                    sample_info->publication_sequence_number.low);
+            if (!sample_info->valid_data) {
+                printf("\t\tINVALID DATA\n");
+            } else {
+                /* Print Sample */
                 printf("\t\tid: %s\n"
                        "\t\tcontent: %s\n",
                         sample->id, sample->content);
-            }
-            else {
-                printf("\tSample received: %p\tINVALID DATA\n", sample);
             }
         }
         My_Type_Chat_ObjDataReader_return_loan(reader, &sample_seq, &info_seq);
@@ -79,34 +83,36 @@ My_Topic_Untyped_input(
     struct ReaderInfo *reader_info = (struct ReaderInfo*)listener_data;
     struct DDS_SampleInfoSeq info_seq =  DDS_SEQUENCE_INITIALIZER;
     struct REDA_PtrSeq reda_ptr_seq = DDS_SEQUENCE_INITIALIZER;
-    struct DDS_UntypedSampleSeq* sample_seq =
+    struct DDS_UntypedSampleSeq* sample_seq_ptr =
                             (struct DDS_UntypedSampleSeq*)&reda_ptr_seq;
 
     printf("%s\n", reader_info->reader_name);
     retcode = DDS_DataReader_take(reader_untyped,
-            sample_seq, &info_seq, DDS_LENGTH_UNLIMITED,
+            sample_seq_ptr, &info_seq, DDS_LENGTH_UNLIMITED,
             DDS_ANY_SAMPLE_STATE, DDS_ANY_VIEW_STATE, DDS_ANY_INSTANCE_STATE);
 
     switch (retcode) {
     case DDS_RETCODE_OK: {
-        for (int i = 0; i < DDS_UntypedSampleSeq_get_length(sample_seq); ++i) {
+        for (int i = 0; i < DDS_UntypedSampleSeq_get_length(sample_seq_ptr); ++i) {
             struct DDS_SampleInfo* sample_info =
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
-            void* sample = DDS_UntypedSampleSeq_get_reference(sample_seq, i);
-            if (sample_info->valid_data) {
-                printf("\tSample received: %p\n", sample);
-            }
-            else {
-                printf("\tSample received: %p\tINVALID DATA\n", sample);
+            void* sample = DDS_UntypedSampleSeq_get_reference(sample_seq_ptr, i);
+            printf("\tSample received: %p\tinstance_state = %d\tpub_seq = %d%u\n",
+                    sample,
+                    sample_info->instance_state,
+                    sample_info->publication_sequence_number.high,
+                    sample_info->publication_sequence_number.low);
+            if (!sample_info->valid_data) {
+                printf("\t\tINVALID DATA\n");
             }
         }
-        DDS_DataReader_return_loan(reader_untyped, sample_seq, &info_seq);
+        DDS_DataReader_return_loan(reader_untyped, sample_seq_ptr, &info_seq);
         break;
     }
     default: fprintf(stderr, "\tfailed input, retcode = %d\n", retcode); break;
     };
 
-    DDS_UntypedSampleSeq_finalize(sample_seq);
+    DDS_UntypedSampleSeq_finalize(sample_seq_ptr);
     DDS_SampleInfoSeq_finalize(&info_seq);
 }
 
