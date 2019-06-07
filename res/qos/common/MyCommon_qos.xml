@@ -65,8 +65,15 @@
 
         <!-- Logging -->
         <qos_profile name="Logging"
-            base_name="BuiltinQosLibExp::Generic.StrictReliable" />
-
+            base_name="BuiltinQosLibExp::Generic.StrictReliable">
+            <datawriter_qos>
+                <history>
+                    <!-- don't block the writer -->
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>32</depth>
+                </history>
+            </datawriter_qos>
+        </qos_profile>
 
         <!-- Configuration -->
         <qos_profile name="Configuration"
@@ -118,10 +125,17 @@
         </qos_profile>
 
 
-        <!-- Command-Response -->
-        <qos_profile name="Command"
-            base_name="BuiltinQosLibExp::Pattern.Event" >
+        <!-- Command-Response (Objective State) -->
+        <qos_profile name="Command" 
+            base_name="BuiltinQosLibExp::Generic.StrictReliable" >
+            <!-- Requested Objective -->
             <datawriter_qos>
+                <history>
+                    <!-- don't block the writer -->
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <!-- one command (Requested Objective) outstanding -->
+                    <depth>3</depth>
+                </history>
                 <liveliness>
                     <lease_duration>
                         <sec>4</sec>
@@ -130,6 +144,7 @@
                 </liveliness>
             </datawriter_qos>
             <datareader_qos>
+                <!-- KEEP_ALL history: don't drop any requests -->
                 <liveliness>
                     <lease_duration>
                         <sec>10</sec>
@@ -139,12 +154,27 @@
             </datareader_qos>
         </qos_profile>
 
-        <qos_profile name="Response" base_name="Command" />
+        <qos_profile name="Response" base_name="Command">
+            <!-- Objective -->
+            <datawriter_qos>
+                <history>
+                    <!-- don't block the writer -->
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <!-- N responses (Objectives) outstanding -->
+                    <depth><!-- N = -->8</depth>
+                </history>
+            </datawriter_qos>
+            <datareader_qos>
+                <!-- KEEP_ALL history: don't drop any responses -->
+            </datareader_qos>
+        </qos_profile>
 
 
         <!-- Event -->
         <qos_profile name="Event"
-            base_name="BuiltinQosLibExp::Pattern.Event" />
+            base_name="BuiltinQosLibExp::Pattern.Event">
+            <!-- may BLOCK writer for ReliabilityQosPolicy::max_blocking_time -->
+        </qos_profile>
 
     </qos_library>
 </dds>
