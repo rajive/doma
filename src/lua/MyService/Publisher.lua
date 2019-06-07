@@ -6,7 +6,7 @@ local ChatObject_writer = CONTAINER.WRITER['_pub::Chat_writer']
 
 ChatObject_writer.instance['id'] = "Rajive Lua" -- key field  
 
-ChatObject_writer.instance['content'] = "Hello from Lua " .. count
+ChatObject_writer.instance['content'] = "Hello from Lua " .. count + 1
 
 ChatObject_writer:write()
 
