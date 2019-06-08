@@ -35,10 +35,10 @@ struct Databus {
 struct Databus *
 Databus_create(const char *participant_name) {
 
-    /* Increase the log buffer size? */
+    /* Set the log buffer size */
     struct OSAPI_LogProperty log_prop;
     OSAPI_Log_get_property(&log_prop);
-    log_prop.max_buffer_size = OSAPI_LOG_BUFFER_SIZE /* * 100 */;
+    log_prop.max_buffer_size = OSAPI_LOG_BUFFER_SIZE * 4 /* 100 */;
     OSAPI_Log_set_property(&log_prop);
 
     /* Factory */
