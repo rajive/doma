@@ -82,7 +82,9 @@ My_Topic_Untyped_input(
     DDS_ReturnCode_t retcode = DDS_RETCODE_OK;
     struct ReaderInfo *reader_info = (struct ReaderInfo*)listener_data;
     struct DDS_SampleInfoSeq info_seq =  DDS_SEQUENCE_INITIALIZER;
+
     struct REDA_PtrSeq reda_ptr_seq = DDS_SEQUENCE_INITIALIZER;
+    REDA_PtrSeq_initialize(&reda_ptr_seq);
     struct DDS_UntypedSampleSeq* sample_seq_ptr =
                             (struct DDS_UntypedSampleSeq*)&reda_ptr_seq;
 
