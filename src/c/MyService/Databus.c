@@ -35,25 +35,39 @@ struct Databus {
 struct Databus *
 Databus_create(const char *participant_name) {
 
-    struct Databus *databus = NULL;
+    /* Increase the log buffer size? */
+    struct OSAPI_LogProperty log_prop;
+    OSAPI_Log_get_property(&log_prop);
+    log_prop.max_buffer_size = OSAPI_LOG_BUFFER_SIZE /* * 100 */;
+    OSAPI_Log_set_property(&log_prop);
+
+    /* Factory */
     DDS_DomainParticipantFactory *factory = NULL;
-    RT_Registry_T *registry = NULL;
-    DDS_DomainParticipant *participant = NULL;
-
-    struct APPGEN_FactoryProperty model_xml = APPGEN_FactoryProperty_INITIALIZER;
-    model_xml._model = APPGEN_get_library_seq();
-
     assert((factory = DDS_DomainParticipantFactory_get_instance())
             != NULL
     );
+
+    /* Registry */
+    RT_Registry_T *registry = NULL;
     assert((registry = DDS_DomainParticipantFactory_get_registry(factory))
             != NULL
     );
-    assert(APPGEN_Factory_register(registry, &model_xml)); /* register the MAG/Appgen code */
+
+    /* Appgen (config from XML files using the MAG tool (rtiddsmag) */
+    struct APPGEN_FactoryProperty model_xml = APPGEN_FactoryProperty_INITIALIZER;
+    model_xml._model = APPGEN_get_library_seq();
+    assert(APPGEN_Factory_register(registry, &model_xml)); /* MAG/Appgen code */
+
+    /* Participant */
+    DDS_DomainParticipant *participant = NULL;
     assert((participant =
-            DDS_DomainParticipantFactory_create_participant_from_config(factory,participant_name))
+            DDS_DomainParticipantFactory_create_participant_from_config(factory,
+                    participant_name))
             != NULL
     );
+
+    /* Databus */
+    struct Databus *databus = NULL;
     assert((databus = (struct Databus *)malloc(sizeof(struct Databus)))
             != NULL
     );
@@ -77,29 +91,35 @@ Databus_delete(struct Databus *databus) {
 
     if (databus == NULL || databus->participant == NULL) { return; }
 
+    /* Databus */
     assert(DDS_DomainParticipant_delete_contained_entities(
             databus->participant)
             == DDS_RETCODE_OK
     );
 
+    /* Participant */
     assert((factory = DDS_DomainParticipantFactory_get_instance())
             != NULL
     );
-    assert(DDS_DomainParticipantFactory_delete_participant(factory, databus->participant)
+    assert(DDS_DomainParticipantFactory_delete_participant(factory,
+                                                        databus->participant)
             == DDS_RETCODE_OK
     );
     databus->participant = NULL;
-    free(databus);
 
-
+    /* Appgen */
     assert((registry = DDS_DomainParticipantFactory_get_registry(factory))
             != NULL
     );
     assert(APPGEN_Factory_unregister(registry, NULL));
 
+
+    /* Factory */
     assert(DDS_DomainParticipantFactory_finalize_instance()
             == DDS_RETCODE_OK
     );
+
+    free(databus);
 }
 
 
