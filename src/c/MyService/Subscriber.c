@@ -50,15 +50,14 @@ My_Topic_Chat_input(
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
             My_Type_Chat_Obj* sample =
                     My_Type_Chat_ObjSeq_get_reference(&sample_seq, i);
-            printf("\tSample received: %8p\tinstance_state = %d   seq_no = %d%u\n",
-                    sample,
+            printf("\tSample: " DDS_GUID_FMT "  istate = %d  seq_no = %d%u\n",
+                    DDS_GUID_ARGS(sample_info->instance_handle.octet),
                     sample_info->instance_state,
                     sample_info->publication_sequence_number.high,
                     sample_info->publication_sequence_number.low);
             if (!sample_info->valid_data) {
-                printf("\t\tINVALID DATA\n");
-            } else {
-                /* Print Sample */
+                printf("\t\t%p\tINVALID DATA\n", sample);
+            } else { /* Print Sample */
                 printf("\t\tid: %s\n"
                        "\t\tcontent: %s\n",
                         sample->id, sample->content);
@@ -99,13 +98,15 @@ My_Topic_Untyped_input(
             struct DDS_SampleInfo* sample_info =
                     DDS_SampleInfoSeq_get_reference(&info_seq, i);
             void* sample = DDS_UntypedSampleSeq_get_reference(sample_seq_ptr, i);
-            printf("\tSample received: %8p\tinstance_state = %d   seq_no = %d%u\n",
-                    sample,
+            printf("\tSample: " DDS_GUID_FMT "  istate = %d  seq_no = %d%u\n",
+                    DDS_GUID_ARGS(sample_info->instance_handle.octet),
                     sample_info->instance_state,
                     sample_info->publication_sequence_number.high,
                     sample_info->publication_sequence_number.low);
             if (!sample_info->valid_data) {
-                printf("\t\tINVALID DATA\n");
+                printf("\t\t%p\tINVALID DATA\n", sample);
+            } else { /* Print Sample */
+                printf("\t\t%p\n", sample);
             }
         }
         DDS_DataReader_return_loan(reader_untyped, sample_seq_ptr, &info_seq);
