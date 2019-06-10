@@ -15,16 +15,18 @@ Tested with
 - Update `MyService.xml`: register type & topic, add readers and/or writers
 - Update `MyService_qos.xml`: add topic filter(s) for writers(s) and/or readers(s)
 - Update `MyService.idl`: add module `Topic::<topic_name>` and define endpoint names
-- Update `Writers.c` and/or `Readers.c` to specify output and/or input handlers
 
 
 ### Add I/O handlers per topic
 
-To add application IO/O handlers logic:
+To add application I/O handlers logic:
 
-- Implement output handler logic in `Publisher.[h|c]` 
-- Implement input handler logic in `Subscriber.[h|c]`
-- Implement content filters in `Filter.[h|c]`
+- Update `Writers.c` and/or `Readers.c` to specify output and/or input handlers
+
+To Customize I/O handlers:
+   - Implement output handler logic in `Publisher.[h|c]` 
+   - Implement input handler logic in `Subscriber.[h|c]`
+   - Implement content filters in `Filter.[h|c]`
 
 
 ## Design
