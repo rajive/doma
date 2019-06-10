@@ -12,15 +12,15 @@ Tested with
 
 - Define DataType `struct`: add to an existing IDL file, or create a 
   new `<type_name>.idl` file, or reuse an existing datatype
-- Update `MyService.xml`: register type & topic, add readers and/or writers
 - Update `MyService_qos.xml`: add topic filter(s) for writers(s) and/or readers(s)
-- Update `MyService.idl`: add module `Topic::<topic_name>` and define endpoint names
+- Update `MyService.xml`: register type & topic, add readers and/or writers
 
 
 ### Add I/O handlers per topic
 
 To add application I/O handlers logic:
 
+- Update `MyService.idl`: add module `Topic::<topic_name>` and define endpoint names
 - Update `Writers.c` and/or `Readers.c` to specify output and/or input handlers
 
 To Customize I/O handlers:
