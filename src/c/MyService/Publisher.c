@@ -22,6 +22,8 @@
 
 #include "Publisher.h"
 
+#include "Utils.h"
+
 void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped,
                           long count) {
 
@@ -38,6 +40,7 @@ void My_Topic_Chat_output(DDS_DataWriter* writer_untyped, void* sample_untyped,
     case DDS_RETCODE_OK: break;
     default: fprintf(stderr, "\tfailed output, retcode = %d\n", retcode); break;
     };
+    HEAP_PRINT("My_Topic_Chat_output");
 }
 
 void My_Topic_Untyped_output(DDS_DataWriter* writer_untyped, void* sample_untyped,
@@ -49,6 +52,7 @@ void My_Topic_Untyped_output(DDS_DataWriter* writer_untyped, void* sample_untype
     case DDS_RETCODE_OK: break;
     default: fprintf(stderr, "\tfailed output, retcode = %d\n", retcode); break;
     };
+    HEAP_PRINT("My_Topic_Untyped_output");
 }
 
 void
@@ -62,4 +66,5 @@ My_Publisher_on_publication_matched(
     else if (status->current_count_change < 0) {
         printf("Unmatched a subscriber\n");
     }
+    HEAP_PRINT("My_Publisher_on_publication_matched");
 }

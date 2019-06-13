@@ -26,6 +26,8 @@
 #include "Readers.h"
 #include "reda/reda_ptr_sequence.h"
 
+#include "Utils.h"
+
 void
 My_Topic_Chat_input(
         void *listener_data,
@@ -71,6 +73,7 @@ My_Topic_Chat_input(
 
     My_Type_Chat_ObjSeq_finalize(&sample_seq);
     DDS_SampleInfoSeq_finalize(&info_seq);
+    HEAP_PRINT("My_Topic_Chat_input");
 }
 
 void
@@ -117,6 +120,7 @@ My_Topic_Untyped_input(
 
     DDS_UntypedSampleSeq_finalize(sample_seq_ptr);
     DDS_SampleInfoSeq_finalize(&info_seq);
+    HEAP_PRINT("My_Topic_Untyped_input");
 }
 
 void
@@ -130,4 +134,5 @@ My_Subscriber_on_subscription_matched(
     else if (status->current_count_change < 0) {
         printf("Unmatched a publisher\n");
     }
+    HEAP_PRINT("My_Subscriber_on_subscription_matched");
 }

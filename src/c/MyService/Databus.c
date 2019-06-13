@@ -21,6 +21,7 @@
 #include "dds_c/dds_c_profile.h"
 
 #include "Databus.h"
+#include "Utils.h"
 
 struct Databus {
     DDS_DomainParticipant *participant;
@@ -46,6 +47,7 @@ Databus_create(const char *participant_name) {
     assert((factory = DDS_DomainParticipantFactory_get_instance())
             != NULL
     );
+    HEAP_PRINT("DDS_DomainParticipantFactory_get_instance");
 
     /* Registry */
     RT_Registry_T *registry = NULL;
@@ -57,6 +59,7 @@ Databus_create(const char *participant_name) {
     struct APPGEN_FactoryProperty model_xml = APPGEN_FactoryProperty_INITIALIZER;
     model_xml._model = APPGEN_get_library_seq();
     assert(APPGEN_Factory_register(registry, &model_xml)); /* MAG/Appgen code */
+    HEAP_PRINT("APPGEN_Factory_register");
 
     /* Participant */
     DDS_DomainParticipant *participant = NULL;
@@ -65,6 +68,7 @@ Databus_create(const char *participant_name) {
                     participant_name))
             != NULL
     );
+    HEAP_PRINT("DDS_DomainParticipantFactory_create_participant_from_config");
 
     /* Databus */
     struct Databus *databus = NULL;
@@ -79,6 +83,8 @@ Databus_create(const char *participant_name) {
         databus->writer_infos = NULL;
         databus->writer_infos_length = 0;
     }
+    HEAP_PRINT("Databus");
+
     return databus;
 }
 
