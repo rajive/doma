@@ -17,13 +17,31 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
-#ifndef NDEBUG
 
+/* Helper utility macros to string-ify a DDS_InstanceHandle_t (GUID) */
+#define DDS_GUID_FMT   "%02x%02x%02x%02x.%02x%02x%02x%02x."\
+                       "%02x%02x%02x%02x.%02x%02x%02x%02x"
+#define DDS_GUID_BIT(g_,i_) \
+    ((unsigned char)((char*)(g_))[i_])
+
+#define DDS_GUID_ARGS(g_) \
+    DDS_GUID_BIT(g_,0),  DDS_GUID_BIT(g_,1),  \
+    DDS_GUID_BIT(g_,2),  DDS_GUID_BIT(g_,3),  \
+    DDS_GUID_BIT(g_,4),  DDS_GUID_BIT(g_,5),  \
+    DDS_GUID_BIT(g_,6),  DDS_GUID_BIT(g_,7),  \
+    DDS_GUID_BIT(g_,8),  DDS_GUID_BIT(g_,9),  \
+    DDS_GUID_BIT(g_,10), DDS_GUID_BIT(g_,11), \
+    DDS_GUID_BIT(g_,12), DDS_GUID_BIT(g_,13), \
+    DDS_GUID_BIT(g_,14), DDS_GUID_BIT(g_,15)
+
+
+/* Helper utility to print the Heap size */
+#ifndef NDEBUG
 #define HEAP_PRINT(prefix) \
 printf(prefix ": OSAPI_Heap_allocated_byte_count =  %d\n", OSAPI_Heap_get_allocated_byte_count())
-
 #else
 #define HEAP_PRINT(prefix)
 #endif
+
 
 #endif /* _UTILS_H_ */
