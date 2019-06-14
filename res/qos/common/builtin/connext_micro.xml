@@ -87,9 +87,9 @@
                     <depth>3</depth>
                 </history>
                 <resource_limits>
-                    <max_instances>16</max_instances>
+                    <max_instances>8</max_instances>
                     <max_samples>64</max_samples>
-                    <max_samples_per_instance>32</max_samples_per_instance>
+                    <max_samples_per_instance>8</max_samples_per_instance>
                 </resource_limits>
                  <writer_resource_limits>
                     <max_remote_readers>16</max_remote_readers>
@@ -101,9 +101,9 @@
                     <depth>1</depth>
                 </history>
                 <resource_limits>
-                    <max_instances>16</max_instances>
+                    <max_instances>8</max_instances>
                     <max_samples>64</max_samples>
-                    <max_samples_per_instance>32</max_samples_per_instance>
+                    <max_samples_per_instance>8</max_samples_per_instance>
                 </resource_limits>
                 <reader_resource_limits>
                     <max_remote_writers>16</max_remote_writers>
@@ -133,6 +133,8 @@
 
 
         <!-- Discovery -->
+        <qos_profile name="Discovery.None" base_name="Protocol" />
+
         <qos_profile name="Discovery.DPDE" base_name="Protocol">
             <participant_qos>
                 <discovery_config>
