@@ -115,6 +115,7 @@ foreach(idl ${IDL_SOURCE_C})
                               
     add_custom_command(OUTPUT ${idl_gen_c} ${idl_gen_h} 
                        COMMAND ${RTIDDSGEN} -verbosity 1 -language C -micro 
+                               -interpreted 0
                                -ppOption "-I${ROOT_DIR}"
                                -update typefiles 
                                -d ${IDL_GEN_ROOT} ${idl}
