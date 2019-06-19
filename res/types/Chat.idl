@@ -20,10 +20,12 @@
 module My {
     module Type {
         module Chat {
-            const long MAX_SIZE=4096;
+            const long ID_STR_SIZE      = 32;
+            const long CONTENT_STR_SIZE = 128;
+
             struct Obj {
-                @key string<MAX_SIZE> id; // identity of the chat object 
-                string<MAX_SIZE> content; // content of the chat object 
+                @key string<ID_STR_SIZE> id;      // identity of the chat object
+                string<CONTENT_STR_SIZE> content; // content of the chat object
             };
         };
     };
