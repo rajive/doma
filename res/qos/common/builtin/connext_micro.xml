@@ -45,54 +45,57 @@
                  -->
                 <resource_limits>
                     <remote_participant_allocation>
-                        <max_count>18<!-- 16 + 2 AdminConsole --></max_count>
+                        <max_count>1<!-- 5 + 2 AdminConsole --></max_count>
                     </remote_participant_allocation>
                     <remote_writer_allocation>
-                        <max_count>40<!-- 16 + 24 AdminConsole --></max_count>
+                        <max_count>1<!-- 16 + 24 AdminConsole --></max_count>
                     </remote_writer_allocation>
                     <remote_reader_allocation>
-                        <max_count>40<!-- 16 + 24 AdminConsole --></max_count>
+                        <max_count>1<!-- 16 + 24 AdminConsole --></max_count>
                     </remote_reader_allocation>
                     <matching_writer_reader_pair_allocation>
-                       <max_count>304<!-- 256 + 48 AdminConsole --></max_count>
+                       <max_count>1<!-- 4 + 48 AdminConsole --></max_count>
                     </matching_writer_reader_pair_allocation>
+                    <matching_reader_writer_pair_allocation>
+                        <max_count>1</max_count>
+                    </matching_reader_writer_pair_allocation>
 
-                    <max_receive_ports>32</max_receive_ports>
-                    <max_destination_ports>32</max_destination_ports>
-                    
+                    <max_receive_ports>8</max_receive_ports>
+                    <max_destination_ports>8</max_destination_ports>
+
                     <local_type_allocation>
-                        <max_count>16</max_count>
+                        <max_count>1</max_count>
                     </local_type_allocation>
                     <local_topic_allocation>
-                        <max_count>16</max_count>
+                        <max_count>1</max_count>
                     </local_topic_allocation>
                     <local_writer_allocation>
-                        <max_count>16</max_count>
+                        <max_count>1</max_count>
                     </local_writer_allocation>
                     <local_reader_allocation>
-                        <max_count>16</max_count>
+                        <max_count>1</max_count>
                     </local_reader_allocation>
 
                     <local_publisher_allocation>
-                        <max_count>2</max_count>
+                        <max_count>1</max_count>
                     </local_publisher_allocation>
                     <local_subscriber_allocation>
-                        <max_count>2</max_count>
+                        <max_count>1</max_count>
                     </local_subscriber_allocation>
                 </resource_limits>  
             </participant_qos>
 
             <datawriter_qos>
                 <history>
-                    <depth>3</depth>
+                    <depth>1</depth>
                 </history>
                 <resource_limits>
-                    <max_instances>8</max_instances>
-                    <max_samples>64</max_samples>
-                    <max_samples_per_instance>8</max_samples_per_instance>
-                </resource_limits>
+                    <max_instances>1</max_instances>
+                    <max_samples_per_instance>3</max_samples_per_instance>
+                    <max_samples>3</max_samples>
+                 </resource_limits>
                  <writer_resource_limits>
-                    <max_remote_readers>16</max_remote_readers>
+                    <max_remote_readers>1</max_remote_readers>
                 </writer_resource_limits>
             </datawriter_qos>
 
@@ -101,14 +104,14 @@
                     <depth>1</depth>
                 </history>
                 <resource_limits>
-                    <max_instances>8</max_instances>
-                    <max_samples>64</max_samples>
-                    <max_samples_per_instance>8</max_samples_per_instance>
+                    <max_instances>1</max_instances>
+                    <max_samples_per_instance>3</max_samples_per_instance>
+                    <max_samples>3</max_samples>
                 </resource_limits>
                 <reader_resource_limits>
-                    <max_remote_writers>16</max_remote_writers>
-                    <max_remote_writers_per_instance>16</max_remote_writers_per_instance>
-                    <max_outstanding_reads>8</max_outstanding_reads>
+                    <max_remote_writers>1</max_remote_writers>
+                    <max_remote_writers_per_instance>1</max_remote_writers_per_instance>
+                    <max_outstanding_reads>2</max_outstanding_reads>
                 </reader_resource_limits>
             </datareader_qos>
         </qos_profile>
@@ -132,37 +135,32 @@
         </qos_profile>
 
 
-        <!-- Discovery -->
-        <qos_profile name="Discovery.None" base_name="Protocol" />
-
-        <qos_profile name="Discovery.DPDE" base_name="Protocol">
-            <participant_qos>
-                <discovery_config>
-                    <builtin_discovery_plugins>SDP</builtin_discovery_plugins>
-                </discovery_config>
-            </participant_qos>
-        </qos_profile>
-
-        <qos_profile name="Discovery.DPSE" base_name="Protocol">
-            <participant_qos>
-                <discovery_config>
-                    <builtin_discovery_plugins>DPSE</builtin_discovery_plugins>
-                </discovery_config>
-            </participant_qos>
-        </qos_profile>
-
-        <qos_profile name="Discovery.Selected" base_name="Discovery.DPDE" />
-
-
         <!-- Transports -->
         <qos_profile name="Transport.Intra" 
-                     base_name="Discovery.Selected">
-
+                     base_name="Protocol">
             <participant_qos>
                 <transport_builtin>
                     <mask>INTRA</mask>
                 </transport_builtin>
+            </participant_qos>
+        </qos_profile>
 
+        <qos_profile name="Transport.Intra.UDPv4" 
+                     base_name="Protocol">
+            <participant_qos>
+                <transport_builtin>
+                    <mask>INTRA|UDPv4</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>
+
+        <qos_profile name="Transport.Selected" 
+                     base_name="Transport.Intra.UDPv4" />
+
+
+        <!-- Discovery -->
+        <qos_profile name="Discovery.None" base_name="Transport.Intra">
+            <participant_qos>
                 <discovery>
                     <enabled_transports>
                         <element>_intra</element>
@@ -171,13 +169,19 @@
             </participant_qos>
         </qos_profile>
 
-        <qos_profile name="Transport.Intra.UDPv4" 
-                     base_name="Transport.Intra">
+        <qos_profile name="Discovery.DPSE" base_name="Transport.Selected">
             <participant_qos>
-                <transport_builtin>
-                    <mask>INTRA|UDPv4</mask>
-                </transport_builtin>
+                <discovery_config>
+                    <builtin_discovery_plugins>DPSE</builtin_discovery_plugins>
+                </discovery_config>
+            </participant_qos>
+        </qos_profile>
 
+        <qos_profile name="Discovery.DPDE" base_name="Transport.Selected">
+            <participant_qos>
+                <discovery_config>
+                    <builtin_discovery_plugins>SDP</builtin_discovery_plugins>
+                </discovery_config>
                 <discovery>
                     <initial_peers>
                         <element>127.0.0.1</element>
@@ -191,15 +195,20 @@
             </participant_qos>
         </qos_profile>
 
-        <qos_profile name="Transport.Selected" 
-                     base_name="Transport.Intra.UDPv4" />
+        <!-- Specify the desired combination via the base_name: 
+             Discovery.None: for INTRA only transport
+             Discovery.DPDE: for dynamic discovery over selected transports
+             Discovery.DPSE: for static discovery over selected transports
+        --> 
+        <qos_profile name="Discovery.Selected" base_name="Discovery.DPDE" />
+
     </qos_library>
 
 
 
     <qos_library name="BuiltinQosLib">
         <qos_profile name="Generic.Common" 
-                     base_name="ResourceQosLib::Transport.Selected"/>
+                     base_name="ResourceQosLib::Discovery.Selected"/>
     </qos_library>
  
  
@@ -213,7 +222,7 @@
                 </reliability>
                 <history>
                     <kind>KEEP_LAST_HISTORY_QOS</kind>
-                    <depth>100</depth>
+                    <depth>3</depth>
                 </history>
             </datawriter_qos>
     
@@ -223,7 +232,7 @@
                 </reliability>
                 <history>
                     <kind>KEEP_LAST_HISTORY_QOS</kind>
-                    <depth>100</depth>
+                    <depth>3</depth>
                 </history>
             </datareader_qos>
         </qos_profile>
@@ -245,7 +254,7 @@
                         <!-- All write() calls will block (for at most max_blocking_time) if 
                             there are 40 unacknowledged samples in the writer queue -->
                         <max_send_window_size>40</max_send_window_size>
-                        <heartbeats_per_max_samples>10</heartbeats_per_max_samples> 
+                        <heartbeats_per_max_samples>1</heartbeats_per_max_samples> 
                         <heartbeat_period>
                             <sec>0</sec>
                             <nanosec>200000000</nanosec>
@@ -256,9 +265,6 @@
             </datawriter_qos>
     
             <datareader_qos>
-                <resource_limits>
-                    <max_samples>256</max_samples>
-                </resource_limits>
                 <reliability>
                     <kind>RELIABLE_RELIABILITY_QOS</kind>
                 </reliability>
@@ -328,13 +334,13 @@
         <qos_profile name="Pattern.ReliableStreaming" base_name="Generic.KeepLastReliable">
             <datawriter_qos>
                 <history>
-                    <depth>100</depth>
+                    <depth>3</depth>
                 </history>
             </datawriter_qos>
     
             <datareader_qos>
                 <history>
-                    <depth>100</depth>
+                    <depth>3</depth>
                 </history>
             </datareader_qos>
         </qos_profile>
