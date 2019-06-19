@@ -52,7 +52,7 @@
                 <history>
                     <!-- don't block the writer -->
                     <kind>KEEP_LAST_HISTORY_QOS</kind>
-                    <depth>32</depth>
+                    <depth>3</depth>
                 </history>
             </datawriter_qos>
         </qos_profile>
@@ -79,12 +79,12 @@
             base_name="BuiltinQosLibExp::Generic.BestEffort">
             <datawriter_qos>
                 <history>
-                    <depth>4</depth>
+                    <depth>3</depth>
                 </history>
             </datawriter_qos>
             <datareader_qos>
                 <history>
-                    <depth>16</depth>
+                    <depth>3</depth>
                 </history>
             </datareader_qos>
         </qos_profile>
@@ -93,12 +93,12 @@
             base_name="BuiltinQosLibExp::Pattern.ReliableStreaming">
             <datawriter_qos>
                 <history>
-                    <depth>4</depth>
+                    <depth>3</depth>
                 </history>
             </datawriter_qos>
             <datareader_qos>
                 <history>
-                    <depth>16</depth>
+                    <depth>3</depth>
                 </history>
             </datareader_qos>
         </qos_profile>
@@ -115,21 +115,9 @@
                     <!-- one command (Requested Objective) outstanding -->
                     <depth>3</depth>
                 </history>
-                <liveliness>
-                    <lease_duration>
-                        <sec>4</sec>
-                        <nanosec>0</nanosec>
-                    </lease_duration>
-                </liveliness>
             </datawriter_qos>
             <datareader_qos>
                 <!-- KEEP_ALL history: don't drop any requests -->
-                <liveliness>
-                    <lease_duration>
-                        <sec>10</sec>
-                        <nanosec>0</nanosec>
-                    </lease_duration>
-                </liveliness>
             </datareader_qos>
         </qos_profile>
 
@@ -140,7 +128,7 @@
                     <!-- don't block the writer -->
                     <kind>KEEP_LAST_HISTORY_QOS</kind>
                     <!-- N responses (Objectives) outstanding -->
-                    <depth><!-- N = -->8</depth>
+                    <depth><!-- N = -->3</depth>
                 </history>
             </datawriter_qos>
             <datareader_qos>
