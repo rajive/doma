@@ -12,8 +12,8 @@
 - QoS Libraries end with `QosLib`, for consistency with the builtin
   qos profiles naming conventions `BuiltinQosLibExp`
 - Service specific QoS library names: `<service_name>QosLib`
-- Service domain qos profile names start with `<service_name>_Root`
-- Service interface qos profile names start with `<service_name>_InterfaceName`
+- Service domain qos profile names start with `[<service_name>_]Root`
+- Service interface qos profile names start with `[<service_name>_]InterfaceName`
 - Selected or preferred user QoS profile names start with `User.Selected.`
 - "QoS only" xml files end with `_qos.xml`
 - Common QoS profiles: `<system_name>Common_qos.xml`, e.g. `MyCommon_qos.xml`
