@@ -52,14 +52,15 @@ NEEDED FOR DEPLOYMENT:
   
 (optional)
        	       
-  - `svc/` : Connext DDS platform service configurations 
-    - `ps/`  : persistence service configurations
-    - `rs/`  : routing service configurations  
-    - `qs/`  : queuing service configurations 
-    - `rec/` : recording service configurations 
-    - `rep/` : replay service configurations 
-    - `db/`  : database integration service configurations
-    - `web/` : web integration service configurations  
+  - `res/`
+    - `svc/` : configurations for *Connext Databus* services 
+        - `ps/`  : persistence service configurations
+        - `rs/`  : routing service configurations  
+        - `qs/`  : queuing service configurations 
+        - `rec/` : recording service configurations 
+        - `rep/` : replay service configurations 
+        - `db/`  : database integration service configurations
+        - `web/` : web integration service configurations  
  
  NEEDED FOR DEVELOPMENT: in addition to the above
     

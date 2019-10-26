@@ -103,7 +103,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			<participant_qos>
 				<transport_builtin>
 					<!-- use only UDPv4 (disable shared memory) -->
-					<mask>UDPV4</mask>
+					<mask>UDPv4</mask>
 				</transport_builtin>
 			</participant_qos>
 		</qos_profile>
@@ -170,11 +170,6 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			name="User.Transport.UDPv4Discovery.ShmemUser"
 			base_name="User.Transport.Shmem">
 			<participant_qos>
-				<transport_builtin>
-					<!-- use only shared memory -->
-					<mask>UDPV4 | SHMEM</mask>
-				</transport_builtin>
-
 				<!-- use shmem for unicast user data -->
 				<default_unicast>
 					<value>
