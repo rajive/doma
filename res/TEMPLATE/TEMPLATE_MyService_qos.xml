@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 *****************************************************************************
 *    (c) 2005-2018 Copyright, Real-Time Innovations, All rights reserved.   *
@@ -22,77 +22,75 @@ RTI Connext DDS User QoS Profiles Service specific qos profiles.
 	
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018. 
 -->
-<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_qos_profiles.xsd">
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_qos_profiles.xsd">
 
-	<qos_library name="MyServiceQosLib">
+    <qos_library name="MyServiceQosLib">
 
-		<qos_profile name="MyService_Root" base_name="EndpointQosLib::User.Pattern.Status">
+        <qos_profile name="Root" base_name="EndpointQosLib::User.Pattern.Status">
 
-			<!-- Note: policies inherit from this qos profile's base_name, unless 
+            <!-- Note: policies inherit from this qos profile's base_name, unless 
 				another base_name is used to override -->
-			<datareader_qos topic_filter="MyTopic*">
-				<ownership>
-					<kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
-				</ownership>
-			</datareader_qos>
+            <datareader_qos topic_filter="MyTopic*">
+                <ownership>
+                    <kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
+                </ownership>
+            </datareader_qos>
 
-			<!-- Override by specifying a different qos profile via base_name -->
-			<datawriter_qos topic_filter="MyTopic*"
-				base_name="EndpointQosLib::User.Pattern.LastValueCache">
-				<ownership>
-					<kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
-				</ownership>
-			</datawriter_qos>
+            <!-- Override by specifying a different qos profile via base_name -->
+            <datawriter_qos topic_filter="MyTopic*" base_name="EndpointQosLib::User.Pattern.LastValueCache">
+                <ownership>
+                    <kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
+                </ownership>
+            </datawriter_qos>
 
-		</qos_profile>
+        </qos_profile>
 
 
-		<qos_profile name="MyService_InterfaceX" base_name="MyService_Root">
+        <qos_profile name="InterfaceX" base_name="Root">
 
-			<subscriber_qos>
-				<partition>
-					<name>
-						<element></element>
-						<element>starwars</element>
-						<element>startrek</element>
-						<element>funny</element>
-						<element>*</element>
-					</name>
-				</partition>
-			</subscriber_qos>
-			
-			<publisher_qos>
-				<partition>
-					<name>
-						<element></element>
-						<element>starwars</element>
-						<element>startrek</element>
-						<element>funny</element>
-						<element>*</element>
-					</name>
-				</partition>
-			</publisher_qos>
-			
-		</qos_profile>
-		
+            <subscriber_qos>
+                <partition>
+                    <name>
+                        <element></element>
+                        <element>starwars</element>
+                        <element>startrek</element>
+                        <element>funny</element>
+                        <element>*</element>
+                    </name>
+                </partition>
+            </subscriber_qos>
 
-		<qos_profile name="MyService_InterfaceX.Strength.High" base_name="MyService_InterfaceX">
-			<datawriter_qos topic_filter="MyTopic*">
+            <publisher_qos>
+                <partition>
+                    <name>
+                        <element></element>
+                        <element>starwars</element>
+                        <element>startrek</element>
+                        <element>funny</element>
+                        <element>*</element>
+                    </name>
+                </partition>
+            </publisher_qos>
+
+        </qos_profile>
+
+
+        <qos_profile name="InterfaceX.Strength.High" base_name="InterfaceX">
+            <datawriter_qos topic_filter="MyTopic*">
                 <ownership_strength>
                     <value>10</value>
-                </ownership_strength>			
-			</datawriter_qos>
-		</qos_profile>
+                </ownership_strength>
+            </datawriter_qos>
+        </qos_profile>
 
 
-		<qos_profile name="MyService_InterfaceX.Strength.Low" base_name="MyService_InterfaceX">
+        <qos_profile name="InterfaceX.Strength.Low" base_name="InterfaceX">
             <datawriter_qos topic_filter="MyTopic*">
-				<ownership_strength>
-					<value>1</value>
-				</ownership_strength>
-			</datawriter_qos>
-		</qos_profile>
+                <ownership_strength>
+                    <value>1</value>
+                </ownership_strength>
+            </datawriter_qos>
+        </qos_profile>
 
-	</qos_library>
+    </qos_library>
 </dds>

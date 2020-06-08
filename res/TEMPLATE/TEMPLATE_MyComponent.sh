@@ -29,14 +29,14 @@ NAME_Component="MyComponent"
 # --- Service composition ---
 
 # final -> ServiceN_InterfaceX
-BASE_NAME_Component="MyService_Library::MyServiceN_InterfaceX"
+BASE_NAME_Component="MyServiceLib::MyServiceN_InterfaceX"
 
 # ServiceN_InterfaceX -> ServiceM_InterfaceY
-BASE_NAME_MyServiceN_InterfaceX="MyServiceN_Library::MyService_Root"
-BASE_NAME_MyServiceN_Root="MyServiceM_Library::MyServiceM_InterfaceY"
+BASE_NAME_MyServiceN_InterfaceX="MyServiceNLib::Root"
+BASE_NAME_MyServiceN_Root="MyServiceMLib::MyServiceM_InterfaceY"
 
 # ServiceM_InterfaceY -> root
-BASE_NAME_MyServiceM_InterfaceY="MyServiceM_Library::MyServiceM_Root"
+BASE_NAME_MyServiceM_InterfaceY="MyServiceMLib::MyServiceM_Root"
 BASE_NAME_MyServiceM_Root="DeploymentIfLib::Component_Root"
 
 # ---------------------------------------------------------------------
@@ -72,18 +72,18 @@ NDDS_QOS_PROFILES+="${MY_HOME}/if/component/root.xml;"
 
 
 # ServiceM
-export BASE_NAME_MyServiceM_InterfaceX=${BASE_NAME_MyServiceM_InterfaceX:="MyServiceM_Library::MyService_Root"}
-export BASE_NAME_MyServiceM_InterfaceY=${BASE_NAME_MyServiceM_InterfaceY:="MyServiceM_Library::MyService_Root"}
-export BASE_NAME_MyServiceM_InterfaceZ=${BASE_NAME_MyServiceM_InterfaceZ:="MyServiceM_Library::MyService_Root"}
+export BASE_NAME_MyServiceM_InterfaceX=${BASE_NAME_MyServiceM_InterfaceX:="MyServiceMLib::Root"}
+export BASE_NAME_MyServiceM_InterfaceY=${BASE_NAME_MyServiceM_InterfaceY:="MyServiceMLib::Root"}
+export BASE_NAME_MyServiceM_InterfaceZ=${BASE_NAME_MyServiceM_InterfaceZ:="MyServiceMLib::Root"}
 export BASE_NAME_MyServiceM_Root=${BASE_NAME_MyServiceM_Root:="DeploymentIfLib::Component_Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/MyServiceM_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/MyServiceM.xml;"
 
 
 # ServiceN
-export BASE_NAME_MyServiceN_InterfaceX=${BASE_NAME_MyServiceN_InterfaceX:="MyServiceN_Library::MyService_Root"}
-export BASE_NAME_MyServiceN_InterfaceY=${BASE_NAME_MyServiceN_InterfaceY:="MyServiceN_Library::MyService_Root"}
-export BASE_NAME_MyServiceN_InterfaceZ=${BASE_NAME_MyServiceN_InterfaceZ:="MyServiceN_Library::MyService_Root"}
+export BASE_NAME_MyServiceN_InterfaceX=${BASE_NAME_MyServiceN_InterfaceX:="MyServiceNLib::Root"}
+export BASE_NAME_MyServiceN_InterfaceY=${BASE_NAME_MyServiceN_InterfaceY:="MyServiceNLib::Root"}
+export BASE_NAME_MyServiceN_InterfaceZ=${BASE_NAME_MyServiceN_InterfaceZ:="MyServiceNLib::Root"}
 export BASE_NAME_MyServiceN_Root=${BASE_NAME_MyServiceN_Root:="DeploymentIfLib::Component_Root"}
 NDDS_QOS_PROFILES+="${MY_HOME}/res/qos/services/MyServiceN_qos.xml;"
 NDDS_QOS_PROFILES+="${MY_HOME}/if/MyServiceN.xml;"

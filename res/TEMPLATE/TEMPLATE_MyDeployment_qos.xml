@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 *****************************************************************************
 *    (c) 2005-2018 Copyright, Real-Time Innovations, All rights reserved.   *
@@ -18,25 +18,29 @@ A deployment binds a service implementation to specific resources.
 		  
 In the example below, MyDeployment is a deployment of MyService.
  
-MyDeployment_InterfaceX defines the resource binding of a component that 
-implements MyService_InterfaceX. 
+InterfaceX defines the resource binding of a component that 
+implements InterfaceX. 
 
 It configures the component specific "Participant" Qos profile settings 
 such as: transports, discovery, monitoring, resources, etc. 
 
 Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 -->
-<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_qos_profiles.xsd">
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_dds_qos_profiles.xsd">
 
-	<qos_library name="MyDeploymentQosLib">
+    <qos_library name="MyDeploymentQosLib">
 
-        <qos_profile name="MyDeployment_Root" base_name="ParticipantQosLib::User.Selected.Participant">
+        <qos_profile name="Root" base_name="ParticipantQosLib::User.Selected.Participant">
+            <base_name>
+                <element>MyServiceQosLib::Root</element>
+            </base_name>
+
             <participant_factory_qos base_name="FactoryQosLib::User.Selected.Factory">
                 <logging>
                     <verbosity>ERROR</verbosity>
                 </logging>
             </participant_factory_qos>
+
             <participant_qos>
                 <resource_limits>
                     <type_code_max_serialized_length>0</type_code_max_serialized_length>
@@ -48,28 +52,30 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
                         <element>239.255.0.1</element>
                     </initial_peers>
                     <accept_unknown_peers>false</accept_unknown_peers>
-                </discovery>                
+                </discovery>
             </participant_qos>
         </qos_profile>
-        
-		<qos_profile name="MyDeployment_InterfaceX" base_name="MyDeployment_Root">
-			<base_name>
-				<element>MyServiceQosLib::MyService_InterfaceX</element>
-			</base_name>
-            <participant_qos> 
-				<discovery>
-					<multicast_receive_addresses>
-						<element>239.255.0.2</element>
-					</multicast_receive_addresses>
-				</discovery>
-			</participant_qos>            
-		</qos_profile>
-	
-        <qos_profile name="MyDeployment_InterfaceY" base_name="MyDeployment_Root">
+
+        <qos_profile name="InterfaceX" base_name="Root">
             <base_name>
-                <element>MyServiceQosLib::MyService_InterfaceY</element>
-            </base_name>        
-            <participant_qos>           
+                <element>MyServiceQosLib::InterfaceX</element>
+            </base_name>
+
+            <participant_qos>
+                <discovery>
+                    <multicast_receive_addresses>
+                        <element>239.255.0.2</element>
+                    </multicast_receive_addresses>
+                </discovery>
+            </participant_qos>
+        </qos_profile>
+
+        <qos_profile name="InterfaceY" base_name="Root">
+            <base_name>
+                <element>MyServiceQosLib::InterfaceY</element>
+            </base_name>
+
+            <participant_qos>
                 <discovery>
                     <multicast_receive_addresses>
                         <element>239.255.0.1</element>
@@ -78,5 +84,5 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
             </participant_qos>
         </qos_profile>
 
-	</qos_library>
+    </qos_library>
 </dds>
