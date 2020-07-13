@@ -34,7 +34,8 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2017.
 			domain_id="$(DOMAIN_ID_Component)">
 			<participant_qos base_name="DeploymentQosLib::$(NAME_Component)">
 				<participant_name>
-					<name>$(NAME_Component)</name>
+                                    <name>$(NAME_Component)</name>
+                                    <role_name>$(NAME_Component)</role_name>    
 				</participant_name>
 			</participant_qos>
 		</domain_participant>
