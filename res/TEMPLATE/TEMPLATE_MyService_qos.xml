@@ -26,7 +26,7 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
 
     <qos_library name="MyServiceQosLib">
 
-        <qos_profile name="Root" base_name="EndpointQosLib::User.Pattern.Status">
+        <qos_profile name="Root"> 
 
             <!-- Note: policies inherit from this qos profile's base_name, unless 
 				another base_name is used to override -->
@@ -42,6 +42,10 @@ Author: Rajive Joshi, Real-Time Innovations Inc. Copyright (C) 2018.
                     <kind>EXCLUSIVE_OWNERSHIP_QOS</kind>
                 </ownership>
             </datawriter_qos>
+
+             <!-- Catch all -->
+            <datareader_qos topic_filter="*" base_name="EndpointQosLib::User.Pattern.Status" />
+            <datawriter_qos topic_filter="*" base_name="EndpointQosLib::User.Pattern.Status" />
 
         </qos_profile>
 
